@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --font-exo2: 'Exo 2', sans-serif;
+}
+
+
+:root {
+    --color-dark: #1C1D20;
+    --color-dark-dark: #141517;
+    --color-light: #FFFFFF;
+    --color-blue: #455CE9;
+    --color-blue-dark: #334BD3;
+    --color-gray: #999D9E;
+    --color-lightgray: #E9EAEB;
+    --color-white: #FFFFFF;
+    --color-border: rgba(28, 29, 32, 0.175);
+    --color-border-solid: #D2D2D2;
+    --color-border-light: rgba(255, 255, 255, 0.2);
+    --color-border-solid-light: #545557;
+    --color-text: #1C1D20;
+    --color-text-light: #FFF;
+    --alert-error: #ff4444;
+    --alert-success: #24C958;
+}
+
+
+
+
+
+/* newstacket settings */
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    animation: marquee 30s linear infinite;
+    display: inline-block;
+    white-space: nowrap;
+    min-width: 200%;
+}
