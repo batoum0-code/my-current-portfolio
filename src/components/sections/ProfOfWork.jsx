@@ -1,5 +1,6 @@
 import AnimatedSplitText from '../utils/AnimatedSplitText';
 import MagicButton from '../utils/MagicButton';
+import ProjectHoverPreview from '../utils/ProjectHoverPreview';
 
 
 
@@ -20,9 +21,13 @@ const ProfOfWork = () => {
                 code & interaction <br /> positions me in a '
                 unique place in<br /> the web design world.</p>
                 <div>
-                    <MagicButton children={'About me'}/>
+                    <MagicButton text={'About me'} size={'10rem'}/>
                 </div>
             </div>
+        </div>
+        <div>
+            <div className="text-start ml-[10rem] text-gray pb-9 text-sm ">Recent work</div>
+        <ProjectHoverPreview/>
         </div>
     </div>;
 };

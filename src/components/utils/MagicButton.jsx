@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
-const MagicButton = ({ children }) => {
+const MagicButton = ({ text, size }) => {
     const ref = useRef(null);
 
     const [offsetX, setOffsetX] = useState(0);
@@ -17,7 +17,7 @@ const MagicButton = ({ children }) => {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const maxOffset = 15;
+        const maxOffset = 55;
 
         const newX = Math.max(-maxOffset, Math.min(maxOffset, x - centerX));
         const newY = Math.max(-maxOffset, Math.min(maxOffset, y - centerY));
@@ -59,30 +59,33 @@ const MagicButton = ({ children }) => {
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="relative overflow-hidden px-[3rem] py-[4.6rem] rounded-full bg-dark-dark text-white font-semibold text-lg shadow-lg transition-all duration-300 hover:shadow-2xl"
+            className="relative overflow-hidden rounded-full bg-dark-dark text-white font-semibold text-lg shadow-lg transition-all duration-300 hover:shadow-2xl flex items-center justify-center"
+            
+
             style={{
                 transform: `translate(${offsetX}px, ${offsetY}px)`,
-                transition: "transform 0.3s ease-out",
+                transition: "transform 0.3s ease-out", 
+                width: size, height: size
             }}
         >
             {/* Animated text */}
             <span
-                className="relative z-10 block"
+                className="relative z-10 block text-center"
                 style={{
                     transform: `translate(${offsetX / 2}px, ${offsetY / 2}px)`,
                     transition: "transform 0.3s ease-out",
                 }}
             >
-                {children}
+                {text}
             </span>
 
             {/* Blue background */}
             <motion.span
-                className="absolute inset-0 bg-blue rounded-[100px] scale-150 z-0"
+                className="absolute inset-0 bg-blue rounded-full scale-150 z-0"
                 style={{
                     clipPath: "ellipse(120% 100% at 50% 100%)",
                 }}
-                initial={false} // prevent any initial animation from Framer
+                initial={false}
                 animate={animateProps}
                 transition={{
                     duration: hasInteracted && bgState !== "resetting" ? 0.5 : 0,
@@ -90,6 +93,7 @@ const MagicButton = ({ children }) => {
                 }}
             />
         </button>
+
     );
 };
 
