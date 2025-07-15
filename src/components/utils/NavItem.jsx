@@ -43,14 +43,14 @@ const NavItem = ({ label }) => {
             onMouseMove={handleMouseMove}
         >
             <div
-                className="transition-transform duration-700 ease-out"
+                className={`transition-transform duration-700 ease-out`}
                 style={{
                     transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
                 }}
             >
                 <span className="mb-2 font-samirFont font-medium text-[1.1rem]">{label}</span>
-                {isHovered ? <span className="block mt-1 h-[.4rem] w-[.4rem] bg-light rounded-full mx-auto" /> :
-                    <span className="block mt-1 opacity-0 h-[.4rem] w-[.4rem] bg-light rounded-full mx-auto" />
+                {isHovered ? <span className={`block  h-[.4rem] mt-1 w-[.4rem] bg-light rounded-full mx-auto`} /> :
+                            <span className={`block   opacity-0 mt-1 h-[.4rem] w-[.4rem] bg-light rounded-full mx-auto`} />
 
                 }
             </div>

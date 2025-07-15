@@ -23,6 +23,7 @@ export default {
         textLight: 'var(--color-text-light)',
         'alert-error': 'var(--alert-error)',
         'alert-success': 'var(--alert-success)',
+        
       },
 
       // samir fonts 

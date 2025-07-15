@@ -7,7 +7,7 @@ import Menu from './components/sections/Menu';
 function App() {
 
   return (
-    <div className='font-samirFont scroll-smooth'>
+    <div className=' scroll-smooth'>
     <Menu/>
     <Home/>
     </div>

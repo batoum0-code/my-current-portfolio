@@ -22,7 +22,7 @@ const ProfOfWork = () => {
     const y = useTransform(scrollYProgress, [0, 1], [120, -90]);
 
     return (
-        <div>
+        <div className='rounded-b-[30rem]'>
             <div className="flex pt-[10rem] justify-center gap-[9rem] h-full ">
                 <AnimatedSplitText text={myText} />
                 <div className="flex flex-col gap-[3rem]">
