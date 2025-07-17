@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import MenuItem from "../utils/MenuItem";
 import SocialMediaTitle from "../utils/SocialMediaTitle";
+import { TbRubberStamp } from "react-icons/tb";
 
 
 
@@ -14,6 +15,8 @@ import SocialMediaTitle from "../utils/SocialMediaTitle";
 const SlideMenu = () => {
     const [showButton, setShowButton] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [buttonState, setButtonState] = useState(false)
+    const buttonRef = useRef();
 
     // Track scroll position
     useEffect(() => {
@@ -23,6 +26,12 @@ const SlideMenu = () => {
             } else {
                 setShowButton(false);
                 setMenuOpen(false); // Optional: auto-close menu on scroll-up
+            }
+
+            if(window.scrollY > 2500){
+                setButtonState(true);
+            }else {
+                setButtonState(false);
             }
         };
         window.addEventListener("scroll", handleScroll);
@@ -39,14 +48,24 @@ const SlideMenu = () => {
         setMenuOpen(false);
     };
 
+
+
+    
+
+
+
+
+
+
     return (
         <>
             {/* Menu Toggle Button */}
             {(showButton || menuOpen) && (
                 <button
+                    ref={buttonRef}
                     onClick={toggleMenu}
-                    className={`fixed top-5 right-5 z-50 p-6  ${menuOpen ? "bg-blue" : "bg-dark"} text-light shadow-lg 
-                    rounded-full transition-all duration-900 hover:scale-105`}
+                    className={`fixed top-5 right-5 z-50 p-6 border-[1px]  ${menuOpen ? "bg-blue" : "bg-dark"} ${buttonState ? 'text-lightGray border-gray': 'text-light'}  
+                    rounded-full transition-all duration-900 `}
                 >
                     {menuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
                 </button>
@@ -58,7 +77,7 @@ const SlideMenu = () => {
                     <>
                         {/* Overlay */}
                         <motion.div
-                            className="fixed inset-0 bg-gray opacity-10 z-30"
+                            className="fixed inset-0 bg-light opacity-20 z-30"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 0.5 }}
                             exit={{ opacity: 0 }}
