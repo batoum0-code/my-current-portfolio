@@ -23,10 +23,10 @@ const ProfOfWork = () => {
 
     return (
         <div className='rounded-b-[30rem]'>
-            <div className="flex pt-[10rem] justify-center gap-[9rem] h-full ">
+            <div className="flex pt-[10rem] justify-center gap-[6rem] h-full px-[3rem] ">
                 <AnimatedSplitText text={myText} />
                 <div className="flex flex-col gap-[3rem]">
-                    <p className="text-dark-dark text-[.9rem] font-samirFont">
+                    <p className="text-text text-[.9rem] font-samirFont">
                         The combination of my passion <br /> for design, code & interaction <br /> positions me in a unique place in
                         <br /> the web design world.
                     </p>
@@ -34,9 +34,11 @@ const ProfOfWork = () => {
                         ref={magicRef}
                         style={{ y }}
                     >
-                        <MagicButton text={'About me'} size={'10rem'} />
+                        <div className=''>
+                            <MagicButton text={'About me'} size={'9rem'} bg={'dark'} hoverBg={'blue'} rounded={'full'}/>
+                        </div>
                     </motion.div>
-                </div>
+                </div> 
             </div>
 
             <div>

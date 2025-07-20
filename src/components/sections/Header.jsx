@@ -32,7 +32,7 @@ const Header = () => {
                         className={`absolute font-samirFont transition-all duration-700 ease-in-out ${isNameHovered ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 text-gray"
                             }`}
                     >
-                        Batoum
+                        Samir Batoum
                     </span>
                 </h1>
             </div>

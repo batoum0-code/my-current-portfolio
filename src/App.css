@@ -1,16 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root {
-    --font-exo2: 'Exo 2', sans-serif;
-}
+
+
+
+
+
 
 
 :root {
     --color-dark: #1C1D20;
     --color-dark-dark: #141517;
     --color-light: #FFFFFF;
+    --color-samir: #334BD3;
     --color-blue: #455CE9;
-    --color-blue-dark: #334BD3;
     --color-gray: #999D9E;
     --color-lightgray: #E9EAEB;
     --color-white: #FFFFFF;

@@ -1,7 +1,13 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
-const MagicButton = ({ text, size, bg, hoverBg, rounded }) => {
+
+
+
+
+
+
+const ContactMagicButton = ({ text, bg, hoverBg }) => {
 
 
 
@@ -16,12 +22,12 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded }) => {
     const handleMouseMove = (e) => {
         const rect = ref.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top; 
+        const y = e.clientY - rect.top;
 
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const maxOffset = 55;
+        const maxOffset = 10;
 
         const newX = Math.max(-maxOffset, Math.min(maxOffset, x - centerX));
         const newY = Math.max(-maxOffset, Math.min(maxOffset, y - centerY));
@@ -63,17 +69,17 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded }) => {
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-        className={`relative overflow-hidden rounded-${rounded} bg-${bg} text-white font-semibold 
+            className={`relative overflow-hidden rounded-full bg-${bg} text-white font-semibold px-[1.6rem] py-[1.4rem] border-[1.8px]
+                border-border-solidLight hover:border-transparent
             text-lg  transition-all duration-300  flex items-center justify-center`}
             style={{
                 transform: `translate(${offsetX}px, ${offsetY}px)`,
-                transition: "transform 0.3s ease-out", 
-                width: size, height: size
+                transition: "transform 0.3s ease-out",
             }}
         >
             {/* Animated text */}
             <span
-                className="relative z-10 block text-center text-sm"
+                className="relative z-10 block text-center tracking-[.9px] text-sm font-medium"
                 style={{
                     transform: `translate(${offsetX / 2}px, ${offsetY / 2}px)`,
                     transition: "transform 0.3s ease-out",
@@ -84,9 +90,9 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded }) => {
 
             {/* Blue background */}
             <motion.span
-                className={`absolute inset-0 bg-${hoverBg} rounded-${rounded} scale-150 z-0`}
+                className={`absolute inset-0 bg-${hoverBg} rounded-full scale-150 z-0`}
                 style={{
-                    clipPath: "ellipse(120% 100% at 50% 100%)",                
+                    clipPath: "ellipse(390% 100% at 50% 100%)",
                 }}
                 initial={false}
                 animate={animateProps}
@@ -100,4 +106,4 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded }) => {
     );
 };
 
-export default MagicButton;
+export default ContactMagicButton;

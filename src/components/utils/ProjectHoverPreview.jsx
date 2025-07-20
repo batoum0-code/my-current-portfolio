@@ -96,8 +96,8 @@ export default function ProjectHoverWithSlide() {
                         className="  hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
                         cursor-pointer transition-all duration-300 py-14 border-b-[1px] border-gray px-6 hover:px-1"
                     >
-                        <h3 className="text-5xl font-semibold text-dark-dark">{project.title}</h3>
-                        <p className="text-lg text-dark ">
+                        <h3 className="text-5xl font-semibold text-text">{project.title}</h3>
+                        <p className="text-lg text-text">
                             {project.tech.join(", ")}
                         </p>
                     </div>
