@@ -64,7 +64,7 @@ const SlideMenu = () => {
                 <button
                     ref={buttonRef}
                     onClick={toggleMenu}
-                    className={`fixed top-5 right-5 z-50 p-6 border-[1px]  ${menuOpen ? "bg-blue" : "bg-dark"} ${buttonState ? 'text-lightGray border-gray': 'text-light'}  
+                    className={`fixed top-5 right-5 z-50 p-6   ${menuOpen ? "bg-blue" : "bg-dark"} ${buttonState ? 'text-gray border-border border-[1px] ': 'text-light'}  
                     rounded-full transition-all duration-900 `}
                 >
                     {menuOpen ? <FiX size={20} /> : <FiMenu size={20} />}

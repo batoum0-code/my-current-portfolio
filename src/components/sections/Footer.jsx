@@ -1,3 +1,8 @@
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from "react";
+
+
+
 import img from '../../assets/samir.png';
 import { GiSupersonicArrow } from "react-icons/gi";
 
@@ -19,6 +24,18 @@ import SocialMediaTitle from '../utils/SocialMediaTitle';
 const Footer = () => {
 
 
+    const borderRef = useRef(null);
+
+    // Watch scroll progress relative to the MagicButton
+    const { scrollYProgress } = useScroll({
+        target: borderRef,
+        offset: ['start end', 'end start'],
+    });
+
+    // Animate Y position from 100px to -20px based on scroll
+    const x = useTransform(scrollYProgress, [1, 0], [60, -90]);
+
+
     const now = new Date();
 
     const time = new Intl.DateTimeFormat('en-UK', {
@@ -26,12 +43,12 @@ const Footer = () => {
         minute: '2-digit',
         hour12: true,
         timeZoneName: 'short',
-    }).format(now); 
+    }).format(now);
 
 
 
 
-    return <footer className="bg-dark w-full h-screen flex flex-col justify-between pt-[6rem]">
+    return <footer className="bg-dark w-full h-screen flex flex-col justify-between pt-[4rem]">
 
         <div className='flex flex-col justify-center px-[12rem]  '>
 
@@ -50,7 +67,15 @@ const Footer = () => {
 
             <div className='relative'>
                 <div className='absolute z-20 right-20 -top-20'>
-                    <MagicButton text={'Get in tuch'} size={'10rem'} bg={'blue'} hoverBg={'samir'} rounded={'full'} />
+
+                    <motion.div
+                        ref={borderRef}
+                        style={{ x }}>
+
+                        <MagicButton text={'Get in tuch'} size={'9.6rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
+
+                    </motion.div>
+
                     <div className='text-light text-[2rem] transform rotate-90 absolute -top-10 -right-20'>
                         <GiSupersonicArrow />
                     </div>

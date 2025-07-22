@@ -1,9 +1,41 @@
-import React from "react";
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from "react";
 
 const SvgBorderBottom = () => {
-    return <div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,320L26.7,298.7C53.3,277,107,235,160,229.3C213.3,224,267,256,320,229.3C373.3,203,427,117,480,96C533.3,75,587,117,640,149.3C693.3,181,747,203,800,213.3C853.3,224,907,224,960,234.7C1013.3,245,1067,267,1120,277.3C1173.3,288,1227,288,1280,277.3C1333.3,267,1387,245,1413,234.7L1440,224L1440,0L1413.3,0C1386.7,0,1333,0,1280,0C1226.7,0,1173,0,1120,0C1066.7,0,1013,0,960,0C906.7,0,853,0,800,0C746.7,0,693,0,640,0C586.7,0,533,0,480,0C426.7,0,373,0,320,0C266.7,0,213,0,160,0C106.7,0,53,0,27,0L0,0Z"></path></svg>
-    </div>;
+
+    const borderRef = useRef(null);
+
+    // Watch scroll progress relative to the MagicButton
+    const { scrollYProgress } = useScroll({
+        target: borderRef,
+        offset: ['start end', 'end start'],
+    });
+
+    // Animate Y position from 100px to -20px based on scroll
+    const y = useTransform(scrollYProgress, [0, 1], [-220, 230]);
+
+
+
+    return <motion.div
+        ref={borderRef}
+        style={{ y }}
+        className="h-[100vh] overflow-hidden"
+    >
+        
+            <svg
+                className="w-full h-full"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1440 320"
+                preserveAspectRatio="none"
+            >
+                <path
+                    fill="#ffffff"
+                    fillOpacity="1"
+                    d="M0,128L40,106.7C80,85,160,43,240,64C320,85,400,171,480,176C560,181,640,107,720,96C800,85,880,139,960,144C1040,149,1120,107,1200,106.7C1280,107,1360,149,1400,170.7L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
+                ></path>
+            </svg>
+        
+    </motion.div>;
 };
 
 export default SvgBorderBottom;

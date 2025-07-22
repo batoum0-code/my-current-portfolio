@@ -9,7 +9,6 @@ const Home = () => {
         <Hero />
         <ProfOfWork/>
         <VideoShowcase/>
-        <SvgBorderBottom/>
         <Footer/>
     </div>;
 };

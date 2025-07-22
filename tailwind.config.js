@@ -10,7 +10,7 @@ export default {
         dark: 'var(--color-dark)',
         'dark-dark': 'var(--color-dark-dark)',
         light: 'var(--color-light)',
-        samir: 'var(--color-samir)',
+        deepb: 'var(--color-deepb)',
         blue: 'var(--color-blue)',
         gray: 'var(--color-gray)',
         lightGray: 'var(--color-lightgray)',
