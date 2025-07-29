@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import MagicButton from '../utils/MagicButton';
 import img1 from "../../assets/cerveau.png";
 import img3 from "../../assets/5.png";
 import img4 from "../../assets/q1.webp";
@@ -82,12 +81,6 @@ export default function ProjectHoverWithSlide() {
         };
     }, [activeProject]);
 
-
-
-
-
-
-
     return (
         <div
             ref={containerRef}
@@ -138,11 +131,9 @@ export default function ProjectHoverWithSlide() {
                             </AnimatePresence>
 
                             <div className="absolute inset-0 flex items-center justify-center">
-                                {/* <button className="text-light bg-blue rounded-full h-16 w-16 text-lg font-samirFont">
+                                <button className="text-light bg-blue rounded-full h-16 w-16 text-lg font-samirFont">
                                     View
-                                </button> */}
-
-                                <MagicButton text={'view'} bg={'blue'} size={'5rem'} rounded={'full'} hoverBg={'gray'}/>
+                                </button>
                             </div>
                         </div>
                     </motion.div>

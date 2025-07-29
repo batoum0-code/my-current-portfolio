@@ -47,7 +47,7 @@ const SocialMediaTitle = ({ label }) => {
                 transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
             }}
         >
-            <span className="relative text-[.8rem] pb-1 font-normal leading-none inline-block">
+            <span className="relative text-[.8rem] pb-1 font-normal leading-none inline-block ">
                 {label}
 
                 {/* Animated line under label */}
@@ -57,7 +57,7 @@ const SocialMediaTitle = ({ label }) => {
                         width: isHovered ? "100%" : "0%",
                         transform: "translateX(-50%)",
                     }}
-                />
+                /> 
             </span>
         </div>
     </div>;
