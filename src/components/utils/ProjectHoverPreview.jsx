@@ -1,6 +1,6 @@
+// ... other imports
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import MagicButton from '../utils/MagicButton';
 import img1 from "../../assets/cerveau.png";
 import img3 from "../../assets/5.png";
 import img4 from "../../assets/q1.webp";
@@ -11,32 +11,43 @@ const projects = [
         title: "Riad BERBERE",
         tech: ["React", "Node.js", "MongoDB"],
         image: img1,
-        them: "lightGray",
+        them: "bg-gray-100",
     },
     {
         id: 2,
         title: "AMELKIS RESOURTS",
         tech: ["Next.js", "Tailwind", "NestJS"],
         image: img4,
-        them: "gray",
+        them: "bg-gray-400",
     },
     {
         id: 3,
         title: "WEDEDING SIWO",
         tech: ["Vue.js", "Firebase"],
         image: img3,
-        them: "dark",
+        them: "bg-gray-800",
     },
 ];
 
 export default function ProjectHoverWithSlide() {
     const containerRef = useRef(null);
+    const previewScrollRef = useRef(null);
+    const sectionRefs = useRef([]);
     const projectRefs = useRef([]);
-    const [activeProject, setActiveProject] = useState(projects[0]);
+    const [activeIndex, setActiveIndex] = useState(0);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [showPreview, setShowPreview] = useState(false);
 
-    // Track mouse inside section and project hover
+    // Scroll preview to active project image
+    const scrollToImage = (index) => {
+        if (sectionRefs.current[index] && previewScrollRef.current) {
+            previewScrollRef.current.scrollTo({
+                top: sectionRefs.current[index].offsetTop,
+                behavior: "smooth",
+            });
+        }
+    };
+
     useEffect(() => {
         const handleMouseMove = (e) => {
             const rect = containerRef.current.getBoundingClientRect();
@@ -44,7 +55,6 @@ export default function ProjectHoverWithSlide() {
             const y = e.clientY - rect.top;
             setMousePos({ x, y });
 
-            // Check which project is hovered
             for (let i = 0; i < projectRefs.current.length; i++) {
                 const ref = projectRefs.current[i];
                 if (ref) {
@@ -52,9 +62,9 @@ export default function ProjectHoverWithSlide() {
                     const top = projectRect.top - rect.top;
                     const bottom = projectRect.bottom - rect.top;
                     if (y >= top && y <= bottom) {
-                        const project = projects[i];
-                        if (activeProject?.id !== project.id) {
-                            setActiveProject(project);
+                        if (activeIndex !== i) {
+                            setActiveIndex(i);
+                            scrollToImage(i);
                         }
                         break;
                     }
@@ -62,31 +72,17 @@ export default function ProjectHoverWithSlide() {
             }
         };
 
-        const handleMouseLeave = () => {
-            setShowPreview(false);
-        };
-
-        const handleMouseEnter = () => {
-            setShowPreview(true);
-        };
-
         const el = containerRef.current;
         el.addEventListener("mousemove", handleMouseMove);
-        el.addEventListener("mouseenter", handleMouseEnter);
-        el.addEventListener("mouseleave", handleMouseLeave);
+        el.addEventListener("mouseenter", () => setShowPreview(true));
+        el.addEventListener("mouseleave", () => setShowPreview(false));
 
         return () => {
             el.removeEventListener("mousemove", handleMouseMove);
-            el.removeEventListener("mouseenter", handleMouseEnter);
-            el.removeEventListener("mouseleave", handleMouseLeave);
+            el.removeEventListener("mouseenter", () => setShowPreview(true));
+            el.removeEventListener("mouseleave", () => setShowPreview(false));
         };
-    }, [activeProject]);
-
-
-
-
-
-
+    }, [activeIndex]);
 
     return (
         <div
@@ -99,19 +95,21 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
-                cursor-pointer transition-all duration-300 py-14 border-b-[1px] border-gray px-6 hover:px-1"
+              cursor-pointer transition-all duration-300 py-14 border-b-[1px] border-gray px-6 hover:px-1"
                     >
-                        <h3 className="text-5xl font-semibold text-text">{project.title}</h3>
+                        <h3 className="text-5xl font-semibold text-text">
+                            {project.title}
+                        </h3>
                         <p className="text-lg text-text">{project.tech.join(", ")}</p>
                     </div>
                 ))}
             </div>
 
-            {/* Floating Preview (Sticky & Smooth Transition) */}
+            {/* Floating Scrollable Preview */}
             <AnimatePresence>
                 {showPreview && (
                     <motion.div
-                        className={`pointer-events-none absolute z-[9999] w-[375px] h-[375px] py-[6rem] px-[2rem] bg-${activeProject.them}`}
+                        className="pointer-events-none absolute z-[9999] w-[375px] h-[375px] rounded-xl overflow-hidden border shadow-xl"
                         style={{
                             top: mousePos.y - 190,
                             left: mousePos.x - 190,
@@ -124,30 +122,42 @@ export default function ProjectHoverWithSlide() {
                             ease: [0.22, 1, 0.36, 1],
                         }}
                     >
-                        <div className="relative w-full h-full overflow-hidden">
-                            <AnimatePresence mode="wait">
-                                <motion.img
-                                    key={activeProject.image}
-                                    src={activeProject.image}
-                                    initial={{ opacity: 0, x: 40 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -40 }}
-                                    transition={{ duration: 0.6, ease: "easeInOut" }}
-                                    className="w-full h-full absolute top-0 left-0"
-                                />
-                            </AnimatePresence>
-
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                {/* <button className="text-light bg-blue rounded-full h-16 w-16 text-lg font-samirFont">
-                                    View
-                                </button> */}
-
-                                <MagicButton text={'view'} bg={'blue'} size={'5rem'} rounded={'full'} hoverBg={'gray'}/>
-                            </div>
+                        {/* Scrollable Image Container */}
+                        <div
+                            ref={previewScrollRef}
+                            className="overflow-y-auto h-full scroll-smooth hide-scrollbar"
+                        >
+                            {projects.map((project, index) => (
+                                <div
+                                    key={index}
+                                    ref={(el) => (sectionRefs.current[index] = el)}
+                                    className={`h-[375px] w-full flex items-center justify-center ${project.them}`}
+                                >
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover opacity-80"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <style jsx global>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
         </div>
     );
 }
+
+
+
+

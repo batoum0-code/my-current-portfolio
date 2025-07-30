@@ -142,3 +142,191 @@ export default function ProjectHoverWithSlide() {
         </div>
     );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+
+
+export default function ProjectHoverPreview() {
+    const colors = [
+        { name: "Red", class: "bg-gradient-to-b from-red-500 to-red-700" },
+        { name: "Green", class: "bg-gradient-to-b from-green-500 to-green-700" },
+        { name: "Blue", class: "bg-gradient-to-b from-blue-500 to-blue-700" },
+        { name: "Yellow", class: "bg-gradient-to-b from-yellow-400 to-yellow-600" },
+        { name: "Purple", class: "bg-gradient-to-b from-purple-500 to-purple-700" },
+    ];
+
+    const scrollContainerRef = useRef(null);
+    const sectionRefs = useRef([]);
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    // Scroll to the selected section
+    const scrollToSection = (index) => {
+        if (!sectionRefs.current[index] || !scrollContainerRef.current) return;
+
+        setActiveIndex(index);
+        scrollContainerRef.current.scrollTo({
+            top: sectionRefs.current[index].offsetTop,
+            behavior: "smooth"
+        });
+    };
+
+    // Handle scroll events to update active section
+    const handleScroll = () => {
+        if (!scrollContainerRef.current) return;
+
+        const container = scrollContainerRef.current;
+        const scrollPosition = container.scrollTop;
+        const containerHeight = container.clientHeight;
+
+        // Find which section is currently in view
+        for (let i = 0; i < sectionRefs.current.length; i++) {
+            const section = sectionRefs.current[i];
+            if (!section) continue;
+
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (
+                scrollPosition >= sectionTop - containerHeight * 0.3 &&
+                scrollPosition < sectionTop + sectionHeight - containerHeight * 0.3
+            ) {
+                setActiveIndex(i);
+                break;
+            }
+        }
+    };
+
+    // Add scroll event listener
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener("scroll", handleScroll);
+            return () => container.removeEventListener("scroll", handleScroll);
+        }
+    }, []);
+
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col items-center justify-center p-4">
+            <div className="max-w-3xl w-full">
+                <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold text-white mb-2">Seamless Color Scroll</h1>
+                    <p className="text-gray-300 mb-6">Hover over buttons to navigate - No gaps between colors</p>
+
+                    {/* Navigation Buttons */}
+                    <div className="flex justify-center flex-wrap gap-2 mb-6">
+                        {colors.map((color, index) => (
+                            <button
+                                key={index}
+                                className={`px-4 py-2 rounded-full transition-all duration-300 ${activeIndex === index
+                                        ? "ring-4 ring-white shadow-lg scale-110"
+                                        : "opacity-90"
+                                    } ${color.class}`}
+                                onMouseEnter={() => scrollToSection(index)}
+                            >
+                                <span className="text-white font-medium drop-shadow-md">
+                                    {color.name}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Scrollable Container - No gaps between sections */}
+                <div className="relative rounded-2xl overflow-hidden border-4 border-gray-700 shadow-2xl">
+                    <div
+                        ref={scrollContainerRef}
+                        className="overflow-y-auto h-[400px] scroll-smooth hide-scrollbar"
+                    >
+                        {colors.map((color, index) => (
+                            <div
+                                key={index}
+                                ref={(el) => (sectionRefs.current[index] = el)}
+                                className={`h-[400px] flex flex-col items-center justify-center p-6 ${color.class}`}
+                            >
+                                <div className="text-center">
+                                    <span className="text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                                        {color.name}
+                                    </span>
+                                    <div className="text-white text-xl font-medium bg-black/20 py-2 px-4 rounded-full">
+                                        Section {index + 1} of {colors.length}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Position indicator */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-1">
+                        <div className="flex space-x-2">
+                            {colors.map((_, index) => (
+                                <div
+                                    key={index}
+                                    className={`w-3 h-3 rounded-full transition-all ${activeIndex === index ? "bg-white scale-125" : "bg-white/30"
+                                        }`}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-6 text-center text-gray-400">
+                    <p>Each color section flows seamlessly into the next with no gaps</p>
+                </div>
+            </div>
+
+            {/* CSS to hide scrollbars */}
+            <style jsx global>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;  /* Chrome, Safari and Opera */
+        }
+        
+        /* Smooth scrolling for the entire page */
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
+        </div>
+    );
+};
+
+
+
+
+
+
+
+

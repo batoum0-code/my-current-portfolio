@@ -1,8 +1,31 @@
 import Header from "./Header";
 import NewsTicker from "../utils/NewsTicker ";
 import samir from '../../assets/samir.png';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+
+
+
+
 
 const Hero = () => {
+
+
+
+
+    const boxRef = useRef(null);
+
+    useEffect(() => {
+        gsap.fromTo(
+            boxRef.current,
+            { opacity: 0, y: 100 },
+            { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
+        );
+    }, []);
+
+
+
+
     return <div className=" bg-gray ">
         <Header />
         <main className="">
@@ -20,7 +43,9 @@ const Hero = () => {
                 </div>
 
                 <div className=" flex bottom-0 absolute  left-[29%]">
-                    <div className="w-[24rem] sticky">
+                    <div
+                    ref={boxRef}
+                    className="w-[24rem] sticky">
                         <img className="w-full object-cover" src={samir} alt="My photo" />
                     </div>
                     {/* small description  */}
