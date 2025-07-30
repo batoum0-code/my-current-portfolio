@@ -167,161 +167,174 @@ export default function ProjectHoverWithSlide() {
 
 
 
+// original version after 10 days of working 
 
-
-
-
-import { useState, useRef, useEffect } from "react";
+// ... other imports
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import img1 from "../../assets/cerveau.png";
+import img3 from "../../assets/5.png";
+import img4 from "../../assets/q1.webp";
 
+const projects = [
+    {
+        id: 1,
+        title: "Riad BERBERE",
+        tech: ["React", "Node.js", "MongoDB"],
+        image: img1,
+        them: "blue",
+    },
+    {
+        id: 2,
+        title: "AMELKIS RESOURTS",
+        tech: ["Next.js", "Tailwind", "NestJS"],
+        image: img4,
+        them: "gray",
+    },
+    {
+        id: 3,
+        title: "WEDEDING SIWO",
+        tech: ["Vue.js", "Firebase"],
+        image: img3,
+        them: "blue",
+    },
+];
 
-
-export default function ProjectHoverPreview() {
-    const colors = [
-        { name: "Red", class: "bg-gradient-to-b from-red-500 to-red-700" },
-        { name: "Green", class: "bg-gradient-to-b from-green-500 to-green-700" },
-        { name: "Blue", class: "bg-gradient-to-b from-blue-500 to-blue-700" },
-        { name: "Yellow", class: "bg-gradient-to-b from-yellow-400 to-yellow-600" },
-        { name: "Purple", class: "bg-gradient-to-b from-purple-500 to-purple-700" },
-    ];
-
-    const scrollContainerRef = useRef(null);
+export default function ProjectHoverWithSlide() {
+    const containerRef = useRef(null);
+    const previewScrollRef = useRef(null);
     const sectionRefs = useRef([]);
+    const projectRefs = useRef([]);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [showPreview, setShowPreview] = useState(false);
 
-    // Scroll to the selected section
-    const scrollToSection = (index) => {
-        if (!sectionRefs.current[index] || !scrollContainerRef.current) return;
-
-        setActiveIndex(index);
-        scrollContainerRef.current.scrollTo({
-            top: sectionRefs.current[index].offsetTop,
-            behavior: "smooth"
-        });
-    };
-
-    // Handle scroll events to update active section
-    const handleScroll = () => {
-        if (!scrollContainerRef.current) return;
-
-        const container = scrollContainerRef.current;
-        const scrollPosition = container.scrollTop;
-        const containerHeight = container.clientHeight;
-
-        // Find which section is currently in view
-        for (let i = 0; i < sectionRefs.current.length; i++) {
-            const section = sectionRefs.current[i];
-            if (!section) continue;
-
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-
-            if (
-                scrollPosition >= sectionTop - containerHeight * 0.3 &&
-                scrollPosition < sectionTop + sectionHeight - containerHeight * 0.3
-            ) {
-                setActiveIndex(i);
-                break;
-            }
+    // Scroll preview to active project image
+    const scrollToImage = (index) => {
+        if (sectionRefs.current[index] && previewScrollRef.current) {
+            previewScrollRef.current.scrollTo({
+                top: sectionRefs.current[index].offsetTop,
+                behavior: "smooth",
+            });
         }
     };
 
-    // Add scroll event listener
     useEffect(() => {
-        const container = scrollContainerRef.current;
-        if (container) {
-            container.addEventListener("scroll", handleScroll);
-            return () => container.removeEventListener("scroll", handleScroll);
-        }
-    }, []);
+        const handleMouseMove = (e) => {
+            const rect = containerRef.current.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            setMousePos({ x, y });
+
+            for (let i = 0; i < projectRefs.current.length; i++) {
+                const ref = projectRefs.current[i];
+                if (ref) {
+                    const projectRect = ref.getBoundingClientRect();
+                    const top = projectRect.top - rect.top;
+                    const bottom = projectRect.bottom - rect.top;
+                    if (y >= top && y <= bottom) {
+                        if (activeIndex !== i) {
+                            setActiveIndex(i);
+                            scrollToImage(i);
+                        }
+                        break;
+                    }
+                }
+            }
+        };
+
+        const el = containerRef.current;
+        el.addEventListener("mousemove", handleMouseMove);
+        el.addEventListener("mouseenter", () => setShowPreview(true));
+        el.addEventListener("mouseleave", () => setShowPreview(false));
+
+        return () => {
+            
+            el.removeEventListener("mouseenter", () => setShowPreview(true));
+            el.removeEventListener("mouseleave", () => setShowPreview(false));
+        };
+    }, [activeIndex]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col items-center justify-center p-4">
-            <div className="max-w-3xl w-full">
-                <div className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-white mb-2">Seamless Color Scroll</h1>
-                    <p className="text-gray-300 mb-6">Hover over buttons to navigate - No gaps between colors</p>
-
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-center flex-wrap gap-2 mb-6">
-                        {colors.map((color, index) => (
-                            <button
-                                key={index}
-                                className={`px-4 py-2 rounded-full transition-all duration-300 ${activeIndex === index
-                                        ? "ring-4 ring-white shadow-lg scale-110"
-                                        : "opacity-90"
-                                    } ${color.class}`}
-                                onMouseEnter={() => scrollToSection(index)}
-                            >
-                                <span className="text-white font-medium drop-shadow-md">
-                                    {color.name}
-                                </span>
-                            </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Scrollable Container - No gaps between sections */}
-                <div className="relative rounded-2xl overflow-hidden border-4 border-gray-700 shadow-2xl">
+        <div
+            ref={containerRef}
+            className="relative bg-light pb-[5rem] mx-[10rem] border-t-[1px] border-gray"
+        >
+            <div className="w-full relative z-10">
+                {projects.map((project, index) => (
                     <div
-                        ref={scrollContainerRef}
-                        className="overflow-y-auto h-[400px] scroll-smooth hide-scrollbar"
+                        key={project.id}
+                        ref={(el) => (projectRefs.current[index] = el)}
+                        className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
+                                cursor-pointer transition-all duration-300 py-14 border-b-[1px] border-gray px-6 hover:px-1"
                     >
-                        {colors.map((color, index) => (
-                            <div
-                                key={index}
-                                ref={(el) => (sectionRefs.current[index] = el)}
-                                className={`h-[400px] flex flex-col items-center justify-center p-6 ${color.class}`}
-                            >
-                                <div className="text-center">
-                                    <span className="text-5xl font-bold text-white mb-4 drop-shadow-lg">
-                                        {color.name}
-                                    </span>
-                                    <div className="text-white text-xl font-medium bg-black/20 py-2 px-4 rounded-full">
-                                        Section {index + 1} of {colors.length}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                        <h3 className="text-5xl font-semibold text-text">
+                            {project.title}
+                        </h3>
+                        <p className="text-lg text-text">{project.tech.join(", ")}</p>
                     </div>
-
-                    {/* Position indicator */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 backdrop-blur-sm rounded-full px-4 py-1">
-                        <div className="flex space-x-2">
-                            {colors.map((_, index) => (
-                                <div
-                                    key={index}
-                                    className={`w-3 h-3 rounded-full transition-all ${activeIndex === index ? "bg-white scale-125" : "bg-white/30"
-                                        }`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="mt-6 text-center text-gray-400">
-                    <p>Each color section flows seamlessly into the next with no gaps</p>
-                </div>
+                ))}
             </div>
 
-            {/* CSS to hide scrollbars */}
+            {/* Floating Scrollable Preview */}
+            <AnimatePresence>
+                {showPreview && (
+                    <motion.div
+                        className="pointer-events-none absolute z-[9999] w-[375px] h-[375px]  overflow-hidden"
+                        style={{
+                            top: mousePos.y - 190,
+                            left: mousePos.x - 190,
+                        }}
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.1 }}
+                        transition={{
+                            duration: 0.9,
+                            ease: [0.22, 1, 0.36, 1],
+                        }}
+                    >
+                        {/* Scrollable Image Container */}
+                        <div
+                            ref={previewScrollRef}
+                            className="overflow-y-auto h-full scroll-smooth hide-scrollbar"
+                        >
+                            {projects.map((project, index) => (
+                                <div
+                                    key={index}
+                                    ref={(el) => (sectionRefs.current[index] = el)}
+                                    className={`h-full w-full flex items-center justify-center bg-${project.them}`}
+                                >
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="object-contain h-full w-full"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <style jsx global>{`
         .hide-scrollbar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
         .hide-scrollbar::-webkit-scrollbar {
-          display: none;  /* Chrome, Safari and Opera */
-        }
-        
-        /* Smooth scrolling for the entire page */
-        html {
-          scroll-behavior: smooth;
+          display: none;
         }
       `}</style>
         </div>
     );
-};
+}
+
+
+
+
+
+
+
 
 
 

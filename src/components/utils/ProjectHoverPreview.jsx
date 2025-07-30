@@ -1,3 +1,4 @@
+
 // ... other imports
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,21 +12,21 @@ const projects = [
         title: "Riad BERBERE",
         tech: ["React", "Node.js", "MongoDB"],
         image: img1,
-        them: "bg-gray-100",
+        them: "blue",
     },
     {
         id: 2,
         title: "AMELKIS RESOURTS",
         tech: ["Next.js", "Tailwind", "NestJS"],
         image: img4,
-        them: "bg-gray-400",
+        them: "gray",
     },
     {
         id: 3,
         title: "WEDEDING SIWO",
         tech: ["Vue.js", "Firebase"],
         image: img3,
-        them: "bg-gray-800",
+        them: "blue",
     },
 ];
 
@@ -78,7 +79,7 @@ export default function ProjectHoverWithSlide() {
         el.addEventListener("mouseleave", () => setShowPreview(false));
 
         return () => {
-            el.removeEventListener("mousemove", handleMouseMove);
+
             el.removeEventListener("mouseenter", () => setShowPreview(true));
             el.removeEventListener("mouseleave", () => setShowPreview(false));
         };
@@ -95,7 +96,7 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
-              cursor-pointer transition-all duration-300 py-14 border-b-[1px] border-gray px-6 hover:px-1"
+                                cursor-pointer transition-all duration-300 py-14 border-b-[1px] border-gray px-6 hover:px-1"
                     >
                         <h3 className="text-5xl font-semibold text-text">
                             {project.title}
@@ -109,7 +110,7 @@ export default function ProjectHoverWithSlide() {
             <AnimatePresence>
                 {showPreview && (
                     <motion.div
-                        className="pointer-events-none absolute z-[9999] w-[375px] h-[375px] rounded-xl overflow-hidden border shadow-xl"
+                        className="pointer-events-none absolute z-[9999] w-[375px] h-[375px]  overflow-hidden"
                         style={{
                             top: mousePos.y - 190,
                             left: mousePos.x - 190,
@@ -131,13 +132,27 @@ export default function ProjectHoverWithSlide() {
                                 <div
                                     key={index}
                                     ref={(el) => (sectionRefs.current[index] = el)}
-                                    className={`h-[375px] w-full flex items-center justify-center ${project.them}`}
+                                    className={`h-full w-full flex items-center justify-center px-[3rem] py-[6rem] bg-${project.them}`}
                                 >
-                                    <img
+                                    {/* <img
                                         src={project.image}
                                         alt={project.title}
-                                        className="w-full h-full object-cover opacity-80"
-                                    />
+                                        className="object-contain h-full w-full"
+                                    /> */}
+
+
+                                    <AnimatePresence mode="wait">
+                                        <motion.img
+                                            key={project.image}
+                                            src={project.image}
+                                            initial={{ opacity: 0, x: 40 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -40 }}
+                                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                                            className="w-full h-full"
+                                        />
+                                    </AnimatePresence>
+
                                 </div>
                             ))}
                         </div>
@@ -147,16 +162,27 @@ export default function ProjectHoverWithSlide() {
 
             <style jsx global>{`
         .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
         }
         .hide-scrollbar::-webkit-scrollbar {
-          display: none;
+        display: none;
         }
-      `}</style>
+        `}</style>
         </div>
     );
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
