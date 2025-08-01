@@ -4,11 +4,26 @@ import ProjectHoverPreview from '../utils/ProjectHoverPreview';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom'
+
+
+
+
+
+
+
+
+
 
 const ProfOfWork = () => {
     const myText = `Helping brands to stand out in the digital era.
         Together we will set the new status quo. No
         nonsense, always oth cutting edge.`;
+
+
+
+    // use use navigate for about me button deriction 
+    const navigate = useNavigate();
 
     const magicRef = useRef(null);
 
@@ -34,14 +49,16 @@ const ProfOfWork = () => {
                         ref={magicRef}
                         style={{ y }}
                     >
-                        <div className=''>
-                            <MagicButton text={'About me'} size={'9rem'} bg={'dark'} hoverBg={'blue'} rounded={'full'}/>
+                        <div
+                            onClick={() => navigate('/about')}
+                            className=''>
+                            <MagicButton text={'About me'} size={'10rem'} bg={'dark'} hoverBg={'blue'} rounded={'full'} />
                         </div>
                     </motion.div>
-                </div> 
+                </div>
             </div>
 
-            <div>
+            <div className='overflow-hidden'>
                 <div className="text-start ml-[10rem] text-gray pb-9 text-sm">Recent work</div>
                 <ProjectHoverPreview />
             </div>

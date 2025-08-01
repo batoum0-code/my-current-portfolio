@@ -52,7 +52,7 @@ const SocialMediaTitle = ({ label }) => {
 
                 {/* Animated line under label */}
                 <span
-                    className="absolute left-1/2 bottom-0 h-[1px] bg-gray transition-all duration-500 ease-in-out origin-center"
+                    className="absolute left-1/2 bottom-0 h-[1.1px] bg-gray transition-all duration-500 ease-in-out origin-center"
                     style={{
                         width: isHovered ? "100%" : "0%",
                         transform: "translateX(-50%)",

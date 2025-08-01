@@ -1,12 +1,15 @@
 import { useState } from "react";
 import NavItem from "../utils/NavItem";
 import brain from '../../assets/cerveau.png';
-
+import { useNavigate  } from "react-router-dom";
 
 
 
 
 const Header = () => {
+
+
+    const navigate = useNavigate ();
 
 
     const [isNameHovered, setIsNameHovered] = useState(false);
@@ -15,6 +18,7 @@ const Header = () => {
         <header className="p-6 flex justify-between w-full text-light  ">
             <div className="">
                 <h1
+                    onClick={()=> navigate('/')}
                     className="cursor-pointer relative w-[9rem]"
                     onMouseEnter={() => setIsNameHovered(true)}
                     onMouseLeave={() => setIsNameHovered(false)}
@@ -38,9 +42,9 @@ const Header = () => {
             </div>
             <nav>   
                 <ul className="flex gap-6">
-                    <li className="cursor-pointer"><NavItem label='About'/></li>
-                    <li className="cursor-pointer"><NavItem label='Work'/></li>
-                    <li className="cursor-pointer"><NavItem label='Contact'/></li>
+                    <li onClick={()=>navigate('/about')} className="cursor-pointer"><NavItem label='About'/></li>
+                    <li onClick={()=>navigate('/work')} className="cursor-pointer"><NavItem label='Work'/></li>
+                    <li onClick={()=>navigate('/contact')} className="cursor-pointer"><NavItem label='Contact'/></li>
                 </ul>
             </nav>
         </header>

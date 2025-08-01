@@ -1,9 +1,16 @@
 import { useEffect, useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiMenu, FiX } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+
+
+import { HiBars2 } from "react-icons/hi2";
+import { RxCross1 } from "react-icons/rx";
+
 import MenuItem from "../utils/MenuItem";
 import SocialMediaTitle from "../utils/SocialMediaTitle";
-import { TbRubberStamp } from "react-icons/tb";
+import MagicButton from "../utils/MagicButton";
+
+
 
 
 
@@ -13,6 +20,15 @@ import { TbRubberStamp } from "react-icons/tb";
 
 
 const SlideMenu = () => {
+
+
+
+
+
+    const navigate = useNavigate();
+
+
+
     const [showButton, setShowButton] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [buttonState, setButtonState] = useState(false)
@@ -28,9 +44,9 @@ const SlideMenu = () => {
                 setMenuOpen(false); // Optional: auto-close menu on scroll-up
             }
 
-            if(window.scrollY > 2500){
+            if (window.scrollY > 2500) {
                 setButtonState(true);
-            }else {
+            } else {
                 setButtonState(false);
             }
         };
@@ -50,25 +66,54 @@ const SlideMenu = () => {
 
 
 
-    
 
 
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            // Clean up in case the component unmounts
+            document.body.style.overflow = '';
+        };
+    }, [menuOpen]);
 
 
 
 
     return (
-        <>
+        <div className="">
             {/* Menu Toggle Button */}
             {(showButton || menuOpen) && (
-                <button
+
+                <div
                     ref={buttonRef}
                     onClick={toggleMenu}
-                    className={`fixed top-5 right-5 z-50 p-6   ${menuOpen ? "bg-blue" : "bg-dark"} ${buttonState ? 'text-gray border-border border-[1px] ': 'text-light'}  
+                    className={`fixed top-1 right-1 z-50 p-6   ${buttonState ? 'text-gray border-border border-[1px] ' : 'text-light'}  
                     rounded-full transition-all duration-900 `}
                 >
-                    {menuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
-                </button>
+                    {
+                        menuOpen ? <MagicButton
+                            size={'4.3rem'}
+                            text={<RxCross1 size={20} />}
+                            bg={'blue'}
+                            hoverBg={'gray'}
+                            rounded={'full'}
+                        /> :
+                            <MagicButton
+                                size={'4.3rem'}
+                                text={<HiBars2 size={28} />}
+                                bg={'dark'}
+                                hoverBg={'blue'}
+                                rounded={'full'}
+                                color={'gray'}
+                                hoverColor={'white'}
+                            />
+                    }
+                </div>
             )}
 
             {/* Overlay + Sliding Menu */}
@@ -77,7 +122,7 @@ const SlideMenu = () => {
                     <>
                         {/* Overlay */}
                         <motion.div
-                            className="fixed inset-0 bg-light opacity-20 z-30"
+                            className="fixed inset-0 bg-gradient-to-r from-black/20 to-black/90 opacity-20 z-30"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 0.5 }}
                             exit={{ opacity: 0 }}
@@ -86,7 +131,7 @@ const SlideMenu = () => {
 
                         {/* Right Menu */}
                         <motion.div
-                            className="fixed top-0 right-0 h-full bg-dark z-40 text-light shadow-2xl 
+                            className="fixed top-0 right-0 h-full bg-dark z-40 text-light  shadow-full shadow-white
                             px-[5vw] pt-[15vh] pb-[10vh]"
 
                             style={{ width: 450 }}
@@ -100,7 +145,7 @@ const SlideMenu = () => {
                             }}
                             exit={{
                                 x: 10,
-                                clipPath: "inset(0% 0% 100% 100%)",
+                                clipPath: "inset(19% 19% 100% 100%)",
                             }}
                             transition={{
                                 duration: 0.8,
@@ -109,12 +154,17 @@ const SlideMenu = () => {
                         >
                             <div className="flex flex-col items-start justify-start">
                                 <h2 className="text-[.55rem] font-medium pl-[1.7rem]  pb-6 text-gray uppercase">Navigation</h2>
-                                <div className="h-[.1px] ml-[1.7rem] mr-[1rem] bg-gray w-full "></div>
+                                <div className="h-[.1px] ml-[1.7rem] mr-[4rem] bg-gray w-full "></div>
                                 <ul className=" pt-6">
-                                    <li className="cursor-pointer"><MenuItem label='Home' /></li>
-                                    <li className="cursor-pointer"><MenuItem label='Work' /></li>
-                                    <li className="cursor-pointer"><MenuItem label='About' /></li>
-                                    <li className="cursor-pointer"><MenuItem label='Contact' /></li>
+                                    <li onClick={() => navigate('/')}
+                                        className="cursor-pointer"><MenuItem label='Home' /></li>
+                                    <li onClick={() => navigate('/work')}
+                                        className="cursor-pointer"><MenuItem label='Work' /></li>
+                                    <li onClick={() => navigate('/about')}
+                                        className="cursor-pointer"><MenuItem label='About' /></li>
+                                    <li
+                                        onClick={() => navigate('/contact')}
+                                        className="cursor-pointer"><MenuItem label='Contact' /></li>
                                 </ul>
                             </div>
 
@@ -133,7 +183,9 @@ const SlideMenu = () => {
                     </>
                 )}
             </AnimatePresence>
-        </>
+        </div>
+
+
     );
 };
 

@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 
 import img from '../../assets/samir.png';
@@ -23,6 +23,8 @@ import SocialMediaTitle from '../utils/SocialMediaTitle';
 
 const Footer = () => {
 
+
+    const navigate = useNavigate();
 
     const borderRef = useRef(null);
 
@@ -72,7 +74,9 @@ const Footer = () => {
                         ref={borderRef}
                         style={{ x }}>
 
-                        <MagicButton text={'Get in tuch'} size={'9.6rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
+                        <div onClick={()=> navigate('/contact')}>
+                            <MagicButton text={'Get in tuch'} size={'9.6rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
+                        </div>
 
                     </motion.div>
 
@@ -110,8 +114,11 @@ const Footer = () => {
                     <div>
                         <ul className=" pt-3 flex gap-6">
                             <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
-                            <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li>
-                            <li className="cursor-pointer"><SocialMediaTitle label='Github' /></li>
+                            <a href="https://www.linkedin.com/in/samir-batoum-3948b72a5?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
+                                <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li></a>
+                            <a href="https://github.com/batoum0-code" target="_blank" rel="noopener noreferrer">
+                                <li className="cursor-pointer"><SocialMediaTitle label='Github' /></li>
+                            </a>
                             <li className="cursor-pointer"><SocialMediaTitle label='Whatsapp' /></li>
                         </ul>
                     </div>

@@ -6,6 +6,21 @@ import img1 from "../../assets/cerveau.png";
 import img3 from "../../assets/5.png";
 import img4 from "../../assets/q1.webp";
 
+
+
+import MagicButton from '../utils/MagicButton';
+
+
+
+
+
+
+
+
+
+
+
+
 const projects = [
     {
         id: 1,
@@ -27,6 +42,13 @@ const projects = [
         tech: ["Vue.js", "Firebase"],
         image: img3,
         them: "blue",
+    },
+    {
+        id: 4,
+        title: "AMELKIS RESOURTS",
+        tech: ["Next.js", "Tailwind", "NestJS"],
+        image: img4,
+        them: "gray",
     },
 ];
 
@@ -88,7 +110,7 @@ export default function ProjectHoverWithSlide() {
     return (
         <div
             ref={containerRef}
-            className="relative bg-light pb-[5rem] mx-[10rem] border-t-[1px] border-gray"
+            className="relative bg-light pb-[5rem] mx-[8rem] border-t-[1px] border-gray"
         >
             <div className="w-full relative z-10">
                 {projects.map((project, index) => (
@@ -96,12 +118,12 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
-                                cursor-pointer transition-all duration-300 py-14 border-b-[1px] border-gray px-6 hover:px-1"
+                                cursor-pointer transition-all duration-300 py-9 border-b-[1px] border-gray px-6 hover:px-1"
                     >
-                        <h3 className="text-5xl font-semibold text-text">
+                        <h3 className="text-[3.3rem] font-semibold text-text">
                             {project.title}
                         </h3>
-                        <p className="text-lg text-text">{project.tech.join(", ")}</p>
+                        <p className="text-sm text-text">{project.tech.join(", ")}</p>
                     </div>
                 ))}
             </div>
@@ -119,12 +141,13 @@ export default function ProjectHoverWithSlide() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.1 }}
                         transition={{
-                            duration: 0.9,
+                            duration: 2,
                             ease: [0.22, 1, 0.36, 1],
                         }}
                     >
                         {/* Scrollable Image Container */}
                         <div
+                            onClick={()=> console.log('ok from project view button ')}
                             ref={previewScrollRef}
                             className="overflow-y-auto h-full scroll-smooth hide-scrollbar"
                         >
@@ -132,13 +155,8 @@ export default function ProjectHoverWithSlide() {
                                 <div
                                     key={index}
                                     ref={(el) => (sectionRefs.current[index] = el)}
-                                    className={`h-full w-full flex items-center justify-center px-[3rem] py-[6rem] bg-${project.them}`}
+                                    className={`h-full w-full flex items-center justify-center px-[2rem] py-[6rem] bg-${project.them}`}
                                 >
-                                    {/* <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="object-contain h-full w-full"
-                                    /> */}
 
 
                                     <AnimatePresence mode="wait">
@@ -149,13 +167,25 @@ export default function ProjectHoverWithSlide() {
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -40 }}
                                             transition={{ duration: 0.6, ease: "easeInOut" }}
-                                            className="w-full h-full"
+                                            className="w-full h-full rounded-[4px]"
                                         />
                                     </AnimatePresence>
 
                                 </div>
                             ))}
+
                         </div>
+
+
+                        <div
+                        
+                        className="absolute inset-0 flex items-center justify-center">
+                            {/* <button className="text-light bg-blue rounded-full h-16 w-16 text-lg font-samirFont">
+                                View
+                            </button> */}
+                            <MagicButton text={'View'} size={'4rem'} rounded={'full'} bg={'blue'}/>
+                        </div>
+
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -172,8 +202,6 @@ export default function ProjectHoverWithSlide() {
         </div>
     );
 }
-
-
 
 
 
