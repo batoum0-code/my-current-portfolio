@@ -38,7 +38,7 @@ const VideoTickerRow = ({ videos, reverse, scrollY }) => {
         {videos.concat(videos).map((item, index) => (
           <div
             key={index}
-            className={`text-center bg-${item.bg} px-[1.3rem] py-[1.6rem] overflow-hidden flex-shrink-0`}
+            className={`text-center bg-${item.bg} px-[1.3rem] py-[1.6rem] overflow-hidden flex-shrink-0 `}
           >
             <video
               src={item.video}

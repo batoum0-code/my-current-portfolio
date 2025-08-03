@@ -1,7 +1,14 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
+
+
+
+
 const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor }) => {
+
+
+
 
 
 
@@ -42,7 +49,7 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor }) =>
         setBgState("leaving");
 
         setTimeout(() => {
-            setBgState("resetting");
+            setBgState("resetting");0   
             setTimeout(() => setBgState("init"), 10);
         }, 500);
     };
@@ -57,6 +64,10 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor }) =>
     } else {
         animateProps = { y: "100%", opacity: hasInteracted ? 1 : 0 };
     }
+
+
+
+
 
     return (
         <button

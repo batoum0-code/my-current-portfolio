@@ -47,7 +47,7 @@ const MenuItem = ({ label }) => {
                 transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
             }}
         >
-            <span className=" text-[2.5rem] font-medium">{label}</span>
+            <span className=" text-[3rem] font-normal">{label}</span>
             <span className={` ${ !isHovered && 'opacity-0'} inline-block h-[.7rem]  w-[.7rem] bg-light rounded-full `} />
         </div>
     </div>;

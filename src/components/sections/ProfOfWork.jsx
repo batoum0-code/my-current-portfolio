@@ -1,6 +1,7 @@
 import AnimatedSplitText from '../utils/AnimatedSplitText';
 import MagicButton from '../utils/MagicButton';
 import ProjectHoverPreview from '../utils/ProjectHoverPreview';
+import ContactMagicButton from '../utils/ContactMagicButton';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
@@ -37,7 +38,7 @@ const ProfOfWork = () => {
     const y = useTransform(scrollYProgress, [0, 1], [120, -90]);
 
     return (
-        <div className='rounded-b-[30rem]'>
+        <div className=''>
             <div className="flex pt-[10rem] justify-center gap-[6rem] h-full px-[3rem] ">
                 <AnimatedSplitText text={myText} />
                 <div className="flex flex-col gap-[3rem]">
@@ -61,6 +62,10 @@ const ProfOfWork = () => {
             <div className='overflow-hidden'>
                 <div className="text-start ml-[10rem] text-gray pb-9 text-sm">Recent work</div>
                 <ProjectHoverPreview />
+            </div>
+
+            <div className='flex items-center justify-center'>
+                <ContactMagicButton text={'More Work'} size={'3rem'} bg={'transparent'} color={'dark'} hoverBg={'blue'} rounded={'lg'} />
             </div>
         </div>
     );

@@ -110,7 +110,7 @@ export default function ProjectHoverWithSlide() {
     return (
         <div
             ref={containerRef}
-            className="relative bg-light pb-[5rem] mx-[8rem] border-t-[1px] border-gray"
+            className="relative bg-light py-[2rem] mx-[6.9rem] border-t-[1px] border-gray"
         >
             <div className="w-full relative z-10">
                 {projects.map((project, index) => (
@@ -118,7 +118,7 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
-                                cursor-pointer transition-all duration-300 py-9 border-b-[1px] border-gray px-6 hover:px-1"
+                                cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray px-6 hover:px-1"
                     >
                         <h3 className="text-[3.3rem] font-semibold text-text">
                             {project.title}

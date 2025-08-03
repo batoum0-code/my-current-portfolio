@@ -47,7 +47,7 @@ const SocialMediaTitle = ({ label }) => {
                 transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
             }}
         >
-            <span className="relative text-[.8rem] pb-1 font-normal leading-none inline-block ">
+            <span className="relative text-[.8rem] pb-1 font-medium leading-none inline-block text-light">
                 {label}
 
                 {/* Animated line under label */}

@@ -25,6 +25,7 @@ const SlideMenu = () => {
 
 
 
+
     const navigate = useNavigate();
 
 
@@ -44,7 +45,7 @@ const SlideMenu = () => {
                 setMenuOpen(false); // Optional: auto-close menu on scroll-up
             }
 
-            if (window.scrollY > 2500) {
+            if (window.scrollY > 2470) {
                 setButtonState(true);
             } else {
                 setButtonState(false);
@@ -92,25 +93,26 @@ const SlideMenu = () => {
                 <div
                     ref={buttonRef}
                     onClick={toggleMenu}
-                    className={`fixed top-1 right-1 z-50 p-6   ${buttonState ? 'text-gray border-border border-[1px] ' : 'text-light'}  
-                    rounded-full transition-all duration-900 `}
+                    className={`fixed top-7 right-7 z-50   ${buttonState ? 'text-gray border-[1px] border-gray hover:border-none ' : 'text-light'}  
+                        ${menuOpen ? 'border-none':''}
+                    rounded-full transition-all duration-100 `}
                 >
                     {
                         menuOpen ? <MagicButton
-                            size={'4.3rem'}
+                            size={'4.8rem'}
                             text={<RxCross1 size={20} />}
                             bg={'blue'}
-                            hoverBg={'gray'}
+                            hoverBg={'deepb'}
                             rounded={'full'}
                         /> :
                             <MagicButton
-                                size={'4.3rem'}
+                                size={'4.8rem'}
                                 text={<HiBars2 size={28} />}
                                 bg={'dark'}
                                 hoverBg={'blue'}
                                 rounded={'full'}
                                 color={'gray'}
-                                hoverColor={'white'}
+                                hoverColor={'light'}
                             />
                     }
                 </div>
@@ -134,7 +136,7 @@ const SlideMenu = () => {
                             className="fixed top-0 right-0 h-full bg-dark z-40 text-light  shadow-full shadow-white
                             px-[5vw] pt-[15vh] pb-[10vh]"
 
-                            style={{ width: 450 }}
+                            style={{ width: 510 }}
                             initial={{
                                 x: 500,
                                 clipPath: "inset(100% 100% 100% 100%)", // hidden from right with curve
@@ -153,9 +155,9 @@ const SlideMenu = () => {
                             }}
                         >
                             <div className="flex flex-col items-start justify-start">
-                                <h2 className="text-[.55rem] font-medium pl-[1.7rem]  pb-6 text-gray uppercase">Navigation</h2>
-                                <div className="h-[.1px] ml-[1.7rem] mr-[4rem] bg-gray w-full "></div>
-                                <ul className=" pt-6">
+                                <h2 className="text-[.55rem] font-bold pl-[1.7rem] pt-6 pb-6 text-gray uppercase">Navigation</h2>
+                                <div className="h-[.1px] ml-[1.7rem] bg-gray w-[20.2rem] opacity-60"></div>
+                                <ul className="pt-6 -space-y-3">
                                     <li onClick={() => navigate('/')}
                                         className="cursor-pointer"><MenuItem label='Home' /></li>
                                     <li onClick={() => navigate('/work')}
@@ -170,8 +172,8 @@ const SlideMenu = () => {
 
 
                             {/* social media icons or titles depend on moode */}
-                            <div className="pl-[1.7rem] pt-20">
-                                <h2 className="text-[.55rem] font-medium tracking-normal text-gray uppercase">Socials</h2>
+                            <div className="pl-[1.7rem] pt-[7.2rem]">
+                                <h2 className="text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
                                 <ul className=" pt-3 flex gap-6">
                                     <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
                                     <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li>
