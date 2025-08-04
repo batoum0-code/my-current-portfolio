@@ -79,7 +79,7 @@ const VideoShowcase = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="flex flex-col gap-8 bg-light py-16">
+    <div ref={containerRef} className="flex flex-col gap-8 bg-light py-16 ">
       <VideoTickerRow
         videos={videosRow1}
         reverse={false}

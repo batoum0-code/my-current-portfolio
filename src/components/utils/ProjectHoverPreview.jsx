@@ -118,9 +118,9 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
-                                cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray px-6 hover:px-1"
+                                cursor-pointer transition-all duration-300 py-9 border-b-[1px] border-gray px-6 hover:px-1"
                     >
-                        <h3 className="text-[3.3rem] font-semibold text-text">
+                        <h3 className="text-[4rem] font-semibold text-text">
                             {project.title}
                         </h3>
                         <p className="text-sm text-text">{project.tech.join(", ")}</p>

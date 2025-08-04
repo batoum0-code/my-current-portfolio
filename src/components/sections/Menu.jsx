@@ -1,4 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
+
+
+
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -18,12 +21,7 @@ import MagicButton from "../utils/MagicButton";
 
 
 
-
 const SlideMenu = () => {
-
-
-
-
 
 
     const navigate = useNavigate();
@@ -32,7 +30,8 @@ const SlideMenu = () => {
 
     const [showButton, setShowButton] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const [buttonState, setButtonState] = useState(false)
+    const [buttonState, setButtonState] = useState(false);
+    const [isAnyHovered, setIsAnyHovered] = useState(false);
     const buttonRef = useRef();
 
     // Track scroll position
@@ -84,6 +83,17 @@ const SlideMenu = () => {
 
 
 
+    const menuItems = [
+        { label: 'Home', paht: "/" },
+        { label: 'Work', paht: "/work" },
+        { label: 'About', paht: "/about" },
+        { label: 'Contact', paht: "/contact" },
+    ]
+
+
+
+
+
 
     return (
         <div className="">
@@ -94,7 +104,7 @@ const SlideMenu = () => {
                     ref={buttonRef}
                     onClick={toggleMenu}
                     className={`fixed top-7 right-7 z-50   ${buttonState ? 'text-gray border-[1px] border-gray hover:border-none ' : 'text-light'}  
-                        ${menuOpen ? 'border-none':''}
+                        ${menuOpen ? 'border-none' : ''}
                     rounded-full transition-all duration-100 `}
                 >
                     {
@@ -158,15 +168,16 @@ const SlideMenu = () => {
                                 <h2 className="text-[.55rem] font-bold pl-[1.7rem] pt-6 pb-6 text-gray uppercase">Navigation</h2>
                                 <div className="h-[.1px] ml-[1.7rem] bg-gray w-[20.2rem] opacity-60"></div>
                                 <ul className="pt-6 -space-y-3">
-                                    <li onClick={() => navigate('/')}
-                                        className="cursor-pointer"><MenuItem label='Home' /></li>
-                                    <li onClick={() => navigate('/work')}
-                                        className="cursor-pointer"><MenuItem label='Work' /></li>
-                                    <li onClick={() => navigate('/about')}
-                                        className="cursor-pointer"><MenuItem label='About' /></li>
-                                    <li
-                                        onClick={() => navigate('/contact')}
-                                        className="cursor-pointer"><MenuItem label='Contact' /></li>
+                                    {
+                                        menuItems.map(({ label, path }) => {
+                                            return (
+                                                <li key={label} onClick={() => navigate(path)}
+                                                    className="cursor-pointer">
+                                                    <MenuItem label={label}
+                                                        setIsAnyHovered={setIsAnyHovered} isAnyHovered={isAnyHovered}/>
+                                                </li>)
+                                        })
+                                    }
                                 </ul>
                             </div>
 
@@ -175,7 +186,7 @@ const SlideMenu = () => {
                             <div className="pl-[1.7rem] pt-[7.2rem]">
                                 <h2 className="text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
                                 <ul className=" pt-3 flex gap-6">
-                                    <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
+                                    <li onClick={() => console.log('this your current page ', currentPage)} className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
                                     <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li>
                                     <li className="cursor-pointer"><SocialMediaTitle label='Github' /></li>
                                     <li className="cursor-pointer"><SocialMediaTitle label='Whatsapp' /></li>

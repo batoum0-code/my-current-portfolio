@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 
 
-const ContactMagicButton = ({ text, bg, hoverBg }) => {
+const ContactMagicButton = ({ text, bg, hoverBg, color }) => {
 
 
 
@@ -69,9 +69,10 @@ const ContactMagicButton = ({ text, bg, hoverBg }) => {
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`relative overflow-hidden rounded-full bg-${bg} text-white font-semibold px-[1.6rem] py-[1.2rem] border-[1.8px]
-                border-border-solidLight hover:border-transparent
-            text-lg  transition-all duration-300  flex items-center justify-center`}
+            className={`relative overflow-hidden rounded-full bg-${bg}  ${color ? `text-${color} text-[1.2rem] tracking-[.2rem] font-medium`: 'text-white'} hover:text-white
+                font-semibold px-[1.7rem] py-[1.3rem] border-[1.8px]
+                border-borderSolidLight hover:border-none tracking-widest 
+            text-lg  transition-all duration-600  flex items-center justify-center`}
             style={{
                 transform: `translate(${offsetX}px, ${offsetY}px)`,
                 transition: "transform 0.1s ease-out",
@@ -79,10 +80,10 @@ const ContactMagicButton = ({ text, bg, hoverBg }) => {
         >
             {/* Animated text */}
             <span
-                className="relative z-10 block text-center tracking-[.9px] text-sm font-medium"
+                className={`relative z-10 block text-center tracking-[.9px] text-sm font-medium `}
                 style={{
                     transform: `translate(${offsetX / 2}px, ${offsetY / 2}px)`,
-                    transition: "transform 0.1s ease-out",
+                    transition: "transform 0.6s ease-out",
                 }}
             >
                 {text}

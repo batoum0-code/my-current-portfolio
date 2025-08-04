@@ -1,9 +1,8 @@
-import Header from "./Header";
 import NewsTicker from "../utils/NewsTicker ";
 import samir from '../../assets/samir.png';
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-
+import Header from "./Header";
 
 
 
@@ -27,7 +26,7 @@ const Hero = () => {
 
 
     return <div className=" bg-gray ">
-        <Header />
+        <Header/>
         <main className="">
             <div className="flex  items-center h-screen relative  ">
                 <div className="bg-dark flex items-center gap-3

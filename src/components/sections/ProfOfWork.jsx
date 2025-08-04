@@ -38,7 +38,7 @@ const ProfOfWork = () => {
     const y = useTransform(scrollYProgress, [0, 1], [120, -90]);
 
     return (
-        <div className=''>
+        <div className='pb-[7rem]'>
             <div className="flex pt-[10rem] justify-center gap-[6rem] h-full px-[3rem] ">
                 <AnimatedSplitText text={myText} />
                 <div className="flex flex-col gap-[3rem]">
@@ -64,8 +64,8 @@ const ProfOfWork = () => {
                 <ProjectHoverPreview />
             </div>
 
-            <div className='flex items-center justify-center'>
-                <ContactMagicButton text={'More Work'} size={'3rem'} bg={'transparent'} color={'dark'} hoverBg={'blue'} rounded={'lg'} />
+            <div className='flex items-center justify-center h-[3rem] pt-[1.5rem]'>
+                <ContactMagicButton text={'More Work'} size={'3rem'} bg={'transparent'} color={'blue'} hoverBg={'blue'}  />
             </div>
         </div>
     );

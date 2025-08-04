@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+
+import { usePage } from "../../context/useContext";
+
+
+
+
+const MenuItem = ({ label, isAnyHovered, setIsAnyHovered }) => {
+
+
+
+    const { currentPage } = usePage();
 
 
 
 
 
 
+    const compareLabelAndCurrentPage = currentPage.trim().toLowerCase() === label.trim().toLowerCase();
 
-const MenuItem = ({ label }) => {
+
+
 
     const [offsetX, setOffsetX] = useState(0);
     const [offsetY, setOffsetY] = useState(0);
@@ -31,9 +45,15 @@ const MenuItem = ({ label }) => {
     };
 
 
+
+
+
     return <div
         className="inline-block align-top  text-center cursor-pointer text-light"
-        onMouseEnter={() => setIsHovered(true)}
+        onMouseEnter={() => {
+            setIsHovered(true)
+            setIsAnyHovered(true)
+        }}
         onMouseLeave={() => {
             setIsHovered(false);
             setOffsetX(0);
@@ -48,9 +68,10 @@ const MenuItem = ({ label }) => {
             }}
         >
             <span className=" text-[3rem] font-normal">{label}</span>
-            <span className={` ${ !isHovered && 'opacity-0'} inline-block h-[.7rem]  w-[.7rem] bg-light rounded-full `} />
+            <span className={` ${(!isAnyHovered && !compareLabelAndCurrentPage) && 'opacity-0'}
+            inline-block h-[.7rem]  w-[.7rem] bg-light rounded-full `} />
         </div>
-    </div>;
+    </div >;
 };
 
 export default MenuItem;
