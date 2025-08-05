@@ -110,7 +110,7 @@ export default function ProjectHoverWithSlide() {
     return (
         <div
             ref={containerRef}
-            className="relative bg-light py-[2rem] mx-[6.9rem] border-t-[1px] border-gray"
+            className="relative bg-light  mx-[6.9rem] border-t-[1px] border-gray"
         >
             <div className="w-full relative z-10">
                 {projects.map((project, index) => (

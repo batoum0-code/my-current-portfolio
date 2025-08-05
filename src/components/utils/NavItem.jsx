@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePage } from "../../context/useContext";
 
 
 
 
 
+const NavItem = ({ label }) => {
 
-const NavItem = ({ label,  currentPage }) => {
+
+    const { currentPage } = usePage();
+    
+
+    const comparedCurrentPageAndLabel = currentPage.trim().toLowerCase() === label.trim().toLowerCase();
+
+
 
 
 
@@ -50,8 +58,9 @@ const NavItem = ({ label,  currentPage }) => {
             >
                 <span 
                 className="mb-2 font-samirFont font-medium text-[1.1rem]">{label}</span>
-                {(isHovered || currentPage === label) ? <span className={`block  h-[.4rem] mt-1 w-[.4rem] bg-light rounded-full mx-auto`} /> :
-                            <span className={`block   opacity-0 mt-1 h-[.4rem] w-[.4rem] bg-light rounded-full mx-auto`} />
+                {(!isHovered && !comparedCurrentPageAndLabel) ? 
+                            <span className={`block   opacity-0 mt-1 h-[.4rem] w-[.4rem] bg-light rounded-full mx-auto`} /> :
+                            <span className={`block  h-[.4rem] mt-1 w-[.4rem] bg-light rounded-full mx-auto`} /> 
 
                 }
             </div>

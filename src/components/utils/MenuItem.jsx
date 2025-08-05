@@ -48,6 +48,9 @@ const MenuItem = ({ label, isAnyHovered, setIsAnyHovered }) => {
 
 
 
+
+
+
     return <div
         className="inline-block align-top  text-center cursor-pointer text-light"
         onMouseEnter={() => {
@@ -68,8 +71,8 @@ const MenuItem = ({ label, isAnyHovered, setIsAnyHovered }) => {
             }}
         >
             <span className=" text-[3rem] font-normal">{label}</span>
-            <span className={` ${(!isAnyHovered && !compareLabelAndCurrentPage) && 'opacity-0'}
-            inline-block h-[.7rem]  w-[.7rem] bg-light rounded-full `} />
+            <span className={` ${(!compareLabelAndCurrentPage && !isHovered) && 'opacity-0'}
+            inline-block h-[.8rem]  w-[.8rem] bg-light rounded-full `} />
         </div>
     </div >;
 };

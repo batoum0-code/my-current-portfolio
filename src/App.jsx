@@ -30,9 +30,9 @@ function App() {
     const path = location.pathname;
 
     if (path === '/') setCurrentPage('home');
-    else if (path.includes('Work')) setCurrentPage('work');
-    else if (path.includes('About')) setCurrentPage('about');
-    else if (path.includes('Contact')) setCurrentPage('contact');
+    else if (path.includes('work')) setCurrentPage('work');
+    else if (path.includes('wbout')) setCurrentPage('about');
+    else if (path.includes('contact')) setCurrentPage('contact');
     else setCurrentPage('');
 
 
@@ -40,11 +40,6 @@ function App() {
   }, [location, setCurrentPage]);
 
 
-
-  useEffect(() => {
-    
-    console.log('✅ debuging from app component :  currentPage after update:', currentPage);
-  }, [currentPage])
 
 
 
