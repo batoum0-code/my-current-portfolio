@@ -7,9 +7,9 @@ import Footer from '../components/sections/Footer';
 const Home = () => {
     return <div>
         <Hero />
-        <ProfOfWork/>
-        <VideoShowcase/>
-        <Footer/>
+        {/* <ProfOfWork/>
+        <VideoShowcase/> */}
+        {/* <Footer/> */}
     </div>;
 };
 

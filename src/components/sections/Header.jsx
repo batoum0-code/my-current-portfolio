@@ -3,6 +3,9 @@ import NavItem from "../utils/NavItem";
 import brain from '../../assets/cerveau.png';
 import { useNavigate  } from "react-router-dom";
 import { usePage } from "../../context/useContext";
+import MenuItem from '../utils/MenuItem';
+
+
 
 
 
@@ -21,11 +24,11 @@ const Header = () => {
     const [isNameHovered, setIsNameHovered] = useState(false);
 
     return (
-        <header className="p-6 flex justify-between w-full text-light  ">
+        <header className="md:p-6 pt-9 px-4 flex justify-between w-full text-light  ">
             <div className="">
                 <h1
                     onClick={()=> navigate('/')}
-                    className="cursor-pointer relative w-[9rem]"
+                    className="cursor-pointer relative md:w-[9rem] w-[9rem] text-[1.1rem]"
                     onMouseEnter={() => setIsNameHovered(true)}
                     onMouseLeave={() => setIsNameHovered(false)}
                 >
@@ -46,13 +49,16 @@ const Header = () => {
                     </span>
                 </h1>
             </div>
-            <nav>   
+            <nav className="hidden md:block">   
                 <ul className="flex gap-6">
                     <li onClick={()=>navigate('/about')} className="cursor-pointer"><NavItem label='About' currentPage={currentPage}/></li>
                     <li onClick={()=>navigate('/work')} className="cursor-pointer"><NavItem label='Work' currentPage={currentPage}/></li>
                     <li onClick={()=>navigate('/contact')} className="cursor-pointer"><NavItem label='Contact' currentPage={currentPage}/></li>
                 </ul>
             </nav>
+            <div className="md:hidden">
+                <h3><MenuItem label='menu' mobile={true}/></h3>
+            </div>
         </header>
     );
 };

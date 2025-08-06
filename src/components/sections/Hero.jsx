@@ -3,7 +3,7 @@ import samir from '../../assets/samir.png';
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Header from "./Header";
-
+import { GiFlamingArrow } from "react-icons/gi";
 
 
 
@@ -26,10 +26,10 @@ const Hero = () => {
 
 
     return <div className=" bg-gray ">
-        <Header/>
-        <main className="">
-            <div className="flex  items-center h-screen relative  ">
-                <div className="bg-dark flex items-center gap-3
+        <Header />
+        <main className="w-full">
+            <div className="flex  items-center h-screen  relative  left-0 right-0">
+                <div className="bg-dark hidden md:flex  items-center gap-3  
                 rounded-tr-[30rem] rounded-br-[30rem] px-6 py-4 ">
                     <h3 className="text-light font-medium">
                         located in <br /> Morocco
@@ -41,31 +41,19 @@ const Hero = () => {
 
                 </div>
 
-                <div className=" flex bottom-0 absolute  left-[29%]">
+                <div className=" flex bottom-0  absolute left-[1%] md:left-[29%] ">
                     <div
-                    ref={boxRef}
-                    className="w-[24rem] sticky">
+                        ref={boxRef}
+                        className=" w-[24rem] md:w-[24rem]   sticky">
                         <img className="w-full object-cover" src={samir} alt="My photo" />
                     </div>
-                    {/* small description  */}
+                    {/*  description  */}
                     <div className="text-light">
-                        <h2 className="absolute top-[9rem] right-[-27rem] flex flex-col gap-11">
-                            <span className="">
-                                <svg
-                                    width="20px"
-                                    height="20px"
-                                    viewBox="0 0 14 14"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                                        <g stroke="#FFFFFF" strokeWidth="1.5" transform="rotate(90 7 7)">
-                                            <polyline points="2.76923077 0 12 0 12 9.23076923"></polyline>
-                                            <line x1="12" y1="0" x2="0" y2="12"></line>
-                                        </g>
-                                    </g>
-                                </svg>
+                        <h2 className="absolute top-[24rem] md:top-[9rem] left-3 md:left-auto md:right-[-9rem] lg:right-[-21rem] xl:right-[-27rem] flex flex-col md:gap-11 ">
+                            <span className="text-[2rem] pb-2 md:text-[3rem]">
+                                <GiFlamingArrow />
                             </span>
-                            <span className="text-[1.7rem]  font-medium space-y-9 pt-11">
+                            <span className="lg:text-[1.7rem] md:text-[1rem] text-[1.2rem] font-medium  md:font-medium md:space-y-9 md:pt-11">
                                 Full Stack Dev & Freelancer
 
                                 <br />
@@ -74,9 +62,18 @@ const Hero = () => {
                             </span>
 
                         </h2>
+
+
                     </div>
                 </div>
-                <div className="absolute bottom-20 left-0 right-0 bg-transparent">
+
+
+                <div className=" rounded-full md:hidden absolute top-[31rem] right-3">
+                    <img src="/public/videos/planete.gif" alt="" />
+                </div>
+
+
+                <div className="absolute md:bottom-20 left-0 right-0 bg-transparent">
                     <NewsTicker />
                 </div>
 

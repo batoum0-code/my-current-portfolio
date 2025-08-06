@@ -6,7 +6,7 @@ import { usePage } from "../../context/useContext";
 
 
 
-const MenuItem = ({ label, isAnyHovered, setIsAnyHovered }) => {
+const MenuItem = ({ label, isAnyHovered, setIsAnyHovered, mobile }) => {
 
 
 
@@ -70,9 +70,9 @@ const MenuItem = ({ label, isAnyHovered, setIsAnyHovered }) => {
                 transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
             }}
         >
-            <span className=" text-[3rem] font-normal">{label}</span>
+            <span className={`${mobile? "text-[1.2rem] ":"text-[3rem]"} font-normal`}>{label}</span>
             <span className={` ${(!compareLabelAndCurrentPage && !isHovered) && 'opacity-0'}
-            inline-block h-[.8rem]  w-[.8rem] bg-light rounded-full `} />
+            inline-block  bg-light rounded-full ${mobile? "h-[.5rem]  w-[.5rem]":"h-[.8rem]  w-[.8rem]"}`} />
         </div>
     </div >;
 };
