@@ -61,8 +61,8 @@ const NewsTicker = () => {
                 className="flex whitespace-nowrap absolute"
                 style={{ x }}
             >
-                <span className="text-[9rem] text-white">{repeatedText}</span>
-                <span className="text-[9rem] text-white">{repeatedText}</span>
+                <span className="text-[10rem] text-white">{repeatedText}</span>
+                <span className="text-[10rem] text-white">{repeatedText}</span>
             </motion.div>
         </div>
     );

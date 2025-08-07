@@ -67,14 +67,13 @@ const Hero = () => {
                     </div>
                 </div>
 
-
-                <div className=" rounded-full md:hidden absolute top-[31rem] right-3">
-                    <img src="/public/videos/planete.gif" alt="" />
-                </div>
-
-
                 <div className="absolute md:bottom-20 left-0 right-0 bg-transparent">
                     <NewsTicker />
+                </div>
+
+                
+                <div className="sm:hidden absolute top-[31rem]  right-3 rotate-12">
+                    <img src="/public/videos/planete.gif" alt="" />
                 </div>
 
             </div>
