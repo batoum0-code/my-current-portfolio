@@ -51,13 +51,13 @@ const ProfOfWork = () => {
                     </p>
 
                     <motion.div style={{ y: buttonY }}>
-                        <button
+                        <div
                             onClick={() => navigate('/about')}
                             aria-label="About me"
                             className="pl-[11rem] sm:pl-0"
                         >
                             <MagicButton text={'About me'} size={'10rem'} bg={'dark'} hoverBg={'blue'} rounded={'full'} />
-                        </button>
+                        </div>
                     </motion.div>
                 </div>
             </motion.div>

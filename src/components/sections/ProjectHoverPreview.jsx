@@ -180,9 +180,7 @@ export default function ProjectHoverWithSlide() {
                         <div
                         
                         className="absolute inset-0 flex items-center justify-center">
-                            {/* <button className="text-light bg-blue rounded-full h-16 w-16 text-lg font-samirFont">
-                                View
-                            </button> */}
+                            
                             <MagicButton text={'View'} size={'4rem'} rounded={'full'} bg={'blue'}/>
                         </div>
 

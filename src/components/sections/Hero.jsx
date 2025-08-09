@@ -71,7 +71,7 @@ const Hero = () => {
                     <NewsTicker />
                 </div>
 
-                
+
                 <div className="sm:hidden absolute top-[31rem]  right-3 rotate-12">
                     <img src="/public/videos/planete.gif" alt="" />
                 </div>

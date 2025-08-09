@@ -134,7 +134,7 @@ const SlideMenu = () => {
                     <>
                         {/* Overlay */}
                         <motion.div
-                            className="fixed inset-0 bg-gradient-to-r from-black/20 to-black/90 opacity-20 z-30"
+                            className="fixed inset-0 bg-gradient-to-r from-black/20 to-black/90 opacity-20 z-30 hidden md:block"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 0.5 }}
                             exit={{ opacity: 0 }}
@@ -143,7 +143,7 @@ const SlideMenu = () => {
 
                         {/* Right Menu */}
                         <motion.div
-                            className="fixed top-0 right-0 h-full bg-dark z-40 text-light  shadow-full shadow-white
+                            className="fixed top-0 right-0 left-0 md:left-auto h-full bg-dark z-40 text-light  shadow-full shadow-white w-full
                             px-[5vw] pt-[15vh] pb-[10vh]"
 
                             style={{ width: 510 }}
@@ -164,7 +164,7 @@ const SlideMenu = () => {
                                 ease: [0.25, 1, 0.5, 1], // smooth curve-like motion
                             }}
                         >
-                            <div className="flex flex-col items-start justify-start">
+                            <div className="flex flex-col items-start justify-start ">
                                 <h2 className="text-[.55rem] font-bold pl-[1.7rem] pt-6 pb-6 text-gray uppercase">Navigation</h2>
                                 <div className="h-[.1px] ml-[1.7rem] bg-gray w-[20.2rem] opacity-60"></div>
                                 <ul className="pt-6 -space-y-3">
@@ -181,9 +181,13 @@ const SlideMenu = () => {
                                 </ul>
                             </div>
 
+                            <div className="pl-[1rem] md:hidden h-[1px] opacity-70 w-full bg-gray mt-[10rem]">
+
+                            </div>
+
 
                             {/* social media icons or titles depend on moode */}
-                            <div className="pl-[1.7rem] pt-[7.2rem]">
+                            <div className="pl-[1rem] md:pl-[1.7rem] md:pt-[7.2rem] ">
                                 <h2 className="text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
                                 <ul className=" pt-3 flex gap-6">
                                     <li onClick={() => console.log('this your current page ', currentPage)} className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
