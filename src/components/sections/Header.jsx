@@ -12,7 +12,7 @@ import MenuItem from '../utils/MenuItem';
 const Header = () => {
 
 
-    const { currentPage } = usePage();
+    const { currentPage, menuOpen, setMenuOpen  } = usePage();
 
 
 
@@ -57,7 +57,9 @@ const Header = () => {
                 </ul>
             </nav>
             <div className="md:hidden">
-                <h3><MenuItem label='menu' mobile={true}/></h3>
+                <h3 
+                onClick={()=> setMenuOpen(!menuOpen)}> 
+                    <MenuItem label='menu' mobile={true}/></h3>
             </div>
         </header>
     );

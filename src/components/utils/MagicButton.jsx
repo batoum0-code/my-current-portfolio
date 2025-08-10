@@ -74,7 +74,7 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor }) =>
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`relative overflow-hidden rounded-${rounded} bg-${bg} 
+            className={`relative overflow-hidden rounded-${rounded} ${bg ? `bg-${bg}`: 'bg-blue'}
             ${color ? `text-${color}` : 'text-white'}  
             ${hoverColor ? `hover:text-light` : ''}
             font-semibold 
@@ -98,7 +98,7 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor }) =>
 
             {/* Blue background */}
             <motion.span
-                className={`absolute inset-0 bg-${hoverBg} rounded-[30rem] scale-150 z-0`}
+                className={`absolute inset-0 ${hoverBg ? `bg-${hoverBg}`: 'bg-deepb'} rounded-[30rem] scale-150 z-0`}
                 style={{
                     clipPath: "ellipse(120% 100% at 50% 100%)",
                 }}

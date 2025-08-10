@@ -10,7 +10,7 @@ const Home = () => {
         <div className="hidden sm:block">
             <VideoShowcase/>
         </div>
-        {/* <Footer/> */}
+        <Footer/>
     </div>;
 };
 

@@ -6,9 +6,10 @@ const PageContext = createContext();
 // 2. Create provider
 export const PageProvider = ({ children }) => {
     const [currentPage, setCurrentPage] = useState('Home'); // default value
+    const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <PageContext.Provider value={{ currentPage, setCurrentPage }}>
+        <PageContext.Provider value={{ currentPage, setCurrentPage, menuOpen, setMenuOpen }}>
             {children}
         </PageContext.Provider>
     );

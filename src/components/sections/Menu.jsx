@@ -13,7 +13,7 @@ import MenuItem from "../utils/MenuItem";
 import SocialMediaTitle from "../utils/SocialMediaTitle";
 import MagicButton from "../utils/MagicButton";
 
-
+import { usePage } from "../../context/useContext";
 
 
 
@@ -23,13 +23,15 @@ import MagicButton from "../utils/MagicButton";
 
 const SlideMenu = () => {
 
+    const {menuOpen, setMenuOpen} = usePage();
+
 
     const navigate = useNavigate();
 
 
 
     const [showButton, setShowButton] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
+    
     const [buttonState, setButtonState] = useState(false);
     const [isAnyHovered, setIsAnyHovered] = useState(false);
     const buttonRef = useRef();
@@ -98,35 +100,81 @@ const SlideMenu = () => {
     return (
         <div className="">
             {/* Menu Toggle Button */}
-            {(showButton || menuOpen) && (
 
-                <div
-                    ref={buttonRef}
-                    onClick={toggleMenu}
-                    className={`fixed top-7 right-7 z-50   ${buttonState ? 'text-gray border-[1px] border-gray hover:border-none ' : 'text-light'}  
+
+
+            {/* small devices menu toggle  */}
+            <div className="md:hidden">
+
+                {(showButton || menuOpen) && (
+
+                    <div
+                        ref={buttonRef}
+                        onClick={toggleMenu}
+                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-[1px] border-gray hover:border-none ' : 'text-light'}  
                         ${menuOpen ? 'border-none' : ''}
                     rounded-full transition-all duration-100 `}
-                >
-                    {
-                        menuOpen ? <MagicButton
-                            size={'4.8rem'}
-                            text={<RxCross1 size={20} />}
-                            bg={'blue'}
-                            hoverBg={'deepb'}
-                            rounded={'full'}
-                        /> :
-                            <MagicButton
-                                size={'4.8rem'}
-                                text={<HiBars2 size={28} />}
-                                bg={'dark'}
-                                hoverBg={'blue'}
+                    >
+                        {
+                            menuOpen ? <MagicButton
+                                size={'3.8rem'}
+                                text={<RxCross1 size={20} />}
+                                bg={'blue'}
+                                hoverBg={'deepb'}
                                 rounded={'full'}
-                                color={'gray'}
-                                hoverColor={'light'}
-                            />
-                    }
-                </div>
-            )}
+                            /> :
+                                <MagicButton
+                                    size={'3.8rem'}
+                                    text={<HiBars2 size={28} />}
+                                    bg={'dark'}
+                                    hoverBg={'blue'}
+                                    rounded={'full'}
+                                    color={'gray'}
+                                    hoverColor={'light'}
+                                />
+                        }
+                    </div>
+
+                )}
+
+            </div>
+
+
+
+            {/* large devices menu toggle */}
+            <div className="hidden md:block">
+
+                {(showButton || menuOpen) && (
+
+                    <div
+                        ref={buttonRef}
+                        onClick={toggleMenu}
+                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-[1px] border-gray hover:border-none ' : 'text-light'}  
+                        ${menuOpen ? 'border-none' : ''}
+                    rounded-full transition-all duration-100 `}
+                    >
+                        {
+                            menuOpen ? <MagicButton
+                                size={'4.8rem'}
+                                text={<RxCross1 size={20} />}
+                                bg={'blue'}
+                                hoverBg={'deepb'}
+                                rounded={'full'}
+                            /> :
+                                <MagicButton
+                                    size={'4.8rem'}
+                                    text={<HiBars2 size={28} />}
+                                    bg={'dark'}
+                                    hoverBg={'blue'}
+                                    rounded={'full'}
+                                    color={'gray'}
+                                    hoverColor={'light'}
+                                />
+                        }
+                    </div>
+
+                )}
+            </div>
 
             {/* Overlay + Sliding Menu */}
             <AnimatePresence>
@@ -164,9 +212,9 @@ const SlideMenu = () => {
                                 ease: [0.25, 1, 0.5, 1], // smooth curve-like motion
                             }}
                         >
-                            <div className="flex flex-col items-start justify-start ">
-                                <h2 className="text-[.55rem] font-bold pl-[1.7rem] pt-6 pb-6 text-gray uppercase">Navigation</h2>
-                                <div className="h-[.1px] ml-[1.7rem] bg-gray w-[20.2rem] opacity-60"></div>
+                            <div className="flex flex-col items-start justify-start pl-[rem] md:pl-[1.7rem]">
+                                <h2 className="text-[.6rem] md:text-[.55rem] font-bold py-4 md:py-6  text-gray uppercase">Navigation</h2>
+                                <div className="h-[1px]  bg-borderSolid w-[22.2rem] md:w-[20.2rem] opacity-30"></div>
                                 <ul className="pt-6 -space-y-3">
                                     {
                                         menuItems.map(({ label, path }) => {
@@ -174,23 +222,23 @@ const SlideMenu = () => {
                                                 <li key={label} onClick={() => navigate(path)}
                                                     className="cursor-pointer">
                                                     <MenuItem label={label}
-                                                        setIsAnyHovered={setIsAnyHovered} isAnyHovered={isAnyHovered}/>
+                                                        setIsAnyHovered={setIsAnyHovered} isAnyHovered={isAnyHovered} />
                                                 </li>)
                                         })
                                     }
                                 </ul>
                             </div>
 
-                            <div className="pl-[1rem] md:hidden h-[1px] opacity-70 w-full bg-gray mt-[10rem]">
+                            <div className=" md:ml-[1.7rem] md:hidden h-[.2px] max-h-[0.1px] opacity-40 w-[22.2rem] bg-borderSolid mt-[11rem] ">
 
                             </div>
 
 
                             {/* social media icons or titles depend on moode */}
-                            <div className="pl-[1rem] md:pl-[1.7rem] md:pt-[7.2rem] ">
-                                <h2 className="text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
-                                <ul className=" pt-3 flex gap-6">
-                                    <li onClick={() => console.log('this your current page ', currentPage)} className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
+                            <div className=" md:pl-[1.7rem] md:pt-[7.2rem] pt-6">
+                                <h2 className="text-[.6rem] md:text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
+                                <ul className=" pt-3 flex gap-6 ">
+                                    <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
                                     <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li>
                                     <li className="cursor-pointer"><SocialMediaTitle label='Github' /></li>
                                     <li className="cursor-pointer"><SocialMediaTitle label='Whatsapp' /></li>

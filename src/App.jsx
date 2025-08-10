@@ -46,7 +46,7 @@ function App() {
   return (
     <div className='scroll-smooth'>
       <>
-        <Menu />
+        <Menu/>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/work' element={<Work />} />
