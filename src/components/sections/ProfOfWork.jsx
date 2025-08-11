@@ -67,8 +67,11 @@ const ProfOfWork = () => {
                 <ProjectHoverPreview />
             </div>
 
-            <div>
+            <div className='xl:hidden'>
+
                 <MobileProjectPreview />
+
+                
             </div>
 
             <div className="flex items-center justify-center h-[3rem] pt-[1.5rem]">

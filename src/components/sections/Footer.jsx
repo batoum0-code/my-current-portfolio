@@ -50,17 +50,17 @@ const Footer = () => {
 
 
 
-    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[4rem] pt-[5rem]">
+    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[13rem] md:px-[1.2rem] pt-[5rem]">
 
         <div className='flex flex-col justify-center px-[1rem] md:px-[12rem]  '>
 
             <div className=' flex  md:gap-[24rem] pb-[4.2rem]'>
                 <div className="flex flex-col items-start justify-start leading-[3.3rem] md:leading-[4.4rem] md:tracking-[.2rem]">
-                    <h1 className="text-light text-[2.8rem] md:text-[5rem] flex items-center  gap-6 font-samirFont">
+                    <h1 className="text-light text-[2.3rem] md:text-[5rem] flex items-center  gap-6 font-samirFont">
                         <img src={img} alt="" className="max-w-[3rem] max-h-[3rem] rounded-full" />Let’s work
 
                     </h1>
-                    <h1 className="text-light text-[2.8rem] md:text-[5rem]  font-samirFont" >
+                    <h1 className="text-light text-[2.3rem] md:text-[5rem]  font-samirFont" >
                         together
                     </h1>
                 </div>
@@ -74,8 +74,15 @@ const Footer = () => {
                         ref={borderRef}
                         style={{ x }}>
 
-                        <div onClick={() => navigate('/contact')}>
+                        <div
+                            className='hidden md:block'
+                            onClick={() => navigate('/contact')}>
                             <MagicButton text={'Get in tuch'} size={'9.6rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
+                        </div>
+                        <div
+                            className='md:hidden'
+                            onClick={() => navigate('/contact')}>
+                            <MagicButton text={'Get in tuch'} size={'8rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
                         </div>
 
                     </motion.div>
@@ -87,9 +94,9 @@ const Footer = () => {
                 <div className="absolute  z-10 bg-gray w-full h-[1.5px] opacity-20"></div>
             </div>
 
-            <div className='flex flex-col md:flex-row gap-5 md:pt-9 pt-[7rem]'>
-                <ContactMagicButton text={'+212 696550985'} size={'3rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
-                <ContactMagicButton text={'batoumsamir0@gmail.com'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
+            <div className='flex flex-col md:flex-row gap-5 md:pt-16 pt-[7rem]'>
+                <ContactMagicButton text={'+212 696550985'} size={'4rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
+                <ContactMagicButton text={'batoumsamir0@gmail.com'} size={'4rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
             </div>
         </div>
 
@@ -97,11 +104,11 @@ const Footer = () => {
             <div className="flex flex-col-reverse md:flex-row  justify-between items-center">
                 <div className="flex gap-[12rem] pb-8 md:pb-0 md:gap-[2rem]">
                     <div className='flex flex-col gap-2 justify-start'>
-                        <span className='uppercase text-[9px] font-extrabold text-gray font-samirFont'>version</span>
+                        <span className='uppercase md:text-[.7rem] text-[.6rem] tracking-widest font-extrabold text-gray font-samirFont'>version</span>
                         <span className='text-[11px] font-bold font-samirFont'>2022 © Edition</span>
                     </div>
                     <div className='flex flex-col gap-2 justify-start'>
-                        <span className="uppercase text-[9px] font-extrabold text-gray">
+                        <span className="uppercase md:text-[.7rem] text-[.6rem] tracking-widest font-extrabold text-gray">
                             local time
                         </span>
                         <span className='text-[11px] font-bold font-samirFont uppercase'>
@@ -111,10 +118,10 @@ const Footer = () => {
                 </div>
 
                 {/* smooth line under */}
-                <div className="h-[.1px] bg-borderSolid opacity-30 w-full md:hidden my-[1rem]"></div>
+                <div className="h-[.1px] bg-borderSolid opacity-40 w-full md:hidden mt-[.7rem] mb-[1.6rem]"></div>
 
                 <div className="">
-                    <span className='uppercase text-[9px] font-extrabold text-gray'>socials</span>
+                    <span className='uppercase md:text-[.7rem] text-[.6rem] tracking-widest font-extrabold text-gray'>socials</span>
                     <div>
                         <ul className=" pt-3 flex gap-6">
                             <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
@@ -127,7 +134,7 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </footer>;

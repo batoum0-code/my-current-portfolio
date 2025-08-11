@@ -118,9 +118,9 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
-                                cursor-pointer transition-all duration-300 py-9 border-b-[1px] border-gray px-6 hover:px-1"
+                                cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray px-6 hover:px-1"
                     >
-                        <h3 className="text-[4rem] font-semibold text-text">
+                        <h3 className="text-[4rem]  text-text">
                             {project.title}
                         </h3>
                         <p className="text-sm text-text">{project.tech.join(", ")}</p>
@@ -132,7 +132,7 @@ export default function ProjectHoverWithSlide() {
             <AnimatePresence>
                 {showPreview && (
                     <motion.div
-                        className="pointer-events-none absolute z-[9999] w-[375px] h-[375px]  overflow-hidden"
+                        className="pointer-events-none absolute z-[9999] w-[400px] h-[400px]  overflow-hidden"
                         style={{
                             top: mousePos.y - 190,
                             left: mousePos.x - 190,
@@ -147,7 +147,7 @@ export default function ProjectHoverWithSlide() {
                     >
                         {/* Scrollable Image Container */}
                         <div
-                            onClick={()=> console.log('ok from project view button ')}
+                        
                             ref={previewScrollRef}
                             className="overflow-y-auto h-full scroll-smooth hide-scrollbar"
                         >
@@ -181,7 +181,7 @@ export default function ProjectHoverWithSlide() {
                         
                         className="absolute inset-0 flex items-center justify-center">
                             
-                            <MagicButton text={'View'} size={'4rem'} rounded={'full'} bg={'blue'}/>
+                            <MagicButton text={'View'} size={'4.4rem'} rounded={'full'} bg={'blue'}/>
                         </div>
 
                     </motion.div>

@@ -235,7 +235,7 @@ const SlideMenu = () => {
 
 
                             {/* social media icons or titles depend on moode */}
-                            <div className=" md:pl-[1.7rem] md:pt-[7.2rem] pt-6">
+                            <div className=" md:pl-[1.7rem] md:pt-[11.2rem] pt-6">
                                 <h2 className="text-[.6rem] md:text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
                                 <ul className=" pt-3 flex gap-6 ">
                                     <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>

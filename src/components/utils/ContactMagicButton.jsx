@@ -80,7 +80,7 @@ const ContactMagicButton = ({ text, bg, hoverBg, color }) => {
         >
             {/* Animated text */}
             <span
-                className={`relative z-10 block text-center tracking-[.9px] text-sm font-medium `}
+                className={`relative z-10 block text-center md:tracking-[1.5px] md:text-[1rem] text-[.8rem] font-medium `}
                 style={{
                     transform: `translate(${offsetX / 2}px, ${offsetY / 2}px)`,
                     transition: "transform 0.6s ease-out",

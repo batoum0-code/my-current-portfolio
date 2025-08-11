@@ -60,7 +60,7 @@ const MobileProjectPreview = () => {
     {
       projects.map((project) => {
         return <div key={project.id}
-        className=''>
+        className='lg:flex lg:flex-wrap'>
           <Project size={'3rem'} project={project} />
         </div>
       })
