@@ -44,7 +44,7 @@ function App() {
 
 
   return (
-    <div className='scroll-smooth bg-dark'>
+    <div className='scroll-smoot'>
       <>
         <Menu/>
         <Routes>

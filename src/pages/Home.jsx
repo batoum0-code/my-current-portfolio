@@ -16,7 +16,7 @@ const Home = () => {
             // Entrance completed - start pause timer
             setTimeout(() => {
                 setShowOverlay(false); // Triggers exit after 1s pause
-            }, 1000);
+            }, 3000);
             setEntranceComplete(true);
         }
     };

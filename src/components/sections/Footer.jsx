@@ -50,7 +50,7 @@ const Footer = () => {
 
 
 
-    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[13rem] md:px-[1.2rem] pt-[5rem]">
+    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[9rem] md:px-[1.2rem] pt-[5rem]">
 
         <div className='flex flex-col justify-center px-[1rem] md:px-[12rem]  '>
 
@@ -94,7 +94,7 @@ const Footer = () => {
                 <div className="absolute  z-10 bg-gray w-full h-[1.5px] opacity-20"></div>
             </div>
 
-            <div className='flex flex-col md:flex-row gap-5 md:pt-16 pt-[7rem]'>
+            <div className='flex flex-col md:flex-row gap-5 md:pt-11 pt-[7rem]'>
                 <ContactMagicButton text={'+212 696550985'} size={'4rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
                 <ContactMagicButton text={'batoumsamir0@gmail.com'} size={'4rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
             </div>
