@@ -6,7 +6,7 @@ import { useState } from "react";
 
 
 
-const SocialMediaTitle = ({ label }) => {
+const SocialMediaTitle = ({ label, size }) => {
 
     const [offsetX, setOffsetX] = useState(0);
     const [offsetY, setOffsetY] = useState(0);
@@ -47,8 +47,8 @@ const SocialMediaTitle = ({ label }) => {
                 transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
             }}
         >
-            <span className="relative md:text-[.9rem] text-[.77rem] pb-1 tracking-widest md:tracking-normal
-             leading-none inline-block text-light">
+            <span className={`relative text-[.77rem] ${ size ? `md:text-[${size}]` : "md:text-[.9rem]"} pb-1 tracking-widest md:tracking-normal
+            leading-none inline-block text-light md:font-medium`}>
                 {label}
 
                 {/* Animated line under label */}
@@ -58,7 +58,7 @@ const SocialMediaTitle = ({ label }) => {
                         width: isHovered ? "100%" : "0%",
                         transform: "translateX(-50%)",
                     }}
-                /> 
+                />
             </span>
         </div>
     </div>;
