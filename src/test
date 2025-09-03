@@ -150,7 +150,7 @@ const Contact = () => {
                                             id="name"
                                             placeholder="Hello Samir, can you help me with ..."
                                             className="text-gray font-semibold text-[1.2rem]
-                      bg-transparent border-none outline-none focus:text-light"
+                        bg-transparent border-none outline-none focus:text-light"
                                         />
 
                                     </div>
@@ -215,7 +215,6 @@ const Contact = () => {
                             <SocialMediaTitle label={'batoumsamir0@gmail.com'} size={'1rem'} />
                             <SocialMediaTitle label={'06-*************'} size={'1rem'} />
                         </div>
-
 
                         <h2 className="text-[.6rem] md:text-[.68rem] tracking-normal text-gray uppercase font-bold pt-[4rem] pb-[1rem]">
                             Contact Details

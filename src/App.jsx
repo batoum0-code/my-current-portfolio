@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import Work from './pages/Work';
 import Menu from './components/sections/Menu';
+import PopUp from './components/PopUp';
 import { usePage } from './context/useContext';
 
 
@@ -46,6 +47,7 @@ function App() {
   return (
     <div className='scroll-smoot'>
       <>
+        <PopUp/>
         <Menu/>
         <Routes>
           <Route path='/' element={<Home />} />
