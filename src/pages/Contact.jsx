@@ -45,7 +45,7 @@ const Contact = () => {
 
 
   // Animate Y position from 100px to -20px based on scroll
-  const x = useTransform(scrollYProgress, [1, 0], [60, -90]);
+  const y = useTransform(scrollYProgress, [-20, -30], [20, 10]);
 
 
 
@@ -62,31 +62,31 @@ const Contact = () => {
         leading-[3.3rem] md:leading-[4.4rem] md:tracking-[.2rem] w-3/4">
 
 
-          <div className="pb-[11rem]">
-            <h1 className="text-light text-[2.3rem] md:text-[4rem] flex items-center  gap-6 font-samirFont ">
+          <div className="pb-[11rem] text-light text-[2.3rem] md:text-[5rem]   font-samirFont">
+            <h1 className="text-light text-[2.3rem] md:text-[5rem] flex items-center  gap-6 font-samirFont ">
               Let's start a
             </h1>
-            <h1 className="text-light text-[2.3rem] md:text-[4rem]  font-samirFont" >
+            <h1 className="text-light text-[2.3rem] md:text-[4.4rem]  font-samirFont" >
               project together
             </h1>
           </div>
 
-          <form action="" className="w-full">
+          <form action="" className="w-full font-samirFont">
             <ol className="w-full pb-[10rem]">
               <li className="flex flex-col w-full">
                 <div className=" bg-gray w-full h-[1.5px] opacity-40 mb-[1.5rem]"></div>
 
-                <div className="flex gap-[2.3rem]">
-                  <div className="text-gray font-semibold">01</div>
-                  <div className="flex flex-col">
-                    <label htmlFor="name" className=" font-semibold text-[1.3rem]">
+                <div className="flex justify-start gap-[2.3rem]">
+                  <div className="text-gray font-mono font-semibold text-pretty">01</div>
+                  <div className="flex flex-col py-6">
+                    <label htmlFor="name" className=" font-semibold text-[1.3rem] leading-tight">
                       What's your name?
                     </label>
                     <input
                       type="text"
                       id="name"
                       placeholder="Samir Batoum*"
-                      className="text-gray font-semibold text-[1.2rem]
+                      className="text-gray  text-[1.2rem] mt-0
                       bg-transparent border-none outline-none focus:text-light"
                     />
 
@@ -95,7 +95,7 @@ const Contact = () => {
               </li>
 
               <li className="flex flex-col w-full">
-                <div className=" bg-gray w-full h-[1.5px] opacity-40 mb-[1.5rem]"></div>
+                <div className=" bg-gray w-full h-[1.5px] opacity-20 mb-[1.5rem] rounded-full"></div>
 
                 <div className="flex gap-[2.3rem]">
                   <div className="text-gray font-semibold">02</div>
@@ -170,7 +170,7 @@ const Contact = () => {
 
                 <motion.div
                   ref={borderRef}
-                  style={{ x }}>
+                  style={{ y }}>
 
                   <div
                     className='hidden md:block'
@@ -200,15 +200,15 @@ const Contact = () => {
 
 
         {/* contact info (left side) */}
-        <div className="w-1/4 pt-[5rem]">
+        <div className="w-1/4 pt-[5rem] font-samirFont">
           <div className="flex flex-col">
 
             <img src={img} alt="" className="h-[5rem] w-[5rem] rounded-full" />
 
             <div className="pt-[3rem] ">
-              <HiCursorArrowRays className="rotate-[150deg] text-[2rem] animate-pulse" />
+              <HiCursorArrowRays className="rotate-[150deg] text-[2rem] " />
             </div>
-            <h2 className="text-[.6rem] md:text-[.68rem] tracking-normal text-gray uppercase font-bold pt-[4.6rem] pb-[1rem]">
+            <h2 className="text-[.6rem] md:text-[.78rem] tracking-[.1rem] text-gray  font-bold pt-[4.6rem] pb-[1rem]">
               Contact Details
             </h2>
             <div className=" flex flex-col items-start gap-[.6rem]">
@@ -217,7 +217,7 @@ const Contact = () => {
             </div>
 
 
-            <h2 className="text-[.6rem] md:text-[.68rem] tracking-normal text-gray uppercase font-bold pt-[4rem] pb-[1rem]">
+            <h2 className="text-[.6rem] md:text-[.78rem] tracking-[.1rem] text-gray  font-bold pt-[4rem] pb-[1rem]">
               Contact Details
             </h2>
             <div className="leading-[2rem] text-light">
@@ -225,8 +225,8 @@ const Contact = () => {
               <span>Work from Home for more than 3sfsfsd sdfsfsda years</span>
             </div>
 
-            <h2 className="text-[.6rem] md:text-[.68rem] tracking-normal text-gray uppercase font-bold pt-[4.6rem] pb-[1rem]">
-              Contact Details
+            <h2 className="text-[.6rem] md:text-[.78rem] tracking-[.1rem] text-gray  font-bold pt-[4.6rem] pb-[1rem]">
+              Socials
             </h2>
             <div className=" flex flex-col items-start gap-[.6rem]">
               <SocialMediaTitle label={'Awwards'} size={'1rem'} />

@@ -22,7 +22,8 @@ export default {
 
       },
       fontFamily: {
-        samirFont: ['Inter', 'sans-serif'],
+        // This creates the 'font-samirFont' utility class
+        samirFont: ['"Manrope"', 'sans-serif'],
       },
     },
   },

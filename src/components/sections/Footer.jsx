@@ -50,7 +50,7 @@ const Footer = () => {
 
 
 
-    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[9rem] md:px-[1.2rem] pt-[5rem]">
+    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[9rem] md:px-[1.2rem] pt-[5rem] font-samirFont">
 
         <div className='flex flex-col justify-center px-[1rem] md:px-[12rem]  '>
 

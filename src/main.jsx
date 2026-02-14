@@ -7,7 +7,9 @@ import {BrowserRouter} from 'react-router-dom'
 
 import { PageProvider } from './context/useContext';
 
-
+// Import Manrope weights
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
 
 
 

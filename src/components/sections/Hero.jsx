@@ -26,7 +26,7 @@ const Hero = () => {
 
 
     return <div className=" bg-gray ">
-        <Header />
+        <Header pageColor= {'bg-gray'}/>
         <main className="w-full">
             <div className="flex  items-center h-screen  relative  left-0 right-0">
                 <div className="bg-dark hidden md:flex  items-center gap-3  
