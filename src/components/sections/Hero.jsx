@@ -44,7 +44,7 @@ const Hero = () => {
                 <div className=" flex bottom-0  absolute left-[1%] md:left-[29%] ">
                     <div
                         ref={boxRef}
-                        className=" w-[24rem] md:w-[24rem]   sticky">
+                        className=" w-[24rem] md:w-[37rem]   sticky">
                         <img className="w-full object-cover" src={samir} alt="My photo" />
                     </div>
                     {/*  description  */}
@@ -54,10 +54,8 @@ const Hero = () => {
                                 <GiFlamingArrow />
                             </span>
                             <span className="lg:text-[1.7rem] md:text-[1rem] text-[1.2rem] font-medium  md:font-medium md:space-y-9 md:pt-11">
-                                Full Stack Dev & Freelancer
-
+                                Freelance
                                 <br />
-
                                 React, Node, Wordpress
                             </span>
 

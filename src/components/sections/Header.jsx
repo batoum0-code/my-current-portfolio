@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import NavItem from "../utils/NavItem";
-import brain from '../../assets/cerveau.png';
 import { useNavigate } from "react-router-dom";
 import { usePage } from "../../context/useContext";
 import MenuItem from '../utils/MenuItem';

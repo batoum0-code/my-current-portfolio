@@ -8,9 +8,6 @@ import MobileProjectPreview from './MobileProjectPreview'
 
 
 
-
-
-
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +19,8 @@ const ProfOfWork = () => {
 
     const navigate = useNavigate();
     const sectionRef = useRef(null);
+
+
 
     // single useScroll observing the section
     const { scrollYProgress } = useScroll({
@@ -40,7 +39,7 @@ const ProfOfWork = () => {
                 ref={sectionRef}
                 style={{ y: containerY }}
                 className="flex lg:pt-[6rem] flex-col lg:flex-row
-                justify-center lg:gap-[6rem] gap-[2rem] h-full lg:px-[3rem] px-[1rem] "
+                justify-center lg:gap-[6rem] gap-[2rem] h-full lg:px-[3rem] px-[1rem]"
             >
                 <AnimatedSplitText text={myText} />
 
@@ -55,7 +54,7 @@ const ProfOfWork = () => {
                             onClick={() => navigate('/about')}
                             aria-label="About me"
                             className="pl-[11rem] sm:pl-0"
-                        >
+                        > 
                             <MagicButton text={'About me'} size={'10rem'} bg={'dark'} hoverBg={'blue'} rounded={'full'} />
                         </div>
                     </motion.div>
@@ -71,7 +70,6 @@ const ProfOfWork = () => {
 
                 <MobileProjectPreview />
 
-                
             </div>
 
             <div className="flex items-center justify-center h-[3rem] pt-[1.5rem]">
