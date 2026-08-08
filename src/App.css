@@ -1,12 +1,12 @@
 /* Disable scroll */
-/* html,
+html, 
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    
 }
 
- */
+
 
 
 
@@ -62,5 +62,5 @@ body {
     animation: marquee 30s linear infinite;
     display: inline-block;
     white-space: nowrap;
-    min-width: 200%;
+    min-width: 100%;
 }

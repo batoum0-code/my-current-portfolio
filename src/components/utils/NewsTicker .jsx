@@ -56,14 +56,15 @@ const NewsTicker = () => {
     }, [scrollY]);
 
     return (
-        <div className="relative overflow-hidden w-full h-[12rem] bg-transparent flex items-center">
+        <div className="relative overflow-hidden w-full h-[12rem]  bg-transparent flex items-center">
             <motion.div
                 className="flex whitespace-nowrap absolute"
                 style={{ x }}
             >
-                <span className="text-[10rem] text-white">{repeatedText}</span>
-                <span className="text-[10rem] text-white">{repeatedText}</span>
+                <span className="text-[14rem] text-white">{repeatedText}</span>
+                <span className="text-[14rem] text-white">{repeatedText}</span>
             </motion.div>
+
         </div>
     );
 };

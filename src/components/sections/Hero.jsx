@@ -3,7 +3,7 @@ import samir from '../../assets/samir.png';
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Header from "./Header";
-import { GiFlamingArrow } from "react-icons/gi";
+import { FiArrowDownRight } from "react-icons/fi";
 
 
 
@@ -26,9 +26,12 @@ const Hero = () => {
 
 
     return <div className=" bg-gray ">
-        <Header pageColor= {'bg-gray'}/>
+
+        <Header pageColor={'bg-gray'} />
+
         <main className="w-full">
-            <div className="flex  items-center h-screen  relative  left-0 right-0">
+
+            <div className="flex  items-center h-screen  relative">
                 <div className="bg-dark hidden md:flex  items-center gap-3  
                 rounded-tr-[30rem] rounded-br-[30rem] px-6 py-4 ">
                     <h3 className="text-light font-medium">
@@ -41,19 +44,21 @@ const Hero = () => {
 
                 </div>
 
-                <div className=" flex bottom-0  absolute left-[1%] md:left-[29%] ">
+                <div className=" flex bottom-0  absolute left-[1%] md:left-[25%]">
                     <div
                         ref={boxRef}
-                        className=" w-[24rem] md:w-[34rem]   sticky">
+                        className=" w-[24rem] md:w-[37rem]   sticky">
                         <img className="w-full object-cover" src={samir} alt="My photo" />
                     </div>
+
+
                     {/*  description  */}
                     <div className="text-light">
-                        <h2 className="absolute top-[24rem] md:top-[9rem] left-3 md:left-auto md:right-[-9rem] lg:right-[-21rem] xl:right-[-27rem] flex flex-col md:gap-11 ">
-                            <span className="text-[2rem] pb-2 md:text-[3rem]">
-                                <GiFlamingArrow />
+                        <h2 className="absolute top-[24rem] md:top-[12rem] left-3 md:left-auto md:right-[-9rem] lg:right-[-21rem] xl:right-[-24.5rem] flex flex-col md:gap-5 ">
+                            <span className="text-[1rem] pb-2 md:text-[1.8rem] ">
+                                <FiArrowDownRight />
                             </span>
-                            <span className="lg:text-[1.7rem] md:text-[1rem] text-[1.2rem] font-medium  md:font-medium md:space-y-9 md:pt-11">
+                            <span className="lg:text-[1.7rem] md:text-[1rem] text-[1.2rem] font-medium  md:font-medium md:space-y-9 md:pt-1">
                                 Freelance
                                 <br />
                                 React, Node, Wordpress
@@ -65,7 +70,7 @@ const Hero = () => {
                     </div>
                 </div>
 
-                <div className="absolute md:bottom-20 left-0 right-0 bg-transparent">
+                <div className="absolute md:bottom-40 left-0 right-0 bg-transparent">
                     <NewsTicker />
                 </div>
 

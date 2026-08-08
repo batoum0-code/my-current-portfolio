@@ -41,32 +41,38 @@ const Header = ({ pageColor }) => {
                     </span>
 
                     <span
-                        className={`absolute  font-samirFont transition-all duration-700 ease-in-out ${isNameHovered ? " -translate-x-full opacity-0 text-gray" : "translate-x-0 opacity-100"
+                        className={`absolute  font-samirFont transition-all duration-700 ease-in-out w-full
+                                    ${isNameHovered ? " -translate-x-full opacity-0 text-gray" : "translate-x-0 opacity-100"
                             } `}
                     >
                         Code by Samir
                     </span>
                     <span
-                        className={`absolute  font-samirFont transition-all duration-700 ease-in-out ${isNameHovered ? " translate-x-0 opacity-100" : "translate-x-full opacity-0 text-gray"
+                        className={`absolute  font-samirFont transition-all duration-700 ease-in-out
+                                        ${isNameHovered ? " translate-x-0 opacity-100" : "translate-x-full opacity-0 text-gray"
                             }`}
                     >
                         Samir Batoum
                     </span>
                 </h1>
             </div>
+            {/* Header Navigation part both small to large devices  */}
 
-            <nav className="hidden md:block">
-                <ul className="flex gap-6">
-                    <li onClick={() => navigate('/about')} className="cursor-pointer"><NavItem label='About' currentPage={currentPage} /></li>
-                    <li onClick={() => navigate('/work')} className="cursor-pointer"><NavItem label='Work' currentPage={currentPage} /></li>
-                    <li onClick={() => navigate('/contact')} className="cursor-pointer"><NavItem label='Contact' currentPage={currentPage} /></li>
-                </ul>
-            </nav>
+            <div>
 
-            <div className="md:hidden">
-                <h3
-                    onClick={() => setMenuOpen(!menuOpen)}>
-                    <MenuItem label='menu' mobile={true} /></h3>
+                <nav className="hidden md:block">
+                    <ul className="flex gap-6">
+                        <li onClick={() => navigate('/about')} className="cursor-pointer"><NavItem label='About' currentPage={currentPage} /></li>
+                        <li onClick={() => navigate('/work')} className="cursor-pointer"><NavItem label='Work' currentPage={currentPage} /></li>
+                        <li onClick={() => navigate('/contact')} className="cursor-pointer"><NavItem label='Contact' currentPage={currentPage} /></li>
+                    </ul>
+                </nav>
+
+                <div className="md:hidden">
+                    <h3
+                        onClick={() => setMenuOpen(!menuOpen)}>
+                        <MenuItem label='menu' mobile={true} /></h3>
+                </div>
             </div>
         </header>
     );
