@@ -95,7 +95,7 @@ const Footer = () => {
             </div>
 
             <div className='flex flex-col md:flex-row gap-5 md:pt-11 pt-[7rem]'>
-                <ContactMagicButton text={'+212 696550985'} size={'4rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
+                <ContactMagicButton text={'(+212) 604360452'} size={'4rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
                 <ContactMagicButton text={'batoumsamir0@gmail.com'} size={'4rem'} bg={'transparent'} hoverBg={'blue'} rounded={'lg'} />
             </div>
         </div>

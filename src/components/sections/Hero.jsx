@@ -32,14 +32,15 @@ const Hero = () => {
         <main className="w-full">
 
             <div className="flex  items-center h-screen  relative">
-                <div className="bg-dark hidden md:flex  items-center gap-3  
-                rounded-tr-[30rem] rounded-br-[30rem] px-6 py-4 ">
-                    <h3 className="text-light font-medium">
-                        located in <br /> Morocco
+                <div className="bg-dark hidden md:flex  items-center gap-3  absolute top-[29%]
+                rounded-tr-[30rem] rounded-br-[30rem] px-6 py-5 ">
+                    <h3 className="text-light font-medium pl-[16px] pr-[3rem] leading-5">
+                        Located <br/> in The<br /> Morocco
                     </h3>
 
-                    <div className="bg-gray rounded-full ">
-                        <img src="/public/videos/planete.gif" alt="" />
+                    <div className="bg-gray rounded-full p-[28px]">
+                        
+                        {/* <img src="/public/videos/planete.gif" alt="" /> */}
                     </div>
 
                 </div>
@@ -54,7 +55,8 @@ const Hero = () => {
 
                     {/*  description  */}
                     <div className="text-light">
-                        <h2 className="absolute top-[24rem] md:top-[12rem] left-3 md:left-auto md:right-[-9rem] lg:right-[-21rem] xl:right-[-24.5rem] flex flex-col md:gap-5 ">
+                        <h2 className="absolute top-[24rem] md:top-[12rem] left-3 md:left-auto md:right-[-9rem] 
+                        lg:right-[-21rem] xl:right-[-24.5rem] flex flex-col md:gap-5 ">
                             <span className="text-[1rem] pb-2 md:text-[1.8rem] ">
                                 <FiArrowDownRight />
                             </span>

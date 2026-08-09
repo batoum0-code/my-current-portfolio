@@ -4,12 +4,13 @@ import Hero from "../components/sections/Hero";
 import ProfOfWork from "../components/sections/ProfOfWork";
 // import VideoShowcase from "../components/sections/VideoShowCase";
 import Footer from '../components/sections/Footer';
+import ContactMagicButton from "../components/utils/ContactMagicButton";
 // import PageEntrance from "../components/utils/PageEntrance";
 
 const Home = () => {
 
-   // const [showOverlay, setShowOverlay] = useState(true);
-   // const [entranceComplete, setEntranceComplete] = useState(false);
+    // const [showOverlay, setShowOverlay] = useState(true);
+    // const [entranceComplete, setEntranceComplete] = useState(false);
 
     const handleAnimationComplete = () => {
         if (showOverlay) {
@@ -24,7 +25,7 @@ const Home = () => {
 
 
     return <div>
-{/* 
+        {/* 
         <PageEntrance
             show={showOverlay}
             onComplete={handleAnimationComplete}
@@ -39,19 +40,19 @@ const Home = () => {
             //         <VideoShowcase />
             //     </div> */}
             //     <Footer />
-                
+
             //     </>
-        } 
+        }
 
 
 
 
         <Hero />
-                <ProfOfWork />
-                {/* <div className="hidden sm:block">
+        <ProfOfWork />
+        {/* <div className="hidden sm:block">
                     <VideoShowcase />
                 </div> */}
-                <Footer />
+        <Footer />
     </div>;
 };
 

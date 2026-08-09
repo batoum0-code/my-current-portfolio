@@ -61,7 +61,7 @@ const ProfOfWork = () => {
                 </div>
             </motion.div>
 
-            <div className="overflow-hidden py-[3rem] hidden xl:block">
+            <div className="overflow-hidden py-[3rem] pb-[1rem] hidden xl:block">
                 <div className="text-start ml-[10rem] text-gray lg:pb-9 text-sm">Recent work</div>
                 <ProjectHoverPreview />
             </div>
@@ -72,7 +72,7 @@ const ProfOfWork = () => {
 
             </div>
 
-            <div className="flex items-center justify-center h-[3rem] pt-[1.5rem]">
+            <div className="flex items-center justify-center h-[3rem] pt-[1.5rem] ">
                 <ContactMagicButton text={'More Work'} size={'3rem'} bg={'transparent'} color={'blue'} hoverBg={'blue'} />
             </div>
         </div>

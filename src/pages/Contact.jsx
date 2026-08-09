@@ -213,7 +213,7 @@ const Contact = () => {
             </h2>
             <div className=" flex flex-col items-start gap-[.6rem]">
               <SocialMediaTitle label={'batoumsamir0@gmail.com'} size={'1rem'} />
-              <SocialMediaTitle label={'06-*************'} size={'1rem'} />
+              <SocialMediaTitle label={'(+212) 604360452'} size={'1rem'} />
             </div>
 
 
@@ -229,7 +229,7 @@ const Contact = () => {
               Socials
             </h2>
             <div className=" flex flex-col items-start gap-[.6rem]">
-              <SocialMediaTitle label={'Awwards'} size={'1rem'} />
+              <SocialMediaTitle label={'Youtube'} size={'1rem'} />
               <SocialMediaTitle label={'Linkedin'} size={'1rem'} />
               <SocialMediaTitle label={'Github'} size={'1rem'} />
               <SocialMediaTitle label={'Whatsapp'} size={'1rem'} />
@@ -274,7 +274,7 @@ const Contact = () => {
           <span className='uppercase md:text-[.7rem] text-[.6rem] tracking-widest font-extrabold text-gray'>socials</span>
           <div>
             <ul className=" pt-3 flex gap-6">
-              <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
+              <li className="cursor-pointer"><SocialMediaTitle label='Youtube' /></li>
               <a href="https://www.linkedin.com/in/samir-batoum-3948b72a5?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
                 <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li></a>
               <a href="https://github.com/batoum0-code" target="_blank" rel="noopener noreferrer">

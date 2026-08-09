@@ -32,13 +32,13 @@ const Header = ({ pageColor }) => {
                     onMouseEnter={() => setIsNameHovered(true)}
                     onMouseLeave={() => setIsNameHovered(false)}
                 >
-                    <span className={`max-w-6 inline-block pr-1 transition-all duration-700  ${isNameHovered ? "rotate-[100%] " : ""} `}>
+                    <div className={`max-w-9  inline-block pr-1 transition-all duration-700  ${isNameHovered ? "rotate-180" : ""} `}>
 
-                        <span className={`${pageColor}  pr-6 hover:rotate-180 `}>
+                        <div className={` z-50  `}>
                             ©
-                        </span>
+                        </div>
 
-                    </span>
+                    </div>
 
                     <span
                         className={`absolute  font-samirFont transition-all duration-700 ease-in-out w-full
