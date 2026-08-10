@@ -2,7 +2,7 @@
 // ... other imports
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import img1 from "../../assets/cerveau.png";
+
 import img3 from "../../assets/5.png";
 import img4 from "../../assets/q1.webp";
 
@@ -24,31 +24,32 @@ import MagicButton from '../utils/MagicButton';
 const projects = [
     {
         id: 1,
-        title: "Riad BERBERE",
-        tech: ["React", "Node.js", "MongoDB"],
-        image: img1,
-        them: "blue",
+        title: "THE BRIEFLY MEDIA",
+        tech: ["Wordpress", "Oklahoma City"],
+        image: img4,
+        them: "gray",
     },
     {
         id: 2,
         title: "AMELKIS RESOURTS",
-        tech: ["Next.js", "Tailwind", "NestJS"],
-        image: img4,
+        tech: ["Next.js", "Tailwind", "Dubai"],
+        image: img3,
         them: "gray",
     },
     {
         id: 3,
-        title: "WEDEDING SIWO",
-        tech: ["Vue.js", "Firebase"],
+        title: "Com & Golf",
+        tech: ["Wordpress", "Marrakech"],
         image: img3,
         them: "blue",
     },
+
     {
         id: 4,
-        title: "AMELKIS RESOURTS",
-        tech: ["Next.js", "Tailwind", "NestJS"],
+        title: "Riad BERBERE",
+        tech: ["React", "Node.js", "Marrakech"],
         image: img4,
-        them: "gray",
+        them: "blue",
     },
 ];
 
@@ -60,6 +61,7 @@ export default function ProjectHoverWithSlide() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [showPreview, setShowPreview] = useState(false);
+
 
     // Scroll preview to active project image
     const scrollToImage = (index) => {
@@ -110,17 +112,18 @@ export default function ProjectHoverWithSlide() {
     return (
         <div
             ref={containerRef}
-            className="relative bg-light  mx-[6.9rem] border-t-[1px] border-gray"
+            className="relative bg-light  mx-[6.9rem] border-t-[1px] border-gray border-opacity-40"
         >
             <div className="w-full relative z-10">
                 {projects.map((project, index) => (
                     <div
+
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
-                        className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-70 
-                                cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray px-6 hover:px-1"
+                        className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-50
+                                cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray border-opacity-50 px-6 hover:px-1"
                     >
-                        <h3 className="text-[4rem]  text-text">
+                        <h3 className={`text-[4rem]  text-text `}>
                             {project.title}
                         </h3>
                         <p className="text-sm text-text">{project.tech.join(", ")}</p>
@@ -147,7 +150,7 @@ export default function ProjectHoverWithSlide() {
                     >
                         {/* Scrollable Image Container */}
                         <div
-                        
+
                             ref={previewScrollRef}
                             className="overflow-y-auto h-full scroll-smooth hide-scrollbar"
                         >
@@ -157,7 +160,6 @@ export default function ProjectHoverWithSlide() {
                                     ref={(el) => (sectionRefs.current[index] = el)}
                                     className={`h-full w-full flex items-center justify-center px-[2rem] py-[6rem] bg-${project.them}`}
                                 >
-
 
                                     <AnimatePresence mode="wait">
                                         <motion.img
@@ -175,13 +177,11 @@ export default function ProjectHoverWithSlide() {
                             ))}
 
                         </div>
-
-
                         <div
-                        
-                        className="absolute inset-0 flex items-center justify-center">
-                            
-                            <MagicButton text={'View'} size={'4.4rem'} rounded={'full'} bg={'blue'}/>
+
+                            className="absolute inset-0 flex items-center justify-center">
+
+                            <MagicButton text={'View'} size={'4.4rem'} rounded={'full'} bg={'blue'} />
                         </div>
 
                     </motion.div>

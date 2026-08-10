@@ -33,7 +33,7 @@ const ProfOfWork = () => {
     const buttonY = useTransform(scrollYProgress, [0, 1], [120, -30]);
 
     return (
-        <div className="pb-[7rem] ">
+        <div className="pb-[7rem] bg-[#fffe] ">
             {/* the section is the scroll target */}
             <motion.div
                 ref={sectionRef}
@@ -61,7 +61,7 @@ const ProfOfWork = () => {
                 </div>
             </motion.div>
 
-            <div className="overflow-hidden py-[3rem] pb-[1rem] hidden xl:block">
+            <div className="overflow-hidden py-[3rem] pb-[12rem] hidden xl:block">
                 <div className="text-start ml-[10rem] text-gray lg:pb-9 text-sm">Recent work</div>
                 <ProjectHoverPreview />
             </div>

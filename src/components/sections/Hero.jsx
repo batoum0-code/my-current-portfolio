@@ -55,7 +55,7 @@ const Hero = () => {
 
                     {/*  description  */}
                     <div className="text-light">
-                        <h2 className="absolute top-[24rem] md:top-[12rem] left-3 md:left-auto md:right-[-9rem] 
+                        <h2 className="absolute top-[24rem] md:top-[14rem] left-3 md:left-auto md:right-[-9rem] 
                         lg:right-[-21rem] xl:right-[-24.5rem] flex flex-col md:gap-5 ">
                             <span className="text-[1rem] pb-2 md:text-[1.8rem] ">
                                 <FiArrowDownRight />
