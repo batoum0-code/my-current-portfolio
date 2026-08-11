@@ -19,6 +19,7 @@ export default {
         borderSolid: '#D2D2D2',
         borderLight: 'rgba(255, 255, 255, 0.2)',
         borderSolidLight: '#545557',
+        red:'#FF512F',
 
       },
       fontFamily: {

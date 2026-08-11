@@ -1,57 +1,64 @@
-
 // ... other imports
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import amelkis from '../../assets/amelkis.webp';
+import comgolf from '../../assets/com&golf.webp';
 import img3 from "../../assets/5.png";
 import img4 from "../../assets/q1.webp";
-
-
+import cherti from '../../assets/cherti.webp';
 
 import MagicButton from '../utils/MagicButton';
-
-
-
-
-
-
-
-
-
 
 
 
 const projects = [
     {
         id: 1,
-        title: "THE BRIEFLY MEDIA",
-        tech: ["Wordpress", "Oklahoma City"],
-        image: img4,
-        them: "gray",
+        title: "Com & Golf",
+        tech: ["Wordpress", "Marrakech"],
+        image: comgolf,
+        theme: "#DCE3D4",
     },
+
     {
         id: 2,
         title: "AMELKIS RESOURTS",
         tech: ["Next.js", "Tailwind", "Dubai"],
-        image: img3,
-        them: "gray",
+        image: amelkis,
+        theme: "#000000",
     },
     {
         id: 3,
-        title: "Com & Golf",
-        tech: ["Wordpress", "Marrakech"],
-        image: img3,
-        them: "blue",
-    },
-
-    {
-        id: 4,
         title: "Riad BERBERE",
         tech: ["React", "Node.js", "Marrakech"],
         image: img4,
-        them: "blue",
+        theme: "#C96F4A",
+    },
+    {
+        id: 4,
+        title: "MASSANO CHERTI",
+        tech: ["Wordpress", "Oklahoma City"],
+        image: cherti,
+        theme: "#E8E4DC",
     },
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export default function ProjectHoverWithSlide() {
     const containerRef = useRef(null);
@@ -61,7 +68,6 @@ export default function ProjectHoverWithSlide() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [showPreview, setShowPreview] = useState(false);
-
 
     // Scroll preview to active project image
     const scrollToImage = (index) => {
@@ -112,7 +118,7 @@ export default function ProjectHoverWithSlide() {
     return (
         <div
             ref={containerRef}
-            className="relative bg-light  mx-[6.9rem] border-t-[1px] border-gray border-opacity-40"
+            className="relative bg-[rgba(0, 0, 0, 0)]  mx-[6.9rem] border-t-[1px] border-gray border-opacity-40"
         >
             <div className="w-full relative z-10">
                 {projects.map((project, index) => (
@@ -121,7 +127,7 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-50
-                                cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray border-opacity-50 px-6 hover:px-1"
+                            cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray border-opacity-50 px-6 hover:px-1"
                     >
                         <h3 className={`text-[4rem]  text-text `}>
                             {project.title}
@@ -156,9 +162,12 @@ export default function ProjectHoverWithSlide() {
                         >
                             {projects.map((project, index) => (
                                 <div
+
+
                                     key={index}
                                     ref={(el) => (sectionRefs.current[index] = el)}
-                                    className={`h-full w-full flex items-center justify-center px-[2rem] py-[6rem] bg-${project.them}`}
+                                    className={`h-full w-full flex items-center justify-center px-[2rem] py-[6rem] `}
+                                    style={{ backgroundColor: project.theme }}
                                 >
 
                                     <AnimatePresence mode="wait">
@@ -168,7 +177,7 @@ export default function ProjectHoverWithSlide() {
                                             initial={{ opacity: 0, x: 40 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -40 }}
-                                            transition={{ duration: 0.6, ease: "easeInOut" }}
+                                            transition={{ duration: 0.9, ease: "easeInOut" }}
                                             className="w-full h-full rounded-[4px]"
                                         />
                                     </AnimatePresence>
@@ -189,27 +198,16 @@ export default function ProjectHoverWithSlide() {
             </AnimatePresence>
 
             <style jsx global>{`
-        .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-        }
-        `}</style>
+    .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    }
+    `}</style>
         </div>
     );
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
