@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-import img from '../../assets/samir.png';
+import img from '../../../public/favicon.png';
 import { GiSupersonicArrow } from "react-icons/gi";
 
 
@@ -50,14 +50,14 @@ const Footer = () => {
 
 
 
-    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[9rem] md:px-[1.2rem] pt-[5rem] font-samirFont">
+    return <footer className="bg-dark w-full h-screen flex flex-col justify-between md:pt-[6rem] md:px-[1.2rem] pt-[5rem] font-samirFont">
 
         <div className='flex flex-col justify-center px-[1rem] md:px-[12rem]  '>
 
-            <div className=' flex  md:gap-[24rem] pb-[4.2rem]'>
+            <div className=' flex  md:gap-[24rem] pb-[5.9rem]'>
                 <div className="flex flex-col items-start justify-start leading-[3.3rem] md:leading-[4.4rem] md:tracking-[.2rem]">
                     <h1 className="text-light text-[2.3rem] md:text-[5rem] flex items-center  gap-6 font-samirFont">
-                        <img src={img} alt="" className="max-w-[3rem] max-h-[3rem] rounded-full" />Let’s work
+                        <img src={img} alt="" className="max-w-[4.4rem] max-h-[4.4rem] rounded-full" />Let’s work
 
                     </h1>
                     <h1 className="text-light text-[2.3rem] md:text-[5rem]  font-samirFont" >
@@ -77,7 +77,7 @@ const Footer = () => {
                         <div
                             className='hidden md:block'
                             onClick={() => navigate('/contact')}>
-                            <MagicButton text={'Get in tuch'} size={'9.6rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
+                            <MagicButton text={'Get in tuch'} size={'9.9rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
                         </div>
                         <div
                             className='md:hidden'

@@ -32,9 +32,9 @@ const Header = ({ pageColor }) => {
                     onMouseEnter={() => setIsNameHovered(true)}
                     onMouseLeave={() => setIsNameHovered(false)}
                 >
-                    <div className={`max-w-9  inline-block pr-1 transition-all duration-700  ${isNameHovered ? "rotate-180" : ""} `}>
+                    <div className={`max-w-9 z-50  inline-block pr-1 transition-all duration-700  ${isNameHovered ? "rotate-[360deg]" : ""} `}>
 
-                        <div className={` z-50  `}>
+                        <div className={` z-50`}>
                             ©
                         </div>
 
@@ -56,7 +56,7 @@ const Header = ({ pageColor }) => {
                     </span>
                 </h1>
             </div>
-            {/* Header Navigation part both small to large devices  */}
+            {/* Header Navigation part both small to large devices  */} 
 
             <div>
 

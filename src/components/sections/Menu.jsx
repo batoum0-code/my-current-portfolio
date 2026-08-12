@@ -46,7 +46,7 @@ const SlideMenu = () => {
                 setMenuOpen(false); // Optional: auto-close menu on scroll-up
             }
 
-            if (window.scrollY > 2470) {
+            if (window.scrollY > 2170) {
                 setButtonState(true);
             } else {
                 setButtonState(false);
@@ -54,7 +54,7 @@ const SlideMenu = () => {
         };
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [buttonState]);
 
     // Toggle menu state
     const toggleMenu = () => {
@@ -111,12 +111,13 @@ const SlideMenu = () => {
                     <div
                         ref={buttonRef}
                         onClick={toggleMenu}
-                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-[1px] border-gray hover:border-none ' : 'text-light'}  
+                        className={`fixed md:top-7 md:right-7 top-5 
+                            right-2 z-50   ${buttonState ? 'text-gray border-gray border-[1px] hover:border-none ' : 'text-light'}  
                         ${menuOpen ? 'border-none' : ''}
                     rounded-full transition-all duration-100 `}
                     >
                         {
-                            menuOpen ? <MagicButton
+                            menuOpen ?  <MagicButton
                                 size={'3.8rem'}
                                 text={<RxCross1 size={20} />}
                                 bg={'blue'}
@@ -141,7 +142,7 @@ const SlideMenu = () => {
 
 
 
-            {/* large devices menu toggle */}
+            {/* large devices menu toggle ------------------------------------------------------------------ */}
             <div className="hidden md:block">
 
                 {(showButton || menuOpen) && (
@@ -149,20 +150,20 @@ const SlideMenu = () => {
                     <div
                         ref={buttonRef}
                         onClick={toggleMenu}
-                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-[1px] border-gray hover:border-none ' : 'text-light'}  
+                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-opacity-20 border-[1.5px] border-gray hover:border-none ' : 'text-light'}  
                         ${menuOpen ? 'border-none' : ''}
                     rounded-full transition-all duration-100 `}
                     >
                         {
                             menuOpen ? <MagicButton
-                                size={'4.8rem'}
+                                size={'4.5rem'}
                                 text={<RxCross1 size={20} />}
                                 bg={'blue'}
                                 hoverBg={'deepb'}
                                 rounded={'full'}
                             /> :
                                 <MagicButton
-                                    size={'4.8rem'}
+                                    size={'4.5rem'}
                                     text={<HiBars2 size={28} />}
                                     bg={'dark'}
                                     hoverBg={'blue'}
