@@ -69,8 +69,9 @@ const ContactMagicButton = ({ text, bg, hoverBg, color }) => {
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`relative overflow-hidden rounded-full bg-${bg}  ${color ? `text-${color} text-[1.2rem] tracking-[.2rem] font-medium`: 'text-white'} hover:text-white
-                font-semibold px-[1.7rem] py-[1.3rem] border-[1.8px]
+            className={`relative overflow-hidden rounded-full bg-${bg}  ${color ? `text-${color} 
+                text-[1.2rem] tracking-[.2rem] font-medium`: 'text-white'} hover:text-white
+                font-semibold px-[2.7rem] py-[1.3rem] border-[1.8px]
                 border-borderSolidLight hover:border-none tracking-widest 
             text-lg  transition-all duration-600  flex items-center justify-center`}
             style={{
@@ -80,7 +81,7 @@ const ContactMagicButton = ({ text, bg, hoverBg, color }) => {
         >
             {/* Animated text */}
             <span
-                className={`relative z-10 block text-center md:tracking-[1.5px] md:text-[1rem] text-[.8rem] font-medium `}
+                className={`relative z-10 block text-center md:-tracking-[.8px] md:text-[1rem] text-[.8rem] font-medium  `}
                 style={{
                     transform: `translate(${offsetX / 2}px, ${offsetY / 2}px)`,
                     transition: "transform 0.6s ease-out",

@@ -20,14 +20,10 @@ const PopUp = () => {
 
                 {/* Main Message */}
                 <h1 className="text-3xl text-slate-900 font-bold font-serif text-gray-800 mb-[3rem]">
-                    Great things are on the horizon
+                    I'm currently working on some this project <br/> Even that you I'm sure you will enjoy This visit
                 </h1>
 
-                {/* Sub Message */}
-                <p className="text-amber-700 tracking-[.12rem] text-normal font-serif ">
-                    Something big is brewing! My portfolio is in the works and will be
-                    launching soon!
-                </p>
+                
             </div>
         </div>
     );

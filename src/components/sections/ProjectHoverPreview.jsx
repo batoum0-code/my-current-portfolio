@@ -23,7 +23,7 @@ const projects = [
 
     {
         id: 2,
-        title: "AMELKIS RESOURTS",
+        title: "AMELKIS",
         tech: ["Next.js", "Tailwind", "Dubai"],
         image: amelkis,
         theme: "#000000",
@@ -126,13 +126,13 @@ export default function ProjectHoverWithSlide() {
 
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
-                        className="hover:bg-gray-50 flex items-center justify-between gap-1 hover:opacity-50
-                            cursor-pointer transition-all duration-300 py-11 border-b-[1px] border-gray border-opacity-50 px-6 hover:px-1"
+                        className=" flex items-center justify-between gap-1  group hover:opacity-40
+                            cursor-pointer transition-all duration-300 pt-[2.375rem] pb-[2.8rem] border-b-[1px] border-gray border-opacity-50 px-28 hover:px-[6rem]"
                     >
-                        <h3 className={`text-[4rem]  text-text `}>
+                        <h3 className={`text-[3.625rem]  text-text   -tracking-[3px]`}>
                             {project.title}
                         </h3>
-                        <p className="text-sm text-text">{project.tech.join(", ")}</p>
+                        <p className="text-sm text-text ">{project.tech.join(", ")}</p>
                     </div>
                 ))}
             </div>

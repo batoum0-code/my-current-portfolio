@@ -46,7 +46,7 @@ const SlideMenu = () => {
                 setMenuOpen(false); // Optional: auto-close menu on scroll-up
             }
 
-            if (window.scrollY > 2170) {
+            if (window.scrollY > 2180) {
                 setButtonState(true);
             } else {
                 setButtonState(false);
@@ -150,7 +150,7 @@ const SlideMenu = () => {
                     <div
                         ref={buttonRef}
                         onClick={toggleMenu}
-                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-opacity-20 border-[1.5px] border-gray hover:border-none ' : 'text-light'}  
+                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-opacity-45 border-[1.5px] border-gray hover:border-none ' : 'text-light'}  
                         ${menuOpen ? 'border-none' : ''}
                     rounded-full transition-all duration-100 `}
                     >

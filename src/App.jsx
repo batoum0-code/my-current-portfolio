@@ -47,7 +47,7 @@ function App() {
   return (
     <div className='scroll-smoot'>
       <>
-        {/* <PopUp/> */}
+        <PopUp/>
         <Menu/>
         <Routes>
           <Route path='/' element={<Home />} />
