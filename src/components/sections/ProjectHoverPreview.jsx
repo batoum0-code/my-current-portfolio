@@ -26,21 +26,22 @@ const projects = [
         title: "AMELKIS",
         tech: ["Next.js", "Tailwind", "Dubai"],
         image: amelkis,
-        theme: "#000000",
+        theme: "	#f8cc24",
     },
     {
         id: 3,
         title: "Riad BERBERE",
         tech: ["React", "Node.js", "Marrakech"],
         image: img4,
-        theme: "#C96F4A",
+        theme: "#E8E4DC",
+        
     },
     {
         id: 4,
         title: "MASSANO CHERTI",
         tech: ["Wordpress", "Oklahoma City"],
         image: cherti,
-        theme: "#E8E4DC",
+        theme: "#cac5e5",
     },
 ];
 
@@ -141,7 +142,7 @@ export default function ProjectHoverWithSlide() {
             <AnimatePresence>
                 {showPreview && (
                     <motion.div
-                        className="pointer-events-none absolute z-[9999] w-[400px] h-[400px]  overflow-hidden"
+                        className="pointer-events-none absolute z-[9999] w-[400px] h-[400px]   overflow-hidden"
                         style={{
                             top: mousePos.y - 190,
                             left: mousePos.x - 190,
@@ -177,8 +178,8 @@ export default function ProjectHoverWithSlide() {
                                             initial={{ opacity: 0, x: 40 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: -40 }}
-                                            transition={{ duration: 0.9, ease: "easeInOut" }}
-                                            className="w-full h-full rounded-[4px]"
+                                            transition={{ duration: 0.8, ease: "easeInOut" }}
+                                            className="w-full h-full "
                                         />
                                     </AnimatePresence>
 

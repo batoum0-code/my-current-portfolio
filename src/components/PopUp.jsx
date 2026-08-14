@@ -13,17 +13,19 @@ const PopUp = () => {
                 {/* Close Button */}
                 <button
                     onClick={() => setIsOpen(false)}
-                    className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl"
+                    className="absolute top-1 right-3 text-gray-500 hover:text-gray-700 text-4xl"
                 >
                     &times;
                 </button>
 
                 {/* Main Message */}
-                <h1 className="text-3xl text-slate-900 font-bold font-serif text-gray-800 mb-[3rem]">
-                    I'm currently working on some this project <br/> Even that you I'm sure you will enjoy This visit
+                <h1 className="text-2xl text-black font-bold font-samirFont py-[2rem]   mb-[3rem] leading-10">
+                    My portfolio is still under construction 😅
+                    But honestly, I’ve already built some pretty cool stuff.
+                    Take a look around the rest is coming soon.
                 </h1>
 
-                
+
             </div>
         </div>
     );

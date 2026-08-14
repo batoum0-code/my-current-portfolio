@@ -86,10 +86,10 @@ const SlideMenu = () => {
 
 
     const menuItems = [
-        { label: 'Home', paht: "/" },
-        { label: 'Work', paht: "/work" },
-        { label: 'About', paht: "/about" },
-        { label: 'Contact', paht: "/contact" },
+        { label: 'Home', path: "/" },
+        { label: 'Work', path: "/work" },
+        { label: 'About', path: "/about" },
+        { label: 'Contact', path: "/contact" },
     ]
 
 
@@ -206,7 +206,7 @@ const SlideMenu = () => {
                             }}
                             exit={{
                                 x: 10,
-                                clipPath: "inset(19% 19% 100% 100%)",
+                                clipPath: "inset(100% 100% 100% 100%)",
                             }}
                             transition={{
                                 duration: 0.8,
@@ -220,9 +220,10 @@ const SlideMenu = () => {
                                     {
                                         menuItems.map(({ label, path }) => {
                                             return (
-                                                <li key={label} onClick={() => navigate(path)}
+                                                <li key={label} onClick={() => navigate(path)} 
+                                                
                                                     className="cursor-pointer">
-                                                    <MenuItem label={label}
+                                                    <MenuItem label={label} 
                                                         setIsAnyHovered={setIsAnyHovered} isAnyHovered={isAnyHovered} />
                                                 </li>)
                                         })

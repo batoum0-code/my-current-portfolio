@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 import { usePage } from "../../context/useContext";
@@ -6,12 +6,11 @@ import { usePage } from "../../context/useContext";
 
 
 
-const MenuItem = ({ label, isAnyHovered, setIsAnyHovered, mobile }) => {
+const MenuItem = ({ label, path, setIsAnyHovered, mobile }) => {
 
 
 
     const { currentPage } = usePage();
-
 
 
 
@@ -52,6 +51,7 @@ const MenuItem = ({ label, isAnyHovered, setIsAnyHovered, mobile }) => {
 
 
     return <div
+
         className="inline-block align-top  text-center cursor-pointer text-light"
         onMouseEnter={() => {
             setIsHovered(true)
@@ -70,9 +70,11 @@ const MenuItem = ({ label, isAnyHovered, setIsAnyHovered, mobile }) => {
                 transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
             }}
         >
-            <span className={`${mobile? "text-[1.2rem] ":"text-[3rem]"} font-normal`}>{label}</span>
+            <span
+
+                className={`${mobile ? "text-[1.2rem] " : "text-[3rem]"} font-normal`}>{label}</span>
             <span className={` ${(!compareLabelAndCurrentPage && !isHovered) && 'opacity-0'}
-            inline-block  bg-light rounded-full ${mobile? "h-[.5rem]  w-[.5rem]":"h-[.8rem]  w-[.8rem]"}`} />
+            inline-block  bg-light rounded-full ${mobile ? "h-[.5rem]  w-[.5rem]" : "h-[.8rem]  w-[.8rem]"}`} />
         </div>
     </div >;
 };

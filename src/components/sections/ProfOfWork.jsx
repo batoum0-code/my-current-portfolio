@@ -54,7 +54,7 @@ const ProfOfWork = () => {
                             onClick={() => navigate('/about')}
                             aria-label="About me"
                             className="pl-[11rem] sm:pl-0"
-                        > 
+                        >
                             <MagicButton text={'About me'} size={'10rem'} bg={'dark'} hoverBg={'blue'} rounded={'full'} />
                         </div>
                     </motion.div>
@@ -62,7 +62,8 @@ const ProfOfWork = () => {
             </motion.div>
 
             <div className="overflow-hidden py-[3rem] pb-[12rem] hidden xl:block">
-                <div className="text-start ml-[10rem] text-gray lg:pb-9 text-sm">Recent work</div>
+                <div className="text-start ml-[14rem] text-gray lg:pb-9 text-[9.6px] font-semibold
+                                    font-samirFont uppercase">Recent work</div>
                 <ProjectHoverPreview />
             </div>
 
