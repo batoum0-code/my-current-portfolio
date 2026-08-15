@@ -52,7 +52,7 @@ const MenuItem = ({ label, path, setIsAnyHovered, mobile }) => {
 
     return <div
 
-        className="inline-block align-top  text-center cursor-pointer text-light"
+        className="inline-block align-top  text-center cursor-pointer text-light font-samirFont"
         onMouseEnter={() => {
             setIsHovered(true)
             setIsAnyHovered(true)
@@ -65,16 +65,16 @@ const MenuItem = ({ label, path, setIsAnyHovered, mobile }) => {
         onMouseMove={handleMouseMove}
     >
         <div
-            className={`transition-transform duration-700 ease-out flex flex-row-reverse justify-start items-center gap-4`}
+            className={`transition-transform duration-700 ease-out flex flex-row-reverse justify-start items-center gap-[1.2rem]`}
             style={{
                 transform: `translate(${isHovered ? offsetX : 0}px, ${isHovered ? offsetY : 0}px)`,
             }}
         >
             <span
 
-                className={`${mobile ? "text-[1.2rem] " : "text-[3rem]"} font-normal`}>{label}</span>
+                className={`${mobile ? "text-[1.2rem] " : "text-[3rem]"} font-normal font-samirFont`}>{label}</span>
             <span className={` ${(!compareLabelAndCurrentPage && !isHovered) && 'opacity-0'}
-            inline-block  bg-light rounded-full ${mobile ? "h-[.5rem]  w-[.5rem]" : "h-[.8rem]  w-[.8rem]"}`} />
+            inline-block  bg-light rounded-full ${mobile ? "h-[.5rem]  w-[.5rem]" : "h-[.6rem]  w-[.6rem]"}`} />
         </div>
     </div >;
 };

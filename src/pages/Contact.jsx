@@ -64,11 +64,11 @@ const Contact = () => {
         leading-[3.3rem] md:leading-[4.4rem] md:tracking-[.2rem] w-3/4">
 
 
-          <div className="pb-[11rem] text-light text-[2.3rem] md:text-[5rem]  tracking-[-4px] font-samirFont">
+          <div className="pb-[11rem] text-light text-[2.3rem] md:text-[5rem]  tracking-[-2px] font-samirFont">
             <h1 className="text-light text-[2.5rem] md:text-[5rem] flex items-center  gap-6 font-samirFont ">
               Let's start a
             </h1>
-            <h1 className="text-light text-[2.5rem] md:text-[4.4rem] pt-[1.7rem] font-samirFont" >
+            <h1 className="text-light text-[2.5rem] md:text-[5rem] pt-[1.7rem] font-samirFont" >
               project together
             </h1>
           </div>
@@ -213,7 +213,7 @@ const Contact = () => {
             </h2>
             <div className=" flex flex-col items-start gap-[.6rem]">
               <SocialMediaTitle label={'batoumsamir0@gmail.com'} size={'1rem'} />
-              <SocialMediaTitle label={'+212 604360452'} size={'1rem'} />
+              <SocialMediaTitle label={'+212 6 04 36 04 52'} size={'1rem'} />
             </div>
 
 

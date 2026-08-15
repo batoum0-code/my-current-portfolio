@@ -26,7 +26,7 @@ const projects = [
         title: "AMELKIS",
         tech: ["Next.js", "Tailwind", "Dubai"],
         image: amelkis,
-        theme: "	#f8cc24",
+        theme: "#141517",
     },
     {
         id: 3,
@@ -119,7 +119,7 @@ export default function ProjectHoverWithSlide() {
     return (
         <div
             ref={containerRef}
-            className="relative bg-[rgba(0, 0, 0, 0)]  mx-[6.9rem] border-t-[1px] border-gray border-opacity-40"
+            className="relative bg-[rgba(0, 0, 0, 0)] font-samirFont mx-[6.9rem] border-t-[1px] border-gray border-opacity-40"
         >
             <div className="w-full relative z-10">
                 {projects.map((project, index) => (
@@ -142,7 +142,7 @@ export default function ProjectHoverWithSlide() {
             <AnimatePresence>
                 {showPreview && (
                     <motion.div
-                        className="pointer-events-none absolute z-[9999] w-[400px] h-[400px]   overflow-hidden"
+                        className="pointer-events-none absolute z-[9999] w-[400px] h-[400px]   overflow-x-hidden"
                         style={{
                             top: mousePos.y - 190,
                             left: mousePos.x - 190,

@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useContext } from "react";
 
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 
 import { HiBars2 } from "react-icons/hi2";
@@ -23,18 +23,24 @@ import { usePage } from "../../context/useContext";
 
 const SlideMenu = () => {
 
-    const {menuOpen, setMenuOpen} = usePage();
+    const { menuOpen, setMenuOpen } = usePage();
 
 
     const navigate = useNavigate();
 
+    const location = useLocation();
+    const isContactPage = location.pathname === "/contact";
 
 
     const [showButton, setShowButton] = useState(false);
-    
     const [buttonState, setButtonState] = useState(false);
     const [isAnyHovered, setIsAnyHovered] = useState(false);
+
     const buttonRef = useRef();
+
+
+
+
 
     // Track scroll position
     useEffect(() => {
@@ -98,7 +104,7 @@ const SlideMenu = () => {
 
 
     return (
-        <div className="">
+        <div className="font-samirFont">
             {/* Menu Toggle Button */}
 
 
@@ -112,17 +118,18 @@ const SlideMenu = () => {
                         ref={buttonRef}
                         onClick={toggleMenu}
                         className={`fixed md:top-7 md:right-7 top-5 
-                            right-2 z-50   ${buttonState ? 'text-gray border-gray border-[1px] hover:border-none ' : 'text-light'}  
+                            right-2 z-50   ${(buttonState || isContactPage) ? 'text-gray border-gray border-[1px] hover:border-none ' : 'text-light'}  
                         ${menuOpen ? 'border-none' : ''}
                     rounded-full transition-all duration-100 `}
                     >
                         {
-                            menuOpen ?  <MagicButton
+                            menuOpen ? <MagicButton
                                 size={'3.8rem'}
                                 text={<RxCross1 size={20} />}
                                 bg={'blue'}
                                 hoverBg={'deepb'}
                                 rounded={'full'}
+
                             /> :
                                 <MagicButton
                                     size={'3.8rem'}
@@ -150,7 +157,7 @@ const SlideMenu = () => {
                     <div
                         ref={buttonRef}
                         onClick={toggleMenu}
-                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${buttonState ? 'text-gray border-opacity-45 border-[1.5px] border-gray hover:border-none ' : 'text-light'}  
+                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50   ${(buttonState || isContactPage) ? 'text-gray border-opacity-45 border-[1.5px] border-gray hover:border-none ' : 'text-light'}  
                         ${menuOpen ? 'border-none' : ''}
                     rounded-full transition-all duration-100 `}
                     >
@@ -193,7 +200,7 @@ const SlideMenu = () => {
                         {/* Right Menu */}
                         <motion.div
                             className="fixed top-0 right-0 left-0 md:left-auto h-full bg-dark z-40 text-light  shadow-full shadow-white w-full
-                            px-[5vw] pt-[15vh] pb-[10vh]"
+                            px-[5vw] pt-[12vh] pb-[10vh]"
 
                             style={{ width: 510 }}
                             initial={{
@@ -213,17 +220,22 @@ const SlideMenu = () => {
                                 ease: [0.25, 1, 0.5, 1], // smooth curve-like motion
                             }}
                         >
-                            <div className="flex flex-col items-start justify-start pl-[rem] md:pl-[1.7rem]">
-                                <h2 className="text-[.6rem] md:text-[.55rem] font-bold py-4 md:py-6  text-gray uppercase">Navigation</h2>
+                            <div
+                            onClick={()=> console.log('is contact page opened', location.pathname , isContactPage
+
+                            )}
+                            className="flex flex-col items-start justify-start pl-[rem] md:pl-[1.7rem]">
+                                
+                                <h2 className="text-[.6rem] md:text-[.6rem] font-bold py-4 md:pb-[1.8rem] md:pt-  text-gray uppercase">Navigation</h2>
                                 <div className="h-[1px]  bg-borderSolid w-[22.2rem] md:w-[20.2rem] opacity-30"></div>
                                 <ul className="pt-6 -space-y-3">
                                     {
                                         menuItems.map(({ label, path }) => {
                                             return (
-                                                <li key={label} onClick={() => navigate(path)} 
-                                                
+                                                <li key={label} onClick={() => navigate(path)}
+
                                                     className="cursor-pointer">
-                                                    <MenuItem label={label} 
+                                                    <MenuItem label={label}
                                                         setIsAnyHovered={setIsAnyHovered} isAnyHovered={isAnyHovered} />
                                                 </li>)
                                         })
@@ -231,13 +243,13 @@ const SlideMenu = () => {
                                 </ul>
                             </div>
 
-                            <div className=" md:ml-[1.7rem] md:hidden h-[.2px] max-h-[0.1px] opacity-40 w-[22.2rem] bg-borderSolid mt-[11rem] ">
+                            <div className=" md:ml-[1.6rem] md:hidden h-[.2px] max-h-[0.1px] opacity-40 w-[22.2rem] bg-borderSolid mt-[11rem] ">
 
                             </div>
 
 
                             {/* social media icons or titles depend on moode */}
-                            <div className=" md:pl-[1.7rem] md:pt-[8.2rem] pt-6">
+                            <div className=" md:pl-[1.6rem] md:pt-[8.2rem] pt-6">
                                 <h2 className="text-[.6rem] md:text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
                                 <ul className=" pt-3 flex gap-6 ">
                                     <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>

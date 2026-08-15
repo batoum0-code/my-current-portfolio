@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 
 
 
-
-const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor }) => {
-
+const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor}) => {
 
 
 
@@ -69,12 +67,15 @@ const MagicButton = ({ text, size, bg, hoverBg, rounded, color, hoverColor }) =>
 
 
 
+
+
     return (
         <button
+        
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className={`relative overflow-hidden rounded-${rounded} ${bg ? `bg-${bg}`: 'bg-blue'}
+            className={`relative overflow-hidden animate rounded-${rounded} ${bg ? `bg-${bg}`: 'bg-blue'}
             ${color ? `text-${color}` : 'text-white'}  
             ${hoverColor ? `hover:text-light` : ''}
             font-semibold 

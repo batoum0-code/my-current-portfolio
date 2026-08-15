@@ -45,7 +45,7 @@ function App() {
 
 
   return (
-    <div className='scroll-smoot'>
+    <div className='scroll-smooth'>
       <>
         <PopUp/>
         <Menu/>

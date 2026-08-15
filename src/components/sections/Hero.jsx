@@ -48,7 +48,7 @@ const Hero = () => {
                 <div className=" flex bottom-0  absolute left-[1%] md:left-[25%]">
                     <div
                         ref={boxRef}
-                        className=" w-[24rem] md:w-[37rem]   sticky">
+                        className=" w-[24rem] md:w-[37rem]   ">
                         <img className="w-full object-cover" src={samir} alt="My photo" />
                     </div>
 
