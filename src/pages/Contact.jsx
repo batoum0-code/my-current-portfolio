@@ -5,16 +5,13 @@ import SocialMediaTitle from '../components/utils/SocialMediaTitle';
 
 
 // import icons
-import { HiCursorArrowRays } from "react-icons/hi2";
 import { FiArrowDownRight } from "react-icons/fi";
 
 // import tools hooks ... 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 
-// import images 
-// import img from '../assets/samir.png';
 import img from '../../public/favicon.png';
 
 
@@ -32,6 +29,15 @@ const time = new Intl.DateTimeFormat('en-UK', {
 
 
 const Contact = () => {
+
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [comapany, setCompany] = useState();
+  const [message, setMessage] = useState();
+
+
+
+
 
 
   const borderRef = useRef();
@@ -76,20 +82,20 @@ const Contact = () => {
           <form action="" className="w-full font-samirFont">
             <ol className="w-full pb-[10rem]">
               <li className="flex flex-col w-full">
-                <div className=" bg-gray w-full h-[2.5px] opacity-40 mb-[1.5rem] rounded-full"></div>
+                <div className=" bg-gray w-full h-[1.12px] opacity-40 mb-[1.5rem] rounded-full"></div>
 
                 <div className="flex  gap-[2.3rem] ">
                   <div className="text-gray font-mono font-semibold text-pretty">01</div>
                   <div className="flex flex-col py-6">
-                    <label htmlFor="name" className=" font-semibold text-[1.3rem] leading-tight">
+                    <label htmlFor="name" className=" font-[450] text-[1.3rem] -tracking-[.3px] leading-tight">
                       What's your name?
                     </label>
                     <input
                       type="text"
                       id="name"
                       placeholder="Samir Batoum*"
-                      className="text-gray  text-[1.2rem]  mt-0 
-                      bg-transparent border-none outline-none focus:text-light"
+                      className="text-gray  text-[1.1rem]  mt-0 
+                      bg-transparent border-none outline-none -tracking-[.3px]  focus:text-light"
                     />
 
                   </div>
@@ -97,20 +103,20 @@ const Contact = () => {
               </li>
 
               <li className="flex flex-col w-full">
-                <div className=" bg-gray w-full h-[2.5px] opacity-40 mb-[1.5rem] rounded-full"></div>
+                <div className=" bg-gray w-full h-[1.12px] opacity-40 mb-[1.5rem] rounded-full"></div>
 
                 <div className="flex gap-[2.3rem] mb-[1.25rem]">
                   <div className="text-gray font-semibold">02</div>
                   <div className="flex flex-col">
-                    <label htmlFor="name" className=" font-semibold text-[1.3rem]  ">
+                    <label htmlFor="name" className=" font-semibold text-[1.3rem] -tracking-[.3px]  ">
                       What's your email?
                     </label>
                     <input
                       type="text"
                       id="name"
                       placeholder="batoumsamir@gmail.com*"
-                      className="text-gray font-semibold text-[1.2rem] leading-tight
-                      bg-transparent border-none outline-none focus:text-light"
+                      className="text-gray  text-[1.1rem]  leading-tight
+                      bg-transparent border-none outline-none -tracking-[.3px]  focus:text-light"
                     />
 
                   </div>
@@ -118,20 +124,20 @@ const Contact = () => {
               </li>
 
               <li className="flex flex-col w-full">
-                <div className=" bg-gray w-full h-[2.5px] opacity-40 my-[1.5rem] rounded-full"></div>
+                <div className=" bg-gray w-full h-[1.12px] opacity-40 my-[1.5rem] rounded-full"></div>
 
                 <div className="flex gap-[2.3rem]  mb-[1.25rem]">
                   <div className="text-gray font-semibold">03</div>
                   <div className="flex flex-col">
-                    <label htmlFor="name" className=" font-semibold text-[1.3rem] ">
+                    <label htmlFor="name" className=" font-[450] text-[1.3rem] -tracking-[.3px] ">
                       What's the name of your organization?
                     </label>
                     <input
                       type="text"
                       id="name"
                       placeholder="Samir & Tamazirt®"
-                      className="text-gray font-semibold text-[1.2rem] leading-tight
-                      bg-transparent border-none outline-none focus:text-light"
+                      className="text-gray  text-[1.1rem]  mt-0 leading-tight
+                      bg-transparent border-none outline-none -tracking-[.3px]  focus:text-light"
                     />
 
                   </div>
@@ -139,20 +145,20 @@ const Contact = () => {
               </li>
 
               <li className="flex flex-col w-full mb-[5.9rem]">
-                <div className=" bg-gray w-full h-[1.5px] opacity-40 my-[1.5rem]"></div>
+                <div className=" bg-gray w-full h-[1.12px] opacity-40 my-[1.5rem]"></div>
 
                 <div className="flex gap-[2.3rem] ">
-                  <div className="text-gray font-semibold">04</div>
+                  <div className="text-gray font-semibold opacity-70">04</div>
                   <div className="flex flex-col ">
-                    <label htmlFor="name" className=" font-semibold text-[1.3rem] ">
+                    <label htmlFor="name" className=" font-[450] text-[1.3rem] -tracking-[.3px] ">
                       Your message
                     </label>
                     <input
                       type="text"
                       id="name"
                       placeholder="Hello Samir, can you help me with ..."
-                      className="text-gray font-semibold text-[1.2rem] leading-tight
-                      bg-transparent border-none outline-none focus:text-light"
+                      className="text-gray  text-[1.1rem]  mt-0 w-full leading-tight
+                      bg-transparent border-none outline-none -tracking-[.3px]  focus:text-light"
                     />
 
                   </div>
@@ -174,7 +180,7 @@ const Contact = () => {
                   ref={borderRef}
                   style={{ y }}>
 
-                  <div 
+                  <div
                     className='hidden md:block'
                     onClick={() => navigate('/contact')}>
                     <MagicButton text={'Send it!'} size={'10rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
@@ -188,7 +194,7 @@ const Contact = () => {
                 </motion.div>
 
               </div>
-              <div className="absolute  z-10 bg-gray w-full h-[2.8px] opacity-20 rounded-full"></div>
+              <div className="absolute  z-10 bg-gray w-full h-[1.8px] opacity-20 rounded-full"></div>
             </div>
 
             {/* End send button  */}
@@ -221,8 +227,8 @@ const Contact = () => {
               About Details
             </h2>
             <div className="leading-[2rem] text-light">
-              <span>Full-Stack Dev</span><br/>
-              <span>Tamazirt Coding.</span><br/>
+              <span>Full-Stack Dev</span><br />
+              <span>Tamazirt Coding.</span><br />
               <span>Location: Marrakech, Morocco</span>
             </div>
 
