@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 
 
-const ContactMagicButton = ({ text, bg, hoverBg, color }) => {
+const ContactMagicButton = ({ text, bg, hoverBg, color ,isContact}) => {
 
 
 
@@ -71,7 +71,7 @@ const ContactMagicButton = ({ text, bg, hoverBg, color }) => {
             onMouseLeave={handleMouseLeave}
             className={`relative overflow-hidden rounded-full bg-${bg}  ${color ? `text-${color} 
                 text-[1.2rem] tracking-[.2rem] font-medium`: 'text-white'} hover:text-white
-                font-semibold px-[2.7rem] py-[1.3rem] border-[1.8px]
+                font-semibold px-[2.7rem] py-[1.3rem] border-[1.8px]   ${ !isContact ? "py-[1rem]": "py-[1.3rem]"}
                 border-borderSolidLight hover:border-none tracking-widest 
             text-lg  transition-all duration-600  flex items-center justify-center`}
             style={{

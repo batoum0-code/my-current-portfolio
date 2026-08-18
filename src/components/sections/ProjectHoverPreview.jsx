@@ -39,7 +39,7 @@ const projects = [
     {
         id: 4,
         title: "MASSANO CHERTI",
-        tech: ["Wordpress", "Oklahoma City"],
+        tech: ["Wordpress", "React js", "Express js"," Strapi" ,"Fes"],
         image: cherti,
         theme: "#cac5e5",
     },

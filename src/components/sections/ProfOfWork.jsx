@@ -73,8 +73,8 @@ const ProfOfWork = () => {
 
             </div>
 
-            <div className="flex items-center justify-center h-[3rem] pt-[1.5rem] ">
-                <ContactMagicButton text={'More Work'} size={'3rem'} bg={'transparent'} color={'blue'} hoverBg={'blue'} />
+            <div className="flex items-center justify-center h-[3rem]  ">
+                <ContactMagicButton text={'More Work'} size={'3rem'} bg={'dark'} color={'white'} hoverBg={'blue'} isContact={false}/>
             </div>
         </div>
     );

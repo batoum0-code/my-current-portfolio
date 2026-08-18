@@ -85,9 +85,9 @@ const Contact = () => {
                 <div className=" bg-gray w-full h-[1.12px] opacity-40 mb-[1.5rem] rounded-full"></div>
 
                 <div className="flex  gap-[2.3rem] ">
-                  <div className="text-gray font-mono font-semibold text-pretty">01</div>
+                  <div className="text-gray font-mono font-semibold  text-[12.768px] -tracking-[1px]">01</div>
                   <div className="flex flex-col py-6">
-                    <label htmlFor="name" className=" font-[450] text-[1.3rem] -tracking-[.3px] leading-tight">
+                    <label htmlFor="name" className=" font-[450] text-[21.28px] -tracking-[.3px] leading-tight">
                       What's your name?
                     </label>
                     <input
@@ -106,9 +106,9 @@ const Contact = () => {
                 <div className=" bg-gray w-full h-[1.12px] opacity-40 mb-[1.5rem] rounded-full"></div>
 
                 <div className="flex gap-[2.3rem] mb-[1.25rem]">
-                  <div className="text-gray font-semibold">02</div>
+                  <div className="text-gray font-semibold text-[12.768px] -tracking-[1px]">02</div>
                   <div className="flex flex-col">
-                    <label htmlFor="name" className=" font-semibold text-[1.3rem] -tracking-[.3px]  ">
+                    <label htmlFor="name" className=" font-semibold  -tracking-[.3px]  text-[21.28px] ">
                       What's your email?
                     </label>
                     <input
@@ -127,9 +127,9 @@ const Contact = () => {
                 <div className=" bg-gray w-full h-[1.12px] opacity-40 my-[1.5rem] rounded-full"></div>
 
                 <div className="flex gap-[2.3rem]  mb-[1.25rem]">
-                  <div className="text-gray font-semibold">03</div>
+                  <div className="text-gray font-semibold text-[12.768px] -tracking-[1px]">03</div>
                   <div className="flex flex-col">
-                    <label htmlFor="name" className=" font-[450] text-[1.3rem] -tracking-[.3px] ">
+                    <label htmlFor="name" className=" font-[450]  -tracking-[.3px] text-[21.28px] ">
                       What's the name of your organization?
                     </label>
                     <input
@@ -148,9 +148,9 @@ const Contact = () => {
                 <div className=" bg-gray w-full h-[1.12px] opacity-40 my-[1.5rem]"></div>
 
                 <div className="flex gap-[2.3rem] ">
-                  <div className="text-gray font-semibold opacity-70">04</div>
+                  <div className="text-gray font-semibold text-[12.768px] -tracking-[1px] opacity-70">04</div>
                   <div className="flex flex-col ">
-                    <label htmlFor="name" className=" font-[450] text-[1.3rem] -tracking-[.3px] ">
+                    <label htmlFor="name" className=" font-[450] text-[21.28px]  -tracking-[.3px] ">
                       Your message
                     </label>
                     <input
