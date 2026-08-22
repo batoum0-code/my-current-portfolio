@@ -114,7 +114,7 @@ const Contact = () => {
                     <input
                       type="text"
                       id="name"
-                      placeholder="batoumsamir@gmail.com*"
+                      placeholder="batoumsamir@gmail.com *"
                       className="text-gray  text-[1.1rem]  leading-tight
                       bg-transparent border-none outline-none -tracking-[.3px]  focus:text-light"
                     />
