@@ -5,7 +5,7 @@ import gsap from "gsap";
 import Header from "./Header";
 import { FiArrowDownRight } from "react-icons/fi";
 
-
+import earth from '../..//assets/earth.png';
 
 const Hero = () => {
 
@@ -35,12 +35,12 @@ const Hero = () => {
                 <div className="bg-dark hidden md:flex  items-center gap-3  absolute top-[29%]
                 rounded-tr-[30rem] rounded-br-[30rem] px-6 py-5 ">
                     <h3 className="text-light font-medium pl-[16px] pr-[3rem] leading-5">
-                        Located <br/> in The<br /> Morocco
+                        Located <br /> in The<br /> Morocco
                     </h3>
 
-                    <div className="bg-gray rounded-full p-[28px]">
-                        
-                        {/* <img src="/public/videos/planete.gif" alt="" /> */}
+                    <div className="bg-gray rounded-full p-[1rem]">
+
+                        <img src={earth} alt="" className="text-red w-[3rem] h-[3rem] animate-[spin3d_4s_linear_infinite] transition-all duration-900" />
                     </div>
 
                 </div>

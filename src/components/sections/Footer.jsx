@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 
 import img from '../../../public/favicon.png';
-import { GiSupersonicArrow } from "react-icons/gi";
+import { GoArrowDownLeft } from "react-icons/go";
+
+
 
 
 import MagicButton from '../utils/MagicButton';
@@ -87,8 +89,9 @@ const Footer = () => {
 
                     </motion.div>
 
-                    <div className='text-light text-[2rem] transform rotate-90 absolute -top-10 -right-20'>
-                        <GiSupersonicArrow />
+                    <div className='text-light text-[2rem]   absolute -top-10 -right-20'>
+                        <GoArrowDownLeft />
+                        
                     </div>
                 </div>
                 <div className="absolute  z-10 bg-gray w-full h-[1.5px] opacity-20"></div>

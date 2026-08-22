@@ -16,7 +16,7 @@ const projects = [
     {
         id: 1,
         title: "Com & Golf",
-        tech: ["Wordpress", "Marrakech"],
+        tech: ["Wordpress","Elementor"],
         image: comgolf,
         theme: "#DCE3D4",
     },
@@ -24,22 +24,22 @@ const projects = [
     {
         id: 2,
         title: "AMELKIS",
-        tech: ["Next.js", "Tailwind", "Dubai"],
+        tech: ["React", "Node js"],
         image: amelkis,
         theme: "#141517",
     },
     {
         id: 3,
         title: "Riad BERBERE",
-        tech: ["React", "Node.js", "Marrakech"],
+        tech: ["React", "Node.js"],
         image: img4,
         theme: "#E8E4DC",
-        
+
     },
     {
         id: 4,
         title: "MASSANO CHERTI",
-        tech: ["Wordpress", "React js", "Express js"," Strapi" ,"Fes"],
+        tech: ["Wordpress", "React js", "Express js", " Strapi"],
         image: cherti,
         theme: "#cac5e5",
     },
@@ -128,12 +128,13 @@ export default function ProjectHoverWithSlide() {
                         key={project.id}
                         ref={(el) => (projectRefs.current[index] = el)}
                         className=" flex items-center justify-between gap-1  group hover:opacity-40
-                            cursor-pointer transition-all duration-300 pt-[2.375rem] pb-[2.8rem] border-b-[1px] border-gray border-opacity-50 px-28 hover:px-[6rem]"
+                            cursor-pointer transition-all duration-300 pt-[2.375rem] pb-[2.8rem] border-b-[1px] 
+                            border-gray border-opacity-50 px-28 hover:px-[6rem]"
                     >
                         <h3 className={`text-[3.625rem]  text-text   -tracking-[3px]`}>
                             {project.title}
                         </h3>
-                        <p className="text-sm text-text ">{project.tech.join(", ")}</p>
+                        <p className="text-sm text-text">{project.tech.join(", ")}</p>
                     </div>
                 ))}
             </div>

@@ -64,3 +64,14 @@ body {
     white-space: nowrap;
     min-width: 100%;
 }
+
+
+@keyframes spin3d {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(330deg);
+  }
+}
