@@ -77,15 +77,15 @@ export default function ProjectHoverWithSlide() {
     */
 
     // ~4cm movement radius
-    const BUTTON_RADIUS = 150;
+    const BUTTON_RADIUS = 20;
 
     const buttonX = useMotionValue(0);
     const buttonY = useMotionValue(0);
 
     const springButtonX = useSpring(buttonX, {
-        stiffness: 2,
+        stiffness: 120,
         damping: 18,
-        mass: 0.1,
+        mass: 0.6,
     });
 
     const springButtonY = useSpring(buttonY, {
@@ -269,7 +269,7 @@ export default function ProjectHoverWithSlide() {
                 handleMouseLeave
             );
         };
-    }, []);
+    }, [showPreview]);
 
     /*
     |--------------------------------------------------------------------------
@@ -554,13 +554,15 @@ export default function ProjectHoverWithSlide() {
                             <motion.button
                                 className="
                                     flex
-                                    h-[4rem]
-                                    w-[4rem]
+                                    h-[4.5rem]
+                                    w-[4.5rem]
                                     items-center
                                     justify-center
                                     rounded-full
                                     bg-blue
                                     text-light
+                                    font-samirFont
+                                    tracking-[-1px]
                                 "
                                 style={{
                                     x: springButtonX,

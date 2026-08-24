@@ -61,7 +61,7 @@ const ProfOfWork = () => {
                 </div>
             </motion.div>
 
-            <div className="overflow-hidden hidden xl:block py-[6rem]">
+            <div className="overflow-hidden hidden xl:block py-[7rem]">
                 <div className="text-start ml-[14rem] text-gray lg:pb-9 text-[9.6px] font-semibold
                                     font-samirFont uppercase">Recent work</div>
                 <ProjectHoverPreview />
