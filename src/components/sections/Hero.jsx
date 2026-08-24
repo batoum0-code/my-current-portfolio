@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import Header from "./Header";
 import { FiArrowDownRight } from "react-icons/fi";
+import { GoArrowDownLeft } from "react-icons/go";
+
 
 import earth from '../..//assets/earth.png';
 
@@ -38,9 +40,9 @@ const Hero = () => {
                         Located <br /> in The<br /> Morocco
                     </h3>
 
-                    <div className="bg-gray rounded-full p-[1rem]">
+                    <div className="bg-gray rounded-full p-[.2rem]">
 
-                        <img src={earth} alt="" className="text-red w-[3rem] h-[3rem] animate-[spin3d_4s_linear_infinite] transition-all duration-900" />
+                        <img src={earth} alt="" className="text-red w-[3rem] h-[3rem] animate-bounce transition-all duration-900" />
                     </div>
 
                 </div>
@@ -58,7 +60,7 @@ const Hero = () => {
                         <h2 className="absolute top-[24rem] md:top-[11rem] left-3 md:left-auto md:right-[-9rem] 
                         lg:right-[-21rem] xl:right-[-24.5rem] flex flex-col md:gap-5 ">
                             <span className="text-[1rem] pb-9 md:text-[1.8rem] ">
-                                <FiArrowDownRight />
+                                <GoArrowDownLeft className="rotate-[-80deg]" />
                             </span>
                             <span className="lg:text-[1.8rem] lg:font-normal md:text-[1rem] text-[1.2rem] font-medium  md:font-medium md:space-y-9 md:pt-1">
                                 Freelance

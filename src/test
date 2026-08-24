@@ -1,297 +1,409 @@
-// import components 
-import MagicButton from "../components/utils/MagicButton";
-import Header from "../components/sections/Header";
-import SocialMediaTitle from '../components/utils/SocialMediaTitle';
+import { useRef, useState, useEffect } from "react";
+import {
+    motion,
+    AnimatePresence,
+    useMotionValue,
+    useSpring,
+} from "framer-motion";
 
+import amelkis from "../../assets/amelkis.webp";
+import comgolf from "../../assets/com&golf.webp";
+import img4 from "../../assets/q1.webp";
+import cherti from "../../assets/cherti.webp";
 
-// import icons
-import { HiCursorArrowRays } from "react-icons/hi2";
+const projects = [
+    {
+        id: 1,
+        title: "Com & Golf",
+        tech: ["Wordpress", "Elementor"],
+        image: comgolf,
+        theme: "#DCE3D4",
+    },
+    {
+        id: 2,
+        title: "AMELKIS",
+        tech: ["React", "Node js"],
+        image: amelkis,
+        theme: "#141517",
+    },
+    {
+        id: 3,
+        title: "Riad BERBERE",
+        tech: ["React", "Node.js"],
+        image: img4,
+        theme: "#E8E4DC",
+    },
+    {
+        id: 4,
+        title: "MASSANO CHERTI",
+        tech: ["Wordpress", "React js", "Express js", "Strapi"],
+        image: cherti,
+        theme: "#cac5e5",
+    },
+];
 
-// import tools hooks ... 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from 'framer-motion';
+export default function ProjectHoverWithSlide() {
+    const containerRef = useRef(null);
+    const previewScrollRef = useRef(null);
 
+    const sectionRefs = useRef([]);
+    const projectRefs = useRef([]);
 
-// import images 
-import img from '../assets/samir.png'
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [showPreview, setShowPreview] = useState(false);
 
+    /*
+    |--------------------------------------------------------------------------
+    | VIEW BUTTON MOTION
+    |--------------------------------------------------------------------------
+    */
 
+    const buttonX = useMotionValue(0);
+    const buttonY = useMotionValue(0);
 
-const now = new Date();
-
-const time = new Intl.DateTimeFormat('en-UK', {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZoneName: 'short',
-}).format(now);
-
-
-
-
-const Contact = () => {
-
-
-    const borderRef = useRef();
-
-
-
-    // Watch scroll progress relative to the MagicButton
-    const { scrollYProgress } = useScroll({
-        target: borderRef,
-        offset: ['start end', 'end start'],
+    const springButtonX = useSpring(buttonX, {
+        stiffness: 150,
+        damping: 16,
+        mass: 0.5,
     });
 
+    const springButtonY = useSpring(buttonY, {
+        stiffness: 150,
+        damping: 16,
+        mass: 0.5,
+    });
 
+    /*
+    |--------------------------------------------------------------------------
+    | SCROLL PREVIEW TO ACTIVE PROJECT
+    |--------------------------------------------------------------------------
+    */
 
-    // Animate Y position from 100px to -20px based on scroll
-    const x = useTransform(scrollYProgress, [1, 0], [60, -90]);
+    const scrollToImage = (index) => {
+        const section = sectionRefs.current[index];
+        const container = previewScrollRef.current;
 
+        if (!section || !container) return;
 
+        container.scrollTo({
+            top: section.offsetTop,
+            behavior: "smooth",
+        });
+    };
 
+    /*
+    |--------------------------------------------------------------------------
+    | MOUSE TRACKING
+    |--------------------------------------------------------------------------
+    */
 
+    useEffect(() => {
+        const container = containerRef.current;
 
+        if (!container) return;
 
-    return <div className="bg-dark text-light ">
-        <Header />
-        <div className="md:px-[220px] pt-[105px]">
-            <div className="flex gap-[6rem]">
+        const handleMouseMove = (e) => {
+            const rect = container.getBoundingClientRect();
 
-                {/* contact form (right side) */}
-                <div className="flex flex-col items-start justify-start pb-[13rem]
-        leading-[3.3rem] md:leading-[4.4rem] md:tracking-[.2rem] w-3/4">
+            // Mouse position relative to main container
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
+            setMousePos({
+                x,
+                y,
+            });
 
-                    <div className="pb-[11rem]">
-                        <h1 className="text-light text-[2.3rem] md:text-[4rem] flex items-center  gap-6 font-samirFont ">
-                            Let's start a
-                        </h1>
-                        <h1 className="text-light text-[2.3rem] md:text-[4rem]  font-samirFont" >
-                            project together
-                        </h1>
+            /*
+            |--------------------------------------------------------------------------
+            | BUTTON MOVEMENT
+            |--------------------------------------------------------------------------
+            |
+            | Preview = 400x400
+            | Center = 200x200
+            |
+            | We calculate how far the cursor is from
+            | the center of the preview.
+            |
+            | 0.30 means the button follows 30% of
+            | the cursor movement.
+            |
+            */
+
+            const buttonOffsetX = (x - 200) * 0.01;
+            const buttonOffsetY = (y - 200) * 0.0001;
+
+            buttonX.set(buttonOffsetX);
+            buttonY.set(buttonOffsetY);
+
+            /*
+            |--------------------------------------------------------------------------
+            | DETECT ACTIVE PROJECT
+            |--------------------------------------------------------------------------
+            */
+
+            for (let i = 0; i < projectRefs.current.length; i++) {
+                const project = projectRefs.current[i];
+
+                if (!project) continue;
+
+                const projectRect = project.getBoundingClientRect();
+
+                const top = projectRect.top - rect.top;
+                const bottom = projectRect.bottom - rect.top;
+
+                if (y >= top && y <= bottom) {
+                    setActiveIndex((currentIndex) => {
+                        if (currentIndex !== i) {
+                            scrollToImage(i);
+                            return i;
+                        }
+
+                        return currentIndex;
+                    });
+
+                    break;
+                }
+            }
+        };
+
+        const handleMouseEnter = () => {
+            setShowPreview(true);
+        };
+
+        const handleMouseLeave = () => {
+            setShowPreview(false);
+
+            // Return button smoothly to center
+            buttonX.set(0);
+            buttonY.set(0);
+        };
+
+        container.addEventListener("mousemove", handleMouseMove);
+        container.addEventListener("mouseenter", handleMouseEnter);
+        container.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+            container.removeEventListener("mousemove", handleMouseMove);
+            container.removeEventListener("mouseenter", handleMouseEnter);
+            container.removeEventListener("mouseleave", handleMouseLeave);
+        };
+    }, []);
+
+    return (
+        <div
+            ref={containerRef}
+            className="
+                relative
+                mx-[6.9rem]
+                border-t-[1px]
+                border-gray
+                border-opacity-40
+                bg-transparent
+                font-samirFont
+                
+            "
+        >
+            {/* =========================================================
+                PROJECT LIST
+            ========================================================= */}
+
+            <div className="relative z-10 w-full">
+                {projects.map((project, index) => (
+                    <div
+                        key={project.id}
+                        ref={(el) => {
+                            projectRefs.current[index] = el;
+                        }}
+                        className="
+                            group
+                            flex
+                            cursor-pointer
+                            items-center
+                            justify-between
+                            gap-1
+                            border-b-[1px]
+                            border-gray
+                            border-opacity-50
+                            px-28
+                            pb-[2.8rem]
+                            pt-[2.375rem]
+                            transition-all
+                            duration-300
+                            hover:px-[6rem]
+                            hover:opacity-40
+                        "
+                    >
+                        <h3
+                            className="
+                                text-[3.625rem]
+                                -tracking-[3px]
+                                text-text
+                            "
+                        >
+                            {project.title}
+                        </h3>
+
+                        <p className="text-sm text-text">
+                            {project.tech.join(", ")}
+                        </p>
                     </div>
-
-                    <form action="" className="w-full">
-                        <ol className="w-full pb-[10rem]">
-                            <li className="flex flex-col w-full">
-                                <div className=" bg-gray w-full h-[1.5px] opacity-40 mb-[1.5rem]"></div>
-
-                                <div className="flex gap-[2.3rem]">
-                                    <div className="text-gray font-semibold">01</div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="name" className=" font-semibold text-[1.3rem]">
-                                            What's your name?
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            placeholder="Samir Batoum*"
-                                            className="text-gray font-semibold text-[1.2rem]
-                      bg-transparent border-none outline-none focus:text-light"
-                                        />
-
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="flex flex-col w-full">
-                                <div className=" bg-gray w-full h-[1.5px] opacity-40 mb-[1.5rem]"></div>
-
-                                <div className="flex gap-[2.3rem]">
-                                    <div className="text-gray font-semibold">02</div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="name" className=" font-semibold text-[1.3rem]">
-                                            What's your email?
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            placeholder="batoumsamir@gmail.com*"
-                                            className="text-gray font-semibold text-[1.2rem]
-                      bg-transparent border-none outline-none focus:text-light"
-                                        />
-
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="flex flex-col w-full">
-                                <div className=" bg-gray w-full h-[1.5px] opacity-40 mb-[1.5rem]"></div>
-
-                                <div className="flex gap-[2.3rem]">
-                                    <div className="text-gray font-semibold">03</div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="name" className=" font-semibold text-[1.3rem]">
-                                            What's the name of your organization?
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            placeholder="Samir & Tamazirt®"
-                                            className="text-gray font-semibold text-[1.2rem]
-                      bg-transparent border-none outline-none focus:text-light"
-                                        />
-
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li className="flex flex-col w-full">
-                                <div className=" bg-gray w-full h-[1.5px] opacity-40 mb-[1.5rem]"></div>
-
-                                <div className="flex gap-[2.3rem]">
-                                    <div className="text-gray font-semibold">04</div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="name" className=" font-semibold text-[1.3rem]">
-                                            Your message
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="name"
-                                            placeholder="Hello Samir, can you help me with ..."
-                                            className="text-gray font-semibold text-[1.2rem]
-                        bg-transparent border-none outline-none focus:text-light"
-                                        />
-
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ol>
-
-
-
-
-
-                        {/* Start Send Button  */}
-
-                        <div className='relative'>
-                            <div className='absolute z-20 right-20 -top-20'>
-
-                                <motion.div
-                                    ref={borderRef}
-                                    style={{ x }}>
-
-                                    <div
-                                        className='hidden md:block'
-                                        onClick={() => navigate('/contact')}>
-                                        <MagicButton text={'Send'} size={'9.6rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
-                                    </div>
-                                    <div
-                                        className='md:hidden'
-                                        onClick={() => navigate('/contact')}>
-                                        <MagicButton text={'Send'} size={'8rem'} bg={'blue'} hoverBg={'deepb'} rounded={'full'} />
-                                    </div>
-
-                                </motion.div>
-
-                            </div>
-                            <div className="absolute  z-10 bg-gray w-full h-[1.5px] opacity-20"></div>
-                        </div>
-
-                        {/* End send button  */}
-
-
-
-                    </form>
-                </div>
-
-
-
-
-                {/* contact info (left side) */}
-                <div className="w-1/4 pt-[5rem]">
-                    <div className="flex flex-col">
-
-                        <img src={img} alt="" className="h-[5rem] w-[5rem] rounded-full" />
-
-                        <div className="pt-[3rem] ">
-                            <HiCursorArrowRays className="rotate-[150deg] text-[2rem] animate-pulse" />
-                        </div>
-                        <h2 className="text-[.6rem] md:text-[.68rem] tracking-normal text-gray uppercase font-bold pt-[4.6rem] pb-[1rem]">
-                            Contact Details
-                        </h2>
-                        <div className=" flex flex-col items-start gap-[.6rem]">
-                            <SocialMediaTitle label={'batoumsamir0@gmail.com'} size={'1rem'} />
-                            <SocialMediaTitle label={'06-*************'} size={'1rem'} />
-                        </div>
-
-                        <h2 className="text-[.6rem] md:text-[.68rem] tracking-normal text-gray uppercase font-bold pt-[4rem] pb-[1rem]">
-                            Contact Details
-                        </h2>
-                        <div className="leading-[2rem] text-light">
-                            <span>Software Engineer</span>
-                            <span>Work from Home for more than 3sfsfsd sdfsfsda years</span>
-                        </div>
-
-                        <h2 className="text-[.6rem] md:text-[.68rem] tracking-normal text-gray uppercase font-bold pt-[4.6rem] pb-[1rem]">
-                            Contact Details
-                        </h2>
-                        <div className=" flex flex-col items-start gap-[.6rem]">
-                            <SocialMediaTitle label={'Awwards'} size={'1rem'} />
-                            <SocialMediaTitle label={'Linkedin'} size={'1rem'} />
-                            <SocialMediaTitle label={'Github'} size={'1rem'} />
-                            <SocialMediaTitle label={'Whatsapp'} size={'1rem'} />
-                        </div>
-
-
-                    </div>
-                </div>
-
-
+                ))}
             </div>
+
+            {/* =========================================================
+                FLOATING PREVIEW
+            ========================================================= */}
+
+            <AnimatePresence>
+                {showPreview && (
+                    <motion.div
+                        className="
+                            pointer-events-none
+                            absolute
+                            z-[9999]
+                            h-[400px]
+                            w-[400px]
+                            overflow-hidden
+                        "
+                        style={{
+                            top: mousePos.y - 200,
+                            left: mousePos.x - 200,
+                        }}
+                        initial={{
+                            opacity: 0,
+                            scale: 0.6,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            scale: 1,
+                        }}
+                        exit={{
+                            opacity: 0,
+                            scale: 0.1,
+                        }}
+                        transition={{
+                            duration: 0.6,
+                            ease: [0.22, 1, 0.36, 1],
+                        }}
+                    >
+                        {/* =================================================
+                            PROJECT IMAGE SCROLLER
+                        ================================================= */}
+
+                        <div
+                            ref={previewScrollRef}
+                            className="
+                                hide-scrollbar
+                                h-full
+                                overflow-y-auto
+                                scroll-smooth
+                            "
+                        >
+                            {projects.map((project, index) => (
+                                <div
+                                    key={project.id}
+                                    ref={(el) => {
+                                        sectionRefs.current[index] = el;
+                                    }}
+                                    className="
+                                        flex
+                                        h-full
+                                        w-full
+                                        items-center
+                                        justify-center
+                                        px-[2rem]
+                                        py-[6rem]
+                                    "
+                                    style={{
+                                        backgroundColor: project.theme,
+                                    }}
+                                >
+                                    <motion.img
+                                        src={project.image}
+                                        alt={project.title}
+                                        initial={{
+                                            opacity: 0,
+                                            x: 40,
+                                        }}
+                                        animate={{
+                                            opacity: 1,
+                                            x: 0,
+                                        }}
+                                        transition={{
+                                            duration: 0.8,
+                                            ease: "easeInOut",
+                                        }}
+                                        className="
+                                            h-full
+                                            w-full
+                                            object-cover
+                                        "
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* =================================================
+                            MAGNETIC VIEW BUTTON
+                        ================================================= */}
+
+                        <div
+                            className="
+                                pointer-events-none
+                                absolute
+                                inset-0
+                                flex
+                                items-center
+                                justify-center
+                            "
+                        >
+                            <motion.button
+                                className="
+                                    flex
+                                    h-[4rem]
+                                    w-[4rem]
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-blue
+                                    text-light
+                                "
+                                style={{
+                                    x: springButtonX,
+                                    y: springButtonY,
+                                }}
+                                whileHover={{
+                                    scale: 1.15,
+                                }}
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 300,
+                                    damping: 15,
+                                }}
+                            >
+                                View
+                            </motion.button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* =========================================================
+                HIDE SCROLLBAR
+            ========================================================= */}
+
+            <style jsx global>{`
+                .hide-scrollbar {
+                    -ms-overflow-style: none;
+                    scrollbar-width: none;
+                }
+
+                .hide-scrollbar::-webkit-scrollbar {
+                    display: none;
+                }
+            `}</style>
         </div>
-
-
-
-
-
-
-
-        {/* contact footer extract from global footer  */}
-        <div className='bg-dark md:py-[1rem] px-[1rem] md:px-[2rem] text-light'>
-            <div className="flex flex-col-reverse md:flex-row  justify-between items-center">
-                <div className="flex gap-[12rem] pb-8 md:pb-0 md:gap-[2rem]">
-                    <div className='flex flex-col gap-2 justify-start'>
-                        <span className='uppercase md:text-[.7rem] text-[.6rem] tracking-widest font-extrabold text-gray font-samirFont'>version</span>
-                        <span className='text-[11px] font-bold font-samirFont'>2022 © Edition</span>
-                    </div>
-                    <div className='flex flex-col gap-2 justify-start'>
-                        <span className="uppercase md:text-[.7rem] text-[.6rem] tracking-widest font-extrabold text-gray">
-                            local time
-                        </span>
-                        <span className='text-[11px] font-bold font-samirFont uppercase'>
-                            {time}
-                        </span>
-                    </div>
-                </div>
-
-                {/* smooth line under */}
-                <div className="h-[.1px] bg-borderSolid opacity-40 w-full md:hidden mt-[.7rem] mb-[1.6rem]"></div>
-
-                <div className="">
-                    <span className='uppercase md:text-[.7rem] text-[.6rem] tracking-widest font-extrabold text-gray'>socials</span>
-                    <div>
-                        <ul className=" pt-3 flex gap-6">
-                            <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
-                            <a href="https://www.linkedin.com/in/samir-batoum-3948b72a5?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
-                                <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li></a>
-                            <a href="https://github.com/batoum0-code" target="_blank" rel="noopener noreferrer">
-                                <li className="cursor-pointer"><SocialMediaTitle label='Github' /></li>
-                            </a>
-                            <li className="cursor-pointer"><SocialMediaTitle label='Whatsapp' /></li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>;
-};
-
-export default Contact;
-
-
-
-
-
+    );
+}
