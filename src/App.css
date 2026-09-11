@@ -1,9 +1,9 @@
 /* Disable scroll */
-html, 
+html,
 body {
     margin: 0;
     padding: 0;
-    
+
 }
 
 
@@ -65,3 +65,17 @@ body {
     min-width: 100%;
 }
 
+
+/* hide the scroll bar */
+
+
+/* Hide scrollbar but keep scrolling */
+html {
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+html::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Edge, Safari */
+}

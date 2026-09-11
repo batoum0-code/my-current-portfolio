@@ -44,7 +44,7 @@ const ProfOfWork = () => {
                 <AnimatedSplitText text={myText} />
 
                 <div className="flex flex-col lg:gap-[3rem] pb-[4rem] lg:pb-0">
-                    <p className="text-dark lg:text-[.9rem] text-[.9rem] font-samirFont ">
+                    <p className="text-dark lg:text-[1.1rem] text-[.9rem] font-samirFont tracking-[-1.3px] ">
                         The combination of my passion <br /> for design, code & interaction <br /> positions me in a unique place in
                         <br /> the web design world.
                     </p>

@@ -52,7 +52,7 @@ const MenuItem = ({ label, path, setIsAnyHovered, mobile }) => {
 
     return <div
 
-        className="inline-block align-top  text-center cursor-pointer text-light font-samirFont"
+        className="inline-block align-top  text-center cursor-pointer text-light font-samirFont "
         onMouseEnter={() => {
             setIsHovered(true)
             setIsAnyHovered(true)

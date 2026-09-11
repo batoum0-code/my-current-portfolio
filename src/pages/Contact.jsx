@@ -30,10 +30,10 @@ const time = new Intl.DateTimeFormat('en-UK', {
 
 const Contact = () => {
 
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [comapany, setCompany] = useState();
-  const [message, setMessage] = useState();
+  // const [name, setName] = useState();
+  // const [email, setEmail] = useState();
+  // const [comapany, setCompany] = useState();
+  // const [message, setMessage] = useState();
 
 
 
@@ -168,9 +168,6 @@ const Contact = () => {
             </ol>
 
 
-
-
-
             {/* Start Send Button  */}
 
             <div className='relative'>
@@ -202,11 +199,8 @@ const Contact = () => {
           </form>
         </div>
 
-
-
-
         {/* contact info (left side) */}
-        <div className="w-1/4 pt-[5rem] font-samirFont">
+        <div className="w-1/4 pt-[6.6rem] font-samirFont">
           <div className="flex flex-col">
 
             <img src={img} alt="" className="h-[5.5rem] w-[5.5rem] rounded-full" />
@@ -221,7 +215,6 @@ const Contact = () => {
               <SocialMediaTitle label={'batoumsamir0@gmail.com'} size={'1rem'} />
               <SocialMediaTitle label={'+212 6 04 36 04 52'} size={'1rem'} />
             </div>
-
 
             <h2 className="text-[.6rem] md:text-[.7rem] -tracking-[.05rem] uppercase text-gray  font-bold pt-[4.6rem] pb-[.88rem]">
               About Details
@@ -241,7 +234,6 @@ const Contact = () => {
               <SocialMediaTitle label={'Github'} size={'1rem'} />
               <SocialMediaTitle label={'Whatsapp'} size={'1rem'} />
             </div>
-
 
           </div>
         </div>

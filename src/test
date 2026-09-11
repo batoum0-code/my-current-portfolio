@@ -1,409 +1,314 @@
-import { useRef, useState, useEffect } from "react";
-import {
-    motion,
-    AnimatePresence,
-    useMotionValue,
-    useSpring,
-} from "framer-motion";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 
-import amelkis from "../../assets/amelkis.webp";
-import comgolf from "../../assets/com&golf.webp";
-import img4 from "../../assets/q1.webp";
-import cherti from "../../assets/cherti.webp";
+import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const projects = [
-    {
-        id: 1,
-        title: "Com & Golf",
-        tech: ["Wordpress", "Elementor"],
-        image: comgolf,
-        theme: "#DCE3D4",
-    },
-    {
-        id: 2,
-        title: "AMELKIS",
-        tech: ["React", "Node js"],
-        image: amelkis,
-        theme: "#141517",
-    },
-    {
-        id: 3,
-        title: "Riad BERBERE",
-        tech: ["React", "Node.js"],
-        image: img4,
-        theme: "#E8E4DC",
-    },
-    {
-        id: 4,
-        title: "MASSANO CHERTI",
-        tech: ["Wordpress", "React js", "Express js", "Strapi"],
-        image: cherti,
-        theme: "#cac5e5",
-    },
-];
+import { HiBars2 } from "react-icons/hi2";
+import { RxCross1 } from "react-icons/rx";
 
-export default function ProjectHoverWithSlide() {
-    const containerRef = useRef(null);
-    const previewScrollRef = useRef(null);
+import MenuItem from "../utils/MenuItem";
+import SocialMediaTitle from "../utils/SocialMediaTitle";
+import MagicButton from "../utils/MagicButton";
 
-    const sectionRefs = useRef([]);
-    const projectRefs = useRef([]);
+import { usePage } from "../../context/useContext";
 
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-    const [showPreview, setShowPreview] = useState(false);
+// Desired corner radius in real pixels (same visual radius regardless of panel size)
+const CORNER_RADIUS_PX = 28;
 
-    /*
-    |--------------------------------------------------------------------------
-    | VIEW BUTTON MOTION
-    |--------------------------------------------------------------------------
-    */
+// Builds the clip-path 'd' string.
+// baseX   -> resting x position of the edge (0 = fully open, 1 = fully closed/off-screen)
+// bulge   -> how far the MIDDLE belly overshoots past baseX (negative = further left)
+// rx, ry  -> corner radius in objectBoundingBox units (aspect-corrected, stay constant)
+const makeClipPath = (baseX, bulge, rx, ry) => {
+    const topStartX = baseX + rx;
+    const bottomEndX = baseX + rx;
 
-    const buttonX = useMotionValue(0);
-    const buttonY = useMotionValue(0);
+    return [
+        `M ${topStartX},0`,
+        `L 1,0`,
+        `L 1,1`,
+        `L ${bottomEndX},1`,
+        // bottom-left rounded corner
+        `C ${baseX + rx * 0.45},1 ${baseX},${1 - ry * 0.9} ${baseX},${1 - ry}`,
+        // the animated belly through the middle
+        `C ${baseX + bulge},${0.5 + ry} ${baseX + bulge},${0.5 - ry} ${baseX},${ry}`,
+        // top-left rounded corner
+        `C ${baseX},${ry * 0.9} ${baseX + rx * 0.45},0 ${topStartX},0`,
+        `Z`,
+    ].join(" ");
+};
 
-    const springButtonX = useSpring(buttonX, {
-        stiffness: 150,
-        damping: 16,
-        mass: 0.5,
-    });
+const SlideMenu = () => {
+    const { menuOpen, setMenuOpen } = usePage();
 
-    const springButtonY = useSpring(buttonY, {
-        stiffness: 150,
-        damping: 16,
-        mass: 0.5,
-    });
+    const navigate = useNavigate();
 
-    /*
-    |--------------------------------------------------------------------------
-    | SCROLL PREVIEW TO ACTIVE PROJECT
-    |--------------------------------------------------------------------------
-    */
+    const location = useLocation();
+    const isContactPage = location.pathname === "/contact";
 
-    const scrollToImage = (index) => {
-        const section = sectionRefs.current[index];
-        const container = previewScrollRef.current;
+    const [showButton, setShowButton] = useState(false);
+    const [buttonState, setButtonState] = useState(false);
+    const [isAnyHovered, setIsAnyHovered] = useState(false);
 
-        if (!section || !container) return;
+    const buttonRef = useRef();
+    const panelRef = useRef();
 
-        container.scrollTo({
-            top: section.offsetTop,
-            behavior: "smooth",
-        });
-    };
+    // Aspect-corrected corner radius (in 0-1 objectBoundingBox units)
+    const [rx, setRx] = useState(0.08);
+    const [ry, setRy] = useState(0.09);
 
-    /*
-    |--------------------------------------------------------------------------
-    | MOUSE TRACKING
-    |--------------------------------------------------------------------------
-    */
-
-    useEffect(() => {
-        const container = containerRef.current;
-
-        if (!container) return;
-
-        const handleMouseMove = (e) => {
-            const rect = container.getBoundingClientRect();
-
-            // Mouse position relative to main container
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            setMousePos({
-                x,
-                y,
-            });
-
-            /*
-            |--------------------------------------------------------------------------
-            | BUTTON MOVEMENT
-            |--------------------------------------------------------------------------
-            |
-            | Preview = 400x400
-            | Center = 200x200
-            |
-            | We calculate how far the cursor is from
-            | the center of the preview.
-            |
-            | 0.30 means the button follows 30% of
-            | the cursor movement.
-            |
-            */
-
-            const buttonOffsetX = (x - 200) * 0.01;
-            const buttonOffsetY = (y - 200) * 0.0001;
-
-            buttonX.set(buttonOffsetX);
-            buttonY.set(buttonOffsetY);
-
-            /*
-            |--------------------------------------------------------------------------
-            | DETECT ACTIVE PROJECT
-            |--------------------------------------------------------------------------
-            */
-
-            for (let i = 0; i < projectRefs.current.length; i++) {
-                const project = projectRefs.current[i];
-
-                if (!project) continue;
-
-                const projectRect = project.getBoundingClientRect();
-
-                const top = projectRect.top - rect.top;
-                const bottom = projectRect.bottom - rect.top;
-
-                if (y >= top && y <= bottom) {
-                    setActiveIndex((currentIndex) => {
-                        if (currentIndex !== i) {
-                            scrollToImage(i);
-                            return i;
-                        }
-
-                        return currentIndex;
-                    });
-
-                    break;
-                }
-            }
+    useLayoutEffect(() => {
+        const measure = () => {
+            const width = panelRef.current?.offsetWidth || 10;
+            const height = window.innerHeight || 800;
+            setRx(CORNER_RADIUS_PX / width);
+            setRy(CORNER_RADIUS_PX / height);
         };
-
-        const handleMouseEnter = () => {
-            setShowPreview(true);
-        };
-
-        const handleMouseLeave = () => {
-            setShowPreview(false);
-
-            // Return button smoothly to center
-            buttonX.set(0);
-            buttonY.set(0);
-        };
-
-        container.addEventListener("mousemove", handleMouseMove);
-        container.addEventListener("mouseenter", handleMouseEnter);
-        container.addEventListener("mouseleave", handleMouseLeave);
-
-        return () => {
-            container.removeEventListener("mousemove", handleMouseMove);
-            container.removeEventListener("mouseenter", handleMouseEnter);
-            container.removeEventListener("mouseleave", handleMouseLeave);
-        };
+        measure();
+        window.addEventListener("resize", measure);
+        return () => window.removeEventListener("resize", measure);
     }, []);
 
+    // const CLIP_CLOSED = makeClipPath(1, -.1, rx, ry);
+    // const CLIP_CURVE = makeClipPath(18, -1.8, rx, ry);
+    // const CLIP_OPEN = makeClipPath(0, 0, 0, 0);
+
+    const CLIP_CLOSED = makeClipPath(1, -0.1, rx, ry);
+    const CLIP_CURVE = makeClipPath(12, -1.8, rx, ry);   // baseX fixed to 0, bulge kept
+    const CLIP_OPEN = makeClipPath(0, 0, 0, 0);
+
+
+    // Separate, independently-tunable transitions for each direction
+    const OPEN_TRANSITION = {
+        duration: 0.9,
+        times: [0, 0.6, 1],
+        ease: [0.16, 1, 0.3, 1],
+    };
+
+    const CLOSE_TRANSITION = {
+        duration: 0.9,
+        times: [0, 0.6, 1],
+        ease: [0.65, 0, 0.35, 1],
+    };
+
+    // Track scroll position
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 300) {
+                setShowButton(true);
+            } else {
+                setShowButton(false);
+                setMenuOpen(false); // Optional: auto-close menu on scroll-up
+            }
+
+            if (window.scrollY > 2180) {
+                setButtonState(true);
+            } else {
+                setButtonState(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [buttonState]);
+
+    // Toggle menu state
+    const toggleMenu = () => {
+        setMenuOpen(prev => !prev);
+    };
+
+    // Close menu when clicking outside
+    const handleOverlayClick = () => {
+        setMenuOpen(false);
+    };
+
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            // Clean up in case the component unmounts
+            document.body.style.overflow = '';
+        };
+    }, [menuOpen]);
+
+    const menuItems = [
+        { label: 'Home', path: "/" },
+        { label: 'Work', path: "/work" },
+        { label: 'About', path: "/about" },
+        { label: 'Contact', path: "/contact" },
+    ]
+
     return (
-        <div
-            ref={containerRef}
-            className="
-                relative
-                mx-[6.9rem]
-                border-t-[1px]
-                border-gray
-                border-opacity-40
-                bg-transparent
-                font-samirFont
-                
-            "
-        >
-            {/* =========================================================
-                PROJECT LIST
-            ========================================================= */}
+        <div className="font-samirFont">
+            {/* Menu Toggle Button */}
 
-            <div className="relative z-10 w-full">
-                {projects.map((project, index) => (
+            {/* small devices menu toggle  */}
+            <div className="md:hidden">
+
+                {(showButton || menuOpen) && (
+
                     <div
-                        key={project.id}
-                        ref={(el) => {
-                            projectRefs.current[index] = el;
-                        }}
-                        className="
-                            group
-                            flex
-                            cursor-pointer
-                            items-center
-                            justify-between
-                            gap-1
-                            border-b-[1px]
-                            border-gray
-                            border-opacity-50
-                            px-28
-                            pb-[2.8rem]
-                            pt-[2.375rem]
-                            transition-all
-                            duration-300
-                            hover:px-[6rem]
-                            hover:opacity-40
-                        "
+                        ref={buttonRef}
+                        onClick={toggleMenu}
+                        className={`fixed md:top-7 md:right-7 top-5 
+                            right-2 z-50   ${(buttonState || isContactPage) ? 'text-gray border-gray border-[1px] hover:border-none ' : 'text-light'}  
+                        ${menuOpen ? 'border-none' : ''}
+                    rounded-full transition-all duration-100 `}
                     >
-                        <h3
-                            className="
-                                text-[3.625rem]
-                                -tracking-[3px]
-                                text-text
-                            "
-                        >
-                            {project.title}
-                        </h3>
+                        {
+                            menuOpen ? <MagicButton
+                                size={'3.8rem'}
+                                text={<RxCross1 size={20} />}
+                                bg={'blue'}
+                                hoverBg={'deepb'}
+                                rounded={'full'}
 
-                        <p className="text-sm text-text">
-                            {project.tech.join(", ")}
-                        </p>
+                            /> :
+                                <MagicButton
+                                    size={'3.8rem'}
+                                    text={<HiBars2 size={28} />}
+                                    bg={'dark'}
+                                    hoverBg={'blue'}
+                                    rounded={'full'}
+                                    color={'gray'}
+                                    hoverColor={'light'}
+                                />
+                        }
                     </div>
-                ))}
+
+                )}
+
             </div>
 
-            {/* =========================================================
-                FLOATING PREVIEW
-            ========================================================= */}
+            {/* large devices menu toggle ------------------------------------------------------------------ */}
+            <div className="hidden md:block">
 
-            <AnimatePresence>
-                {showPreview && (
-                    <motion.div
-                        className="
-                            pointer-events-none
-                            absolute
-                            z-[9999]
-                            h-[400px]
-                            w-[400px]
-                            overflow-hidden
-                        "
-                        style={{
-                            top: mousePos.y - 200,
-                            left: mousePos.x - 200,
-                        }}
-                        initial={{
-                            opacity: 0,
-                            scale: 0.6,
-                        }}
-                        animate={{
-                            opacity: 1,
-                            scale: 1,
-                        }}
-                        exit={{
-                            opacity: 0,
-                            scale: 0.1,
-                        }}
-                        transition={{
-                            duration: 0.6,
-                            ease: [0.22, 1, 0.36, 1],
-                        }}
+                {(showButton || menuOpen) && (
+
+                    <div
+                        ref={buttonRef}
+                        onClick={toggleMenu}
+                        className={`fixed md:top-7 md:right-7 top-5 right-2 z-50 
+                                        ${(buttonState || isContactPage) ?
+                                'text-gray border-opacity-45 border-[1.5px] border-gray hover:border-none ' : 'text-light'}  
+                        ${menuOpen ? 'border-none' : ''}
+                    rounded-full transition-all duration-100 `}
                     >
-                        {/* =================================================
-                            PROJECT IMAGE SCROLLER
-                        ================================================= */}
+                        {
+                            menuOpen ? <MagicButton
+                                size={'4.5rem'}
+                                text={<RxCross1 size={20} />}
+                                bg={'blue'}
+                                hoverBg={'deepb'}
+                                rounded={'full'}
+                            /> :
+                                <MagicButton
+                                    size={'4.5rem'}
+                                    text={<HiBars2 size={28} />}
+                                    bg={'dark'}
+                                    hoverBg={'blue'}
+                                    rounded={'full'}
+                                    color={'gray'}
+                                    hoverColor={'light'}
+                                />
+                        }
+                    </div>
 
-                        <div
-                            ref={previewScrollRef}
-                            className="
-                                hide-scrollbar
-                                h-full
-                                overflow-y-auto
-                                scroll-smooth
-                            "
+                )}
+            </div>
+
+            {/* SVG clip-path definition for the curved reveal with rounded corners */}
+            <svg width="0" height="0" style={{ position: "absolute" }}>
+                <defs>
+                    <clipPath id="menuCurveClip" clipPathUnits="objectBoundingBox">
+                        <motion.path
+                            initial={{ d: CLIP_CLOSED }}
+                            animate={{
+                                d: menuOpen
+                                    ? [CLIP_CLOSED, CLIP_CURVE, CLIP_OPEN]
+                                    : [CLIP_OPEN, CLIP_CURVE, CLIP_CLOSED],
+                            }}
+                            transition={menuOpen ? OPEN_TRANSITION : CLOSE_TRANSITION}
+                        />
+                    </clipPath>
+                </defs>
+            </svg>
+
+            {/* Overlay + Sliding Menu */}
+            <AnimatePresence>
+                {menuOpen && (
+                    <>
+                        {/* Overlay */}
+                        <motion.div
+                            className="fixed inset-0 bg-gradient-to-r from-black/20 to-black/90 opacity-20 z-30 hidden md:block "
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.5 }}
+                            exit={{ opacity: 0 }}
+                            onClick={handleOverlayClick}
+                        />
+
+                        {/* Right Menu */}
+                        <motion.div
+                            ref={panelRef}
+                            className="fixed top-0 right-0 left-0 md:left-auto h-full bg-dark z-40 text-light  shadow-full shadow-white w-full
+                            px-[5vw] pt-[12vh] pb-[10vh]"
+
+                            style={{
+                                width: 510,
+                                clipPath: "url(#menuCurveClip)",
+                            }}
+                            transition={{
+                                duration: 0.9,
+                                ease: [0.65, 0, 0.35, 1],
+                            }}
                         >
-                            {projects.map((project, index) => (
-                                <div
-                                    key={project.id}
-                                    ref={(el) => {
-                                        sectionRefs.current[index] = el;
-                                    }}
-                                    className="
-                                        flex
-                                        h-full
-                                        w-full
-                                        items-center
-                                        justify-center
-                                        px-[2rem]
-                                        py-[6rem]
-                                    "
-                                    style={{
-                                        backgroundColor: project.theme,
-                                    }}
-                                >
-                                    <motion.img
-                                        src={project.image}
-                                        alt={project.title}
-                                        initial={{
-                                            opacity: 0,
-                                            x: 40,
-                                        }}
-                                        animate={{
-                                            opacity: 1,
-                                            x: 0,
-                                        }}
-                                        transition={{
-                                            duration: 0.8,
-                                            ease: "easeInOut",
-                                        }}
-                                        className="
-                                            h-full
-                                            w-full
-                                            object-cover
-                                        "
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                            <div
+                                onClick={() => console.log('is contact page opened', location.pathname, isContactPage
+                                )}
+                                className="flex flex-col items-start justify-start pl-[rem] md:pl-[1.7rem]">
 
-                        {/* =================================================
-                            MAGNETIC VIEW BUTTON
-                        ================================================= */}
+                                <h2 className="text-[.6rem] md:text-[.6rem] font-bold py-4 md:pb-[1.8rem] md:pt-  text-gray uppercase">Navigation</h2>
+                                <div className="h-[1px]  bg-borderSolid w-[22.2rem] md:w-[20.2rem] opacity-30"></div>
+                                <ul className="pt-6 -space-y-3">
+                                    {
+                                        menuItems.map(({ label, path }) => {
+                                            return (
+                                                <li key={label} onClick={() => navigate(path)}
 
-                        <div
-                            className="
-                                pointer-events-none
-                                absolute
-                                inset-0
-                                flex
-                                items-center
-                                justify-center
-                            "
-                        >
-                            <motion.button
-                                className="
-                                    flex
-                                    h-[4rem]
-                                    w-[4rem]
-                                    items-center
-                                    justify-center
-                                    rounded-full
-                                    bg-blue
-                                    text-light
-                                "
-                                style={{
-                                    x: springButtonX,
-                                    y: springButtonY,
-                                }}
-                                whileHover={{
-                                    scale: 1.15,
-                                }}
-                                transition={{
-                                    type: "spring",
-                                    stiffness: 300,
-                                    damping: 15,
-                                }}
-                            >
-                                View
-                            </motion.button>
-                        </div>
-                    </motion.div>
+                                                    className="cursor-pointer">
+                                                    <MenuItem label={label}
+                                                        setIsAnyHovered={setIsAnyHovered} isAnyHovered={isAnyHovered} />
+                                                </li>)
+                                        })
+                                    }
+                                </ul>
+                            </div>
+
+                            <div className=" md:ml-[1.6rem] md:hidden h-[.2px] max-h-[0.1px] opacity-40 w-[22.2rem] bg-borderSolid mt-[11rem] ">
+
+                            </div>
+
+                            {/* social media icons or titles depend on moode */}
+                            <div className=" md:pl-[1.6rem] md:pt-[8.2rem] pt-6">
+                                <h2 className="text-[.6rem] md:text-[.65rem] tracking-normal text-gray uppercase font-bold">Socials</h2>
+                                <ul className=" pt-3 flex gap-6 ">
+                                    <li className="cursor-pointer"><SocialMediaTitle label='Awwwards' /></li>
+                                    <li className="cursor-pointer"><SocialMediaTitle label='Linkedin' /></li>
+                                    <li className="cursor-pointer"><SocialMediaTitle label='Github' /></li>
+                                    <li className="cursor-pointer"><SocialMediaTitle label='Whatsapp' /></li>
+                                </ul>
+                            </div>
+                        </motion.div>
+                    </>
                 )}
             </AnimatePresence>
-
-            {/* =========================================================
-                HIDE SCROLLBAR
-            ========================================================= */}
-
-            <style jsx global>{`
-                .hide-scrollbar {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-
-                .hide-scrollbar::-webkit-scrollbar {
-                    display: none;
-                }
-            `}</style>
         </div>
+
+
     );
-}
+};
+
+export default SlideMenu;

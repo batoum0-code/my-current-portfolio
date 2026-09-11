@@ -11,9 +11,9 @@ const AnimatedSplitText = ({ text }) => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
-                    transition={{ duration: 0.5, delay: 0 }}
+                    transition={{ duration: 1.4, delay: 0 }}
                     viewport={{ once: true, amount: 1 }}
-                    className="text-dark lg:text-3xl text-[1.4rem] font-medium leading-[1.4rem]"
+                    className="text-dark lg:text-3xl text-[1.4rem] font-heading leading-[1.4rem]"
                 >
                     {line}
                 </motion.p>
